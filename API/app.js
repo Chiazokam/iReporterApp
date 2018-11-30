@@ -12,6 +12,10 @@ app.get('/api/v1', function(req, res){
   res.render('home.ejs');
 })
 
+app.get('/api/v1/about', function(req, res){
+  res.render('about.ejs');
+})
+
 /****************************************************************/
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
