@@ -1,0 +1,488 @@
+/*Home Page*/
+/*Global*/
+body{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.0;
+  height: 100%
+}
+
+#index-body{
+  background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0)), url(https://images.unsplash.com/photo-1509099836639-18ba1795216d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=406b912d33578b2d73fe1f254aed8122&auto=format&fit=crop&w=630&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#index-header h3{
+  margin: 25px 0 0 50px;
+  color: #f5f6fa;
+  font-size: 70px;
+  letter-spacing: 3px;
+  font-family: 'Great Vibes', cursive;
+}
+
+.span-bold-letter{
+  color: #006266;
+  font-size: 90px;
+  font-family: 'Great Vibes', cursive;
+}
+
+.container{
+  margin: auto;
+  width: 80%;
+}
+
+#showcase{
+    margin-top: 13%;
+    text-align: center;
+}
+
+#showcase h1, #showcase h3{
+  color: #f5f6fa;
+  font-weight: 100;
+}
+
+#showcase h1{
+  font-size: 60px;
+}
+
+#showcase h3{
+  font-size: 40px;
+}
+
+#showcase h3 span{
+  background-color: #008C9E;
+  color: #f5f6fa;
+  border-radius: 5px;
+  padding: 0 10px 2px 10px;
+  font-weight: 200;
+}
+
+hr{
+	width: 400px;
+  color: #008C9E;
+}
+
+/*Global*/
+button{
+  height: 45px;
+  background-color: #008C9E;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  padding: 0 13px 0 13px;
+  font-size: 20px;
+  color: #343838;
+  margin-left: 10px;
+}
+/*Global*/
+.btn-colored:hover{
+  color: #f5f6fa;
+  background-color: #343838;
+}
+
+/*Global*/
+.btn-trans{
+  background-color: transparent;
+  border: 1px solid #f5f6fa;
+}
+/*Global*/
+.btn-trans a, .btn-colored a{
+  text-decoration: none;
+  color: #f5f6fa;
+}
+/*Global*/
+.btn-colored a:hover{
+  color: #f5f6fa;
+}
+/*Global*/
+.btn-trans:hover{
+  color: #f5f6fa;
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0));
+}
+
+/*About Page*/
+/*Global*/
+.half-page{
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  overflow-x: hidden;
+  text-align: center;
+}
+/*Global*/
+.left-content{
+    background-color: #343838;
+    padding-top: 25px;
+}
+/*Global*/
+.left-content h2{
+  color: #f5f6fa;
+  font-size: 30px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+/*Global*/
+.content{
+  color: #f5f6fa;
+  line-height: 1.5;
+  font-size: 23px;
+  letter-spacing: 2px;
+}
+/*Global*/
+.right-content{
+  margin-left: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.right-about-content{
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0)), url(https://images.pexels.com/photos/1611001/pexels-photo-1611001.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+.right-about-content #about-button-position{
+  margin-top: 60%;
+}
+
+.about-button{
+  margin-right: 20px;
+}
+
+/*Sign Up Page*/
+.right-signup-content{
+  background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(https://images.pexels.com/photos/943630/pexels-photo-943630.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+.half-page #signup-form, .half-page #create-redflag-form, .half-page #create-interv-form{
+  margin-top: 5%;
+}
+/*Global*/
+.half-page form{
+  border-radius: 15px;
+  padding: 20px 0 20px 0;
+  box-shadow: 0px 0px 5px #f5f6fa;
+}
+/*Global*/
+.form-field{
+  display: block;
+  margin: 25px 0 25px 0;
+}
+/*Global*/
+.form-field input, .form-field select, .form-field textarea{
+  min-width: 84%;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 19px;
+  padding-left: 10px;
+  font-family: 'Lato', sans-serif;
+  color: #95a5a6;
+}
+
+.btn-signup-button:hover{
+  background-color: #005F6B;
+  color: #2f3640;
+}
+/*Global*/
+.right-content h2{
+  color: #f5f6fa;
+  font-size: 30px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 30%;
+}
+/*Global*/
+form p{
+  color: #f5f6fa;
+}
+/*Global*/
+form p span{
+  background-color: #005F6B;
+  border-radius: 5px;
+  padding: 5px;
+}
+/*Global*/
+form p span a{
+  color: #f5f6fa;
+  text-decoration: none;
+}
+
+/*Sign In Page*/
+#signin-body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.half-page #signin-form{
+  margin-top: 33%;
+}
+
+.right-signin-content{
+  background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(https://images.pexels.com/photos/943630/pexels-photo-943630.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+/*Profile Page*/
+#profile-body{
+  background-color: #f5f6fa;
+}
+.sidebar{
+    height: 100%;
+    width: 25%;
+    position: fixed;
+    overflow-x: hidden;
+    text-align: center;
+    background-color: #343838;
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));
+    padding-top: 25px;
+  }
+
+.sidebar-text{
+  color: #f5f6fa;
+  font-size: 19px;
+}
+
+.sidebar ul{
+  list-style: none;
+  padding-left: 12%;
+}
+
+.sidebar ul table{
+  margin-bottom: 15px;
+}
+
+.sidebar table p{
+  margin-bottom: 1px;
+  text-align: right;
+}
+
+.head-li{
+  font-size: 30px;
+  text-align: left;
+}
+
+.head-li i{
+  margin: 0 15px 0 10px;
+  color: #c0392b;
+}
+
+.digit{
+  background-color: #008C9E;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  color: #f5f6fa;
+  margin-left: 10px;
+}
+
+.right-diff-content{
+  margin-left: 25%;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.fixed{
+  position: fixed;
+}
+
+.right-diff-content h2{
+  color: #343838;
+  width: 73%;
+  margin-bottom: 0;
+}
+
+.right-diff-content table{
+  width: 65%;
+  margin-left: 5%;
+  height: 80%;
+}
+
+.right-diff-content table tr td{
+  width: 25%;
+  height: 50%;
+}
+
+.records-image{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 90%;  /*Of the td tag*/
+  width: 95%;  /*Of the td tag*/
+  border-radius: 5px;
+  transform: scale(1);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.records-image:hover{
+  transform: scale(1.10);
+  opacity: 1;
+}
+
+.create-redflag{
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.pexels.com/photos/1266022/pexels-photo-1266022.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+.create-intervention{
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.pexels.com/photos/1239162/pexels-photo-1239162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+.view-redflag{
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.pexels.com/photos/221174/pexels-photo-221174.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  padding-bottom: -12px;
+}
+
+.view-intervention{
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.pexels.com/photos/712786/pexels-photo-712786.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+.btn-record{
+  margin-top: 25%;
+}
+
+/*Modal*/
+.modal-list-record{
+  display: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  position: fixed;
+}
+
+@keyframes modal-animate{
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.modal-list-content{
+    color: #f5f6fa;
+    margin: 0 auto;
+    padding: 30px 0 30px 30px;
+    border-radius: 5px;
+    width: 50%;
+    animation-name: modal-animate;
+    animation-duration: 0.5s;
+}
+
+.modal-list-record h2{
+  text-align: center;
+}
+
+.modal-list-record table tbody td{
+  padding: 0 15px;
+  border: 1px solid #343838;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-list-record table thead th{
+  font-size: 23px;
+  padding: 0 15px 15px 15px;
+  border-radius: 5px;
+}
+
+.modal-close{
+  color: #f5f6fa;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.modal-close:hover{
+  cursor: pointer;
+  color: #343838;
+}
+
+/*Create Red-Flag*/
+.right-redflag-content{
+  background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(https://thumbs.dreamstime.com/b/stop-bribe-business-do-not-take-do-not-give-39526002.jpg);
+}
+
+/*Create Intervention*/
+.right-interv-content{
+  background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(https://images.unsplash.com/photo-1497564885540-b12eee8b5ecd?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=70e07e2e0b4530168e9d9f18c7000d1e&auto=format&fit=crop&w=334&q=80);
+}
+
+/*View Red-Flags*/
+.interv-body{
+  background-color: #bdc3c7;
+}
+
+.interv-body h2{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 28px;
+}
+
+.view-record-box{
+  width: 60%;
+  margin: 3% 0 3% 7%;
+  border: 1px solid;
+  border-radius: 5px;
+  background: #343838;
+  padding: 5px 0 20px 0;
+  box-shadow: 0px 0px 20px #343838;
+}
+
+.view-record-box table{
+  margin: auto;
+  width: 80%;
+}
+
+.view-record-box table td{
+  height: 100%;
+  font-size: 22px;
+  letter-spacing: 1px;
+  padding: 4px;
+  color: #f5f6fa;
+}
+
+.head-table, .body-table{
+  text-align: left;
+}
+
+.table-icon{
+  text-align: right;
+}
+
+.table-icon{
+  height: 30px;
+}
+
+.table-icon i{
+  margin-right: 50px;
+}
+
+.table-icon i:hover{
+  color: #008C9E;
+}
+
+.view-record-box table td .map{
+  height: 200px;
+  border-radius: 5px;
+}
+
+#admin-body{
+  overflow-y: scroll;
+}
+
+.admin-right-content td{
+  border: 1px solid #343838;
+  border-radius: 5px;
+}
+
+.admin-right-content td:hover{
+  background-color: #343838;
+  color: #f5f6fa;
+}
+.admin-right-content th{
+  font-size: 20px;
+  padding-bottom: 15px;
+}
