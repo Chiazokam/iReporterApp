@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>iReporter | View Interventions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  </head>
+  <body class="interv-body">
+    <section class="sidebar sidebar-text">
+      <ul>
+        <li class="head-li"><i class="fab fa-font-awesome-flag"></i> Red-Flag :</li>
+            <table>
+              <tbody>
+                  <tr>
+                    <td><p>Total</p></td>
+                    <td><span class="digit">8</span></td>
+                  </tr>
+                  <tr>
+                    <td><p>In Draft</p></td>
+                    <td><span class="digit">1</span></td>
+                  </tr>
+                  <tr>
+                    <td><p>Resolved</p></td>
+                    <td><span class="digit">3</span></td>
+                  </tr>
+                  <tr>
+                    <td><p>Rejected</p></td>
+                    <td><span class="digit">1</span></td>
+                  </tr>
+                  <tr>
+                    <td><p>Under Investigation</p></td>
+                    <td><span class="digit">3</span></td>
+                  </tr>
+              </tbody>
+            </table>
+          <li class="head-li"><i class="fas fa-info"></i> Intervention :</li>
+          <table>
+            <tbody>
+              <tr>
+                <td><p>Total</p></td>
+                <td><span class="digit">15</span></td>
+              </tr>
+              <tr>
+                <td><p>In Draft</p></td>
+                <td><span class="digit">8</span></td>
+              </tr>
+              <tr>
+                <td><p>Resolved</p></td>
+                <td><span class="digit">3</span></td>
+              </tr>
+              <tr>
+                <td><p>Rejected</p></td>
+                <td><span class="digit">0</span></td>
+              </tr>
+              <tr>
+                <td><p>Under Investigation</p></td>
+                <td><span class="digit">4</span></td>
+              </tr>
+            </tbody>
+          </table>
+      </ul>
+      <button type="button" class="btn-colored btn-record-list"><a href="profile.html">Back To Profile</a></button>
+    </section>
+
+    <!--*******************************************************************************-->
+    <section class="right-diff-content fixed">
+      <h2>- <span class="span-bold-letter">V</span>iew Interventions -</h2>
+      <div class="view-record-box">
+        <table>
+          <tbody>
+            <tr>
+              <td class="table-icon"></td>
+              <td class="table-icon"><i class="far fa-edit"></i><i class="fas fa-trash-alt"></i></td>
+            </tr>
+            <tr>
+              <td class="head-table">Title</td>
+              <td class="body-table">Money Hidden Away</td>
+            </tr>
+            <tr>
+              <td class="head-table">Date</td>
+              <td class="body-table">23-11-2018</td>
+            </tr>
+            <tr>
+              <td class="head-table">Description</td>
+              <td class="body-table">I discovered money hidden away in a soak away</td>
+            </tr>
+            <tr>
+              <td class="head-table">Status</td>
+              <td class="body-table">Resolved</td>
+            </tr>
+            <tr>
+              <td class="head-table">Location</td>
+              <td>
+                <div class="map">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <script type="text/javascript" src="ireporter.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1Us-XFdyoA2kbyb1IvDBJOus9P6_unwM&callback=initMap"
+        async defer></script>
+  </body>
+</html>
