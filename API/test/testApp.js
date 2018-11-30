@@ -4,6 +4,7 @@ const request = require("request");
 
 const base_url = "http://localhost:3000/api/v1";
 const about_url = "http://localhost:3000/api/v1/about";
+const get_signup_url = "http://localhost:3000/api/v1/users/new";
 
 describe('iReporter', function(){
   describe("GET /", function() {
@@ -18,6 +19,15 @@ describe('iReporter', function(){
   describe("GET /about", function() {
     it("About page returns status code 200", function(done) {
       request.get(about_url, function(error, response, body) {
+        assert.equal(200, response.statusCode);
+        done();
+      });
+    });
+  });
+
+  describe("GET /users/new", function() {
+    it("Sign Up page returns status code 200", function(done) {
+      request.get(get_signup_url, function(error, response, body) {
         assert.equal(200, response.statusCode);
         done();
       });
