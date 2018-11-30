@@ -20,7 +20,7 @@ app.get('/api/v1/about', function(req, res){
   res.render('about.ejs');
 })
 
-/*SignUp Page Endpoint */
+/*SignUp Page Endpoint*/
 app.get('/api/v1/users/new', function(req, res){
   res.render('signup.ejs');
 });
@@ -52,6 +52,7 @@ if(!user.firstname || !user.lastname || !user.othername || !user.email || !user.
 };
 })
 
+module.exports = app;
 /****************************************************************/
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
