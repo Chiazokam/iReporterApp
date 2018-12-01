@@ -30,5 +30,36 @@ describe ('GET Requests', () => {
           done();
         });
     });
-  })
-})
+  });
+});
+
+describe('POST Requests', () => {
+  const user = {
+    userId: 'fe1510e5-366f-405b-a189-526b1ee87331',
+    fname: 'Amarachi',
+    lname: 'Gayo',
+    othername: 'Mira',
+    email: 'miragayo@amarachi.com',
+    phone: '0804563888',
+    username: 'Mayo',
+    password: 'hello',
+    registered: true,
+    isAdmin: 'no',
+  };
+
+  describe('POST /api/v1/users', () => {
+    it('should create a new user', (done) => {
+      request(app)
+        .post('/api/v1/users')
+        .send(user)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].fname).to.equal('Amarachi');
+          done();
+        });
+    });
+  });
+});
