@@ -4,7 +4,7 @@ const app = require('../app');
 
 const expect = chai.expect;
 
-
+/* GET Routes*/
 describe ('GET Requests', () => {
   describe ('GET /api/v1', () => {
     it('should get the homepage', (done) => {
@@ -33,6 +33,7 @@ describe ('GET Requests', () => {
   });
 });
 
+/* POST Routes*/
 describe('POST Requests', () => {
   const user = {
     userId: 'fe1510e5-366f-405b-a189-526b1ee87331',
@@ -52,13 +53,26 @@ describe('POST Requests', () => {
     password: 'hello'
   };
 
+  const intervention = {
+       id: 5,
+       title: "Broken bridge",
+       createdOn: "02-12-18",
+       createdBy: 789,
+       type: "intervention",
+       status: "draft",
+       location: "4.34454, 7.88838",
+       comment: "The bridge is about to collapse",
+       image_url: "https://images.unsplash.com/photo-1543738096-79099a610293?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc86c5221409d8d4a93d34c017ecefee&auto=format&fit=crop&w=334&q=80",
+       video_url: "https://images.unsplash.com/photo-1543738096-79099a610293?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc86c5221409d8d4a93d34c017ecefee&auto=format&fit=crop&w=334&q=80"
+     }
+
   describe('POST /api/v1/users', () => {
     it('should create a new user', (done) => {
       request(app)
         .post('/api/v1/users')
         .send(user)
         .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
+          expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
@@ -77,6 +91,22 @@ describe('POST Requests', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.empty;
+          done();
+        });
+    });
+  });
+
+  describe('POST /api/v1/interventions', () => {
+    it('should create a new intervention', (done) => {
+      request(app)
+        .post('/api/v1/45/interventions')
+        .send(intervention)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].title).to.equal('Broken bridge');
           done();
         });
     });

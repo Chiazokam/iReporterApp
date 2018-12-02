@@ -10,10 +10,10 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));
 
-/* Initialize users array */
-const users = [];
 
-// Using a class kept on instantiating a new array
+const users = []; // Initialize users array
+const redflags = []; // Initialize redflags array
+const interventions = []; // Initialize interventions array
 
 /* HomePage Endpoint */
 app.get('/api/v1', (req, res) => res.status(200).send({ data: [] }));
@@ -47,7 +47,7 @@ app.post('/api/v1/users', (req, res) => {
 
   users.push(user);
   console.log(users);
-  return res.status(200).send({ data: [user] });
+  return res.status(201).send({ data: [user] });
 });
 
 /* Sign In Page Endpoint */
@@ -65,6 +65,39 @@ app.post('/api/v1/signin', (req, res) => {
   }
 
 })
+
+/* Create intervention GET route */
+app.get('/api/v1/:userId/interventions', (req, res) => {
+  res.status(200).send({ data: [{
+    userId: req.params.userId,
+      }]
+    })
+  }
+);
+
+/* Create intervention */
+app.post('/api/v1/:userId/interventions', (req, res) => {
+  if (!req.body.title || !req.body.createdOn || !req.body.location
+    || !req.body.comment || !req.body.image_url || !req.body.video_url || !req.params.userId){
+       return res.status(400).send({ error: 'Incomplete data' });
+     }
+     const intervention = {
+       id: uuidv4(),
+       title: req.body.title,
+       createdOn: req.body.createdOn,
+       createdBy: req.params.userId,
+       type: 'intervention',
+       status: 'draft',
+       location: req.body.location,
+       comment: req.body.comment,
+       image_url: req.body.image_url,
+       video_url: req.body.video_url,
+     };
+  interventions.push(intervention);
+  console.log(interventions);
+  return res.status(201).send({ data: [intervention] });
+});
+
 module.exports = app;
 /* ************************************************************** */
 const port = process.env.PORT || 3000;
