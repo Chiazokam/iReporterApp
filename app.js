@@ -98,6 +98,38 @@ app.post('/api/v1/:userId/interventions', (req, res) => {
   return res.status(201).send({ data: [intervention] });
 });
 
+/* Create redflag GET route */
+app.get('/api/v1/:userId/redflags', (req, res) => {
+  res.status(200).send({ data: [{
+    userId: req.params.userId,
+      }]
+    })
+  }
+);
+
+/* Create redflag */
+app.post('/api/v1/:userId/redflags', (req, res) => {
+  if (!req.body.title || !req.body.createdOn || !req.body.location
+    || !req.body.comment || !req.body.image_url || !req.body.video_url || !req.params.userId){
+       return res.status(400).send({ error: 'Incomplete data' });
+     }
+     const redflag = {
+       id: uuidv4(),
+       title: req.body.title,
+       createdOn: req.body.createdOn,
+       createdBy: req.params.userId,
+       type: 'redflag',
+       status: 'draft',
+       location: req.body.location,
+       comment: req.body.comment,
+       image_url: req.body.image_url,
+       video_url: req.body.video_url,
+     };
+  redflags.push(redflag);
+  console.log(redflags);
+  return res.status(201).send({ data: [redflag] });
+});
+
 module.exports = app;
 /* ************************************************************** */
 const port = process.env.PORT || 3000;
