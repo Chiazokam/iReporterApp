@@ -23,8 +23,7 @@ app.get('/api/v1/about', (req, res) => res.status(200).send({ data: [] }));
 
 /* SignUp Page Endpoint */
 app.get('/api/v1/users/new', (req, res) => {
-  // res.status(200).send({ data: [] });
-  res.render('signup.ejs');
+  res.status(200).send({ data: [] });
 });
 
 /* Create a user */
@@ -47,9 +46,25 @@ app.post('/api/v1/users', (req, res) => {
   };
 
   users.push(user);
+  console.log(users);
   return res.status(200).send({ data: [user] });
 });
 
+/* Sign In Page Endpoint */
+app.get('/api/v1/signin', (req, res) => res.status(200).send({ data: [] }));
+
+/* Authenticate credentials */
+app.post('/api/v1/signin', (req, res) => {
+  console.log(users);
+  const emailExist = users.findIndex(user => user.email === req.body.email);
+  const passwordExist = users.findIndex(user => user.password === req.body.password);
+  if (emailExist !== -1 && passwordExist !== -1){
+    res.status(200).send({data: []});
+  } else {
+    res.status(401).send({error: 'Unauthorized access. Please register first'});
+  }
+
+})
 module.exports = app;
 /* ************************************************************** */
 const port = process.env.PORT || 3000;
