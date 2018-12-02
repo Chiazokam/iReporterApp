@@ -47,6 +47,11 @@ describe('POST Requests', () => {
     isAdmin: 'no',
   };
 
+  const userSignIn = {
+    email: 'miragayo@amarachi.com',
+    password: 'hello'
+  };
+
   describe('POST /api/v1/users', () => {
     it('should create a new user', (done) => {
       request(app)
@@ -58,6 +63,20 @@ describe('POST Requests', () => {
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
           expect(res.body.data[0].fname).to.equal('Amarachi');
+          done();
+        });
+    });
+  });
+
+  describe('POST /api/v1/signin', () => {
+    it('should authenticate a user', (done) => {
+      request(app)
+        .post('/api/v1/signin')
+        .send(user)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.empty;
           done();
         });
     });
