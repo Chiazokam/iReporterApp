@@ -130,6 +130,11 @@ app.post('/api/v1/:userId/redflags', (req, res) => {
   return res.status(201).send({ data: [redflag] });
 });
 
+/* View Redflags */
+app.get('/api/v1/:userId/redflags', (req, res) => {
+  const userRedflags = redflags.find(redflag => redflag.createdBy === req.params.userId)
+  res.status(200).send({data: [userRedflags]});
+})
 module.exports = app;
 /* ************************************************************** */
 const port = process.env.PORT || 3000;
