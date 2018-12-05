@@ -21,9 +21,9 @@ class Record {
 
   findAllRecords(recordType) {
     const allFoundRecords = [];
-    for (obj in this.records) {
-      if (obj.type === recordType) {
-        allFoundRecords.push(obj);
+    for (let obj = 0; obj < this.records.length; obj++) {
+      if (this.records[obj].type === recordType) {
+        allFoundRecords.push(this.records[obj]);
       }
     }
     return (allFoundRecords);
