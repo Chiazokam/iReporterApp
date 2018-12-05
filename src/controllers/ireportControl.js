@@ -9,6 +9,14 @@ const recordControllers = {
     }
     return res.status(201).send({ data: [Record.createRecord(req.body)] });
   },
+
+  viewAllRedflags(req, res) {
+    res.status(200).send({ data: [Record.findAllRecords('redflag')] })
+  },
+
+  viewAllInterventions(req, res) {
+    res.status(200).send({ data: [Record.findAllRecords('intervention')] })
+  },
 };
 
 // module.exports = recordControllers;

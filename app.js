@@ -19,6 +19,12 @@ app.get('/api/v1/about', (req, res) => res.status(200).send({ data: [] }));
 /* Create Record Endpoint */
 app.post('/api/v1/records', recordController.createNewRecord);
 
+/* View Redflags Endpoint */
+app.get('/api/v1/redflags', recordController.viewAllRedflags);
+
+/* View interventions Endpoint */
+app.get('/api/v1/interventions', recordController.viewAllInterventions);
+
 module.exports = app;
 
 const port = process.env.PORT || 3000;
