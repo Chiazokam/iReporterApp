@@ -50,19 +50,6 @@ describe ('GET Requests', () => {
     });
   });
 
-  describe ('GET /api/v1/about', () => {
-    it('should get the about page', (done) => {
-      request(app)
-        .get('/api/v1/about')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.empty;
-          done();
-        });
-    });
-  });
-
   describe ('GET /api/v1/redflags', () => {
     it('should get all the redflag records', (done) => {
       request(app)
@@ -93,6 +80,19 @@ describe ('GET Requests', () => {
     it('should get one redflag', (done) => {
       request(app)
         .get('/api/v1/redflags/1')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          done();
+        });
+    });
+  });
+
+  describe ('GET /api/v1/interventions/1', () => {
+    it('should get one intervention', (done) => {
+      request(app)
+        .get('/api/v1/interventions/1')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
