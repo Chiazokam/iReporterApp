@@ -16,7 +16,7 @@ class Record {
       video: record.video,
     };
     this.records.push(newRecord);
-    return newRecord;
+    return (newRecord);
   }
 
   findAllRecords(recordType) {
@@ -56,3 +56,5 @@ class Record {
     return {};
   }
 }
+// module.exports = Record;
+export default new Record();
