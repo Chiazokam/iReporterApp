@@ -19,6 +19,7 @@ app.get('/api/v1/about', (req, res) => res.status(200).send({ data: [] }));
 /* Create Record Endpoint */
 app.post('/api/v1/records', recordController.createNewRecord);
 
-/* ************************************************************** */
+module.exports = app;
+
 const port = process.env.PORT || 3000;
 app.listen(port);
