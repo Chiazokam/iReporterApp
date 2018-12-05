@@ -11,11 +11,19 @@ const recordControllers = {
   },
 
   viewAllRedflags(req, res) {
-    res.status(200).send({ data: [Record.findAllRecords('redflag')] })
+    res.status(200).send({ data: [Record.findAllRecords('redflag')] });
   },
 
   viewAllInterventions(req, res) {
-    res.status(200).send({ data: [Record.findAllRecords('intervention')] })
+    res.status(200).send({ data: [Record.findAllRecords('intervention')] });
+  },
+
+  viewOneRedflag(req, res) {
+    if (!Record.findOneRecord(req.params.id)) {
+      res.status(404).send({ error: 'Record not found' });
+    } else {
+      res.status(200).send({ data: [Record.findOneRecord(req.params.id)] });
+    }
   },
 };
 
