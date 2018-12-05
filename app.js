@@ -28,6 +28,9 @@ app.get('/api/v1/redflags/:id', recordController.viewOneRedflag);
 /* View One intervention Endpoint */
 app.get('/api/v1/interventions/:id', recordController.viewOneIntervention);
 
+/* Edit Redflag Comment */
+app.patch('/api/v1/redflags/:id/comment', recordController.editRedflagComment);
+
 module.exports = app;
 
 const port = process.env.PORT || 3000;

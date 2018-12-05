@@ -102,3 +102,20 @@ describe ('GET Requests', () => {
     });
   });
 });
+
+/* PATCH Routes*/
+describe ('PATCH Requests', () => {
+  describe ('PATCH /api/v1/redflags/1/comment', () => {
+    it('should edit the comment', (done) => {
+      request(app)
+        .patch('/api/v1/redflags/1/comment')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('object');
+          expect(res.body.data.id).to.equal(1);
+          done();
+        });
+    });
+  });
+});

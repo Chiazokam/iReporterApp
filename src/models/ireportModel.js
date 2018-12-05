@@ -11,6 +11,7 @@ class Record {
       createdBy: record.createdBy,
       type: record.type,
       status: record.status,
+      comment: record.comment,
       location: record.location,
       image: record.image,
       video: record.video,
@@ -34,19 +35,19 @@ class Record {
     return (foundRecord);
   }
 
-  updateRecord(id, record) {
+  // record from the controller will be req.body
+  updateComment(id, record) {
     const foundRecord = this.findOneRecord(id);
     const recordIndex = this.records.indexOf(foundRecord);
-    this.records[recordIndex].id = record.id;
-    this.records[recordIndex].title = record.title;
-    this.records[recordIndex].createdOn = record.createdOn;
-    this.records[recordIndex].createdBy = record.createdBy;
-    this.records[recordIndex].type = record.type;
-    this.records[recordIndex].status = record.status;
+    this.records[recordIndex].comment = record.comment;
+    return {};
+  }
+
+  updateLocation(id, record) {
+    const foundRecord = this.findOneRecord(id);
+    const recordIndex = this.records.indexOf(foundRecord);
     this.records[recordIndex].location = record.location;
-    this.records[recordIndex].image = record.image;
-    this.records[recordIndex].video = record.video;
-    return (this.records[recordIndex]);
+    return {};
   }
 
   deleteRecord(id) {
