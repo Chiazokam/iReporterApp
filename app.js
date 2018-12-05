@@ -13,9 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /* HomePage Endpoint */
 app.get('/api/v1', (req, res) => res.status(200).send({ data: [] }));
 
-/* About Page Endpoint */
-app.get('/api/v1/about', (req, res) => res.status(200).send({ data: [] }));
-
 /* Create Record Endpoint */
 app.post('/api/v1/records', recordController.createNewRecord);
 
@@ -27,6 +24,9 @@ app.get('/api/v1/interventions', recordController.viewAllInterventions);
 
 /* View One redflag Endpoint */
 app.get('/api/v1/redflags/:id', recordController.viewOneRedflag);
+
+/* View One intervention Endpoint */
+app.get('/api/v1/interventions/:id', recordController.viewOneIntervention);
 
 module.exports = app;
 

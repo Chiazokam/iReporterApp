@@ -25,6 +25,14 @@ const recordControllers = {
       res.status(200).send({ data: [Record.findOneRecord(req.params.id)] });
     }
   },
+
+  viewOneIntervention(req, res) {
+    if (!Record.findOneRecord(req.params.id)) {
+      res.status(404).send({ error: 'Record not found' });
+    } else {
+      res.status(200).send({ data: [Record.findOneRecord(req.params.id)] });
+    }
+  },
 };
 
 // module.exports = recordControllers;
