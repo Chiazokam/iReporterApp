@@ -62,4 +62,30 @@ describe ('GET Requests', () => {
         });
     });
   });
+
+  describe ('GET /api/v1/redflags', () => {
+    it('should get all the redflag records', (done) => {
+      request(app)
+        .get('/api/v1/redflags')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          done();
+        });
+    });
+  });
+
+  describe ('GET /api/v1/interventions', () => {
+    it('should get all the intervention records', (done) => {
+      request(app)
+        .get('/api/v1/interventions')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          done();
+        });
+    });
+  });
 });
