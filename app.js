@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import recordController from './src/controllers/ireportControl'
+import recordController from './src/controllers/ireportControl';
 /* const express = require('express');
 const bodyParser = require('body-parser');
 const recordController = require('./src/controllers/ireportControl'); */
@@ -24,6 +24,9 @@ app.get('/api/v1/redflags', recordController.viewAllRedflags);
 
 /* View interventions Endpoint */
 app.get('/api/v1/interventions', recordController.viewAllInterventions);
+
+/* View One redflag Endpoint */
+app.get('/api/v1/redflags/:id', recordController.viewOneRedflag);
 
 module.exports = app;
 

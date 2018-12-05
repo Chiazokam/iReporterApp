@@ -30,7 +30,7 @@ class Record {
   }
 
   findOneRecord(id) {
-    const foundRecord = this.records.find(record => record.type === id);
+    const foundRecord = this.records.find(record => record.id === Number(id));
     return (foundRecord);
   }
 
