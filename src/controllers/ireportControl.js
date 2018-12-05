@@ -33,6 +33,15 @@ const recordControllers = {
       res.status(200).send({ data: [Record.findOneRecord(req.params.id)] });
     }
   },
+
+  editRedflagComment(req, res) {
+    if (!Record.findOneRecord(req.params.id)) {
+      res.status(404).send({ error: 'Record not found' });
+    } else {
+      Record.updateComment(req.params.id, req.body)
+      res.status(200).send({ data: { id: Number(req.params.id), message: 'Updated red-flag record\'s comment' } });
+    }
+  },
 };
 
 // module.exports = recordControllers;
