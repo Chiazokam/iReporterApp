@@ -15,12 +15,36 @@ body{
   background-size: cover;
 }
 
+#index-header{
+  padding-top: 25px;
+}
+
+#index-header ul{
+  float: right;
+  text-decoration: none;
+  margin-top: 3%;
+  margin-right: 5%;
+}
+
+#index-header ul li{
+  display: inline;
+  padding-left: 7%;
+}
+
+#index-header ul li a{
+  text-decoration: none;
+  color: #f5f6fa;
+  font-size: 20px;
+  font-weight: 400;
+}
+
 #index-header h3{
   margin: 25px 0 0 50px;
   color: #f5f6fa;
   font-size: 70px;
   letter-spacing: 3px;
   font-family: 'Great Vibes', cursive;
+  display: inline;
 }
 
 .span-bold-letter{
