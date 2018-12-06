@@ -11,34 +11,38 @@
     <section class="half-page left-content">
       <div class="container">
         <form id="create-redflag-form" action="" method="post">
-          <div class="form-field">
-            <input type="text" name="title" value="" placeholder="Title">
+          <p>All marked fields are required</p>
+          <div class="form-field required">
+            <label></label>
+            <input type="text" name="title" value="" placeholder="Record Title" required>
+          </div>
+          <div class="form-field required">
+            <label></label>
+            <select name="type" required>
+              <option value="">Record Type</option>
+              <option value="redflag">Redflag</option>
+              <option value="intervention">Intervention</option>
+            </select>
+          </div>
+          <div class="form-field-textarea required">
+            <label></label>
+            <textarea name="comment" rows="8" placeholder="Describe Incident" required></textarea>
           </div>
           <div class="form-field">
-            <input type="date" name="createdOn" value="" placeholder="Date Captured">
-          </div>
-          <div class="form-field">
-            <input type="text" name="location" value="" placeholder="Latitude, Longitude">
-          </div>
-          <div class="form-field">
-            <textarea name="redflag-descr" rows="8" placeholder="Describe Incidence"></textarea>
-          </div>
-          <div class="form-field">
-            <input type="text" name="image_url" value="" placeholder="Image Url">
+            <input type="file" name="image">
           </div>
           <div class="form-field">
             <input type="text" name="video_url" value="" placeholder="Video Url">
           </div>
-          <button type="button" class="btn-colored"><a href="">Submit</a></button>
+          <button type="button" class="btn-colored"><a href="">Create</a></button>
         </form>
       </div>
     </section>
     <section class="half-page right-redflag-content right-content">
       <div class="container">
-        <h2>- <span class="span-bold-letter">C</span>reate A Red-Flag -</h2>
+        <h2>- <span class="span-bold-letter">C</span>reate A Record -</h2>
         <div class="content">
-          <p>Join in stopping corruption!</p>
-            <button type="button" class="btn-colored"><a href="create_interv.html">Create Intervention</a></button>
+          <p>Together we can make the community more habitable for everyone!</p>
             <button type="button" class="btn-trans"><a href="profile.html">Back To Profile</a></button>
         </div>
       </div>

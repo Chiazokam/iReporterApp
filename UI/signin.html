@@ -11,17 +11,19 @@
     <section class="half-page left-content">
       <div class="container">
         <form id="signin-form" action="" method="post">
-
-          <div class="form-field">
-            <input type="text" name="fname" value="" placeholder="Email">
+          <p>All marked fields are required</p>
+          <div class="form-field required">
+            <label></label>
+            <input type="text" name="fname" value="" placeholder="Email" required>
           </div>
-          <div class="form-field">
-            <input type="password" name="password" value="" placeholder="Password">
+          <div class="form-field required">
+            <label></label>
+            <input type="password" name="password" value="" placeholder="Password" required>
           </div>
 
           <p>New user? Sign Up <span><a href="signup.html">Here</a></span></p>
           <p>Admin? Just take <span><a href="admin.html">Here</a></span> in the meantime!</p>
-          <button type="button" class="btn-colored btn-signup-button"><a href="profile.html">Submit</a></button>
+          <button type="button" class="btn-colored btn-signup-button"><a href="profile.html">Sign In</a></button>
         </form>
       </div>
     </section>
