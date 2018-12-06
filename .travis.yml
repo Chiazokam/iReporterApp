@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-  - "stable"
+  - "node"
+env:
+  global:
+    - NODE_ENV=test
 cache:
   directories:
     - "node_modules"
