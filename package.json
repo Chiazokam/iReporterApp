@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "lint": "eslint",
-    "test": "nyc mocha test/testApp --compilers js:babel-core/register --exit",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "test": "nyc --reporter=html --reporter=text mocha --require babel-register --exit",
+    "coveralls": "nyc --report --reporter=text-lcov | coveralls",
     "build": "babel app.js --out-dir build",
     "dev-start": "babel-watch app.js"
   },
