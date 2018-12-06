@@ -1,11 +1,5 @@
-# Description
-
-Include a summary of the change. Include
-relevant motivation.
-
-## What type of change is this?
-
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-
-### What Issue does it fix?
+#### What does this PR do?
+#### Description of Task to be completed?
+#### How should this be manually tested?
+#### What are the relevant pivotal tracker stories?
+#### Screenshots (if appropriate)
