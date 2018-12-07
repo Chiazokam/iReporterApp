@@ -57,5 +57,4 @@ class Record {
     return {};
   }
 }
-// module.exports = Record;
-export default new Record();
+export default Record;
