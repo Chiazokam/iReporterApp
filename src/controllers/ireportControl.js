@@ -19,7 +19,7 @@ const recordControllers = {
   },
 
   viewOneRedflag(req, res) {
-    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    const { foundRecord } = recordObject.findOneRecord(req.params.id);
     if (!foundRecord) {
       res.status(404).send({ error: 'Record not found' });
     } else {
@@ -28,7 +28,7 @@ const recordControllers = {
   },
 
   viewOneIntervention(req, res) {
-    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    const { foundRecord } = recordObject.findOneRecord(req.params.id);
     if (!foundRecord) {
       res.status(404).send({ error: 'Record not found' });
     } else {
@@ -36,27 +36,27 @@ const recordControllers = {
     }
   },
 
-  editRedflagComment(req, res) {
-    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
-    if (!foundRecord) {
-      res.status(404).send({ error: 'Record not found' });
-    } else {
-      recordObject.updateComment(req.params.id, req.body)
-      res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
+  editRecordComment(req, res) {
+    const { foundRecord } = recordObject.findOneRecord(req.params.id);
+    if (req.body.comment) {
+      console.log(req.body.comment);
+      recordObject.updateComment(req.params.id, req.body.comment)
+      return res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
     }
+    return res.status(404).send({ error: 'Record not found' });
   },
 
-  editRedflagLocation(req, res) {
-    if (!recordObject.findOneRecord(req.params.id)) {
-      res.status(404).send({ error: 'Record not found' });
-    } else {
-      recordObject.updateLocation(req.params.id, req.body)
-      res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
+  editRecordLocation(req, res) {
+    const { foundRecord } = recordObject.findOneRecord(req.params.id);
+    if (req.body.location) {
+      recordObject.updateLocation(req.params.id, req.body.location)
+      return res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
     }
+    return res.status(404).send({ error: 'Record not found' });
   },
 
   deleteIntervention(req, res) {
-    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    const { foundRecord } = recordObject.findOneRecord(req.params.id);
     if (!foundRecord) {
       res.status(404).send({ error: 'Record not found' });
     } else {

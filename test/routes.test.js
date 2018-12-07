@@ -3,26 +3,27 @@ const request = require('supertest');
 const app = require('../src/app');
 
 const expect = chai.expect;
+const redflag = {
+  id: 98,
+  title: 'Money hidden in soak away',
+  createdOn: '02-11-18',
+  createdBy: 453,
+  type: 'redflag',
+  status: 'draft',
+  location: '4.34454, 7.88838',
+  comment: 'Hidden by some poliyician nearby',
+  image: 'girl',
+  video: 'https://images.unsplash.com/photo-1543738096-79099a610293?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc86c5221409d8d4a93d34c017ecefee&auto=format&fit=crop&w=334&q=80',
+};
 
 describe('POST Requests', () => {
-  const redflag = {
-    id: 98,
-    title: 'Money hidden in soak away',
-    createdOn: '02-11-18',
-    createdBy: 453,
-    type: 'redflag',
-    status: 'draft',
-    location: '4.34454, 7.88838',
-    comment: 'Hidden by some poliyician nearby',
-    image: 'girl',
-    video: 'https://images.unsplash.com/photo-1543738096-79099a610293?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc86c5221409d8d4a93d34c017ecefee&auto=format&fit=crop&w=334&q=80',
-  };
+
 
   describe('POST /api/v1/redflags', () => {
     it('should return an error if record is not created', (done) => {
       request(app)
         .post('/api/v1/records')
-        .send()   // sending no data should return an error
+        .send() // sending no data should return an error
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
@@ -49,9 +50,9 @@ describe('POST Requests', () => {
   });
 });
 
-/* GET Routes*/
-describe ('GET Requests', () => {
-  describe ('GET /', () => {
+/* GET Routes */
+describe('GET Requests', () => {
+  describe('GET /', () => {
     it('should get the homepage', (done) => {
       request(app)
         .get('/')
@@ -64,7 +65,7 @@ describe ('GET Requests', () => {
     });
   });
 
-  describe ('GET /api/v1/redflags', () => {
+  describe('GET /api/v1/redflags', () => {
     it('should get all the redflag records', (done) => {
       request(app)
         .get('/api/v1/redflags')
@@ -77,7 +78,7 @@ describe ('GET Requests', () => {
     });
   });
 
-  describe ('GET /api/v1/interventions', () => {
+  describe('GET /api/v1/interventions', () => {
     it('should get all the intervention records', (done) => {
       request(app)
         .get('/api/v1/interventions')
@@ -90,7 +91,7 @@ describe ('GET Requests', () => {
     });
   });
 
-  describe ('GET /api/v1/redflags/10', () => {
+  describe('GET /api/v1/redflags/10', () => {
     it('should return an error if record is not found', (done) => {
       request(app)
         .get('/api/v1/redflags/10')
@@ -103,7 +104,7 @@ describe ('GET Requests', () => {
     });
   });
 
-  describe ('GET /api/v1/redflags/1', () => {
+  describe('GET /api/v1/redflags/1', () => {
     it('should get one redflag', (done) => {
       request(app)
         .get('/api/v1/redflags/1')
@@ -116,7 +117,7 @@ describe ('GET Requests', () => {
     });
   });
 
-  describe ('GET /api/v1/interventions/10', () => {
+  describe('GET /api/v1/interventions/10', () => {
     it('should return an error if record is not found', (done) => {
       request(app)
         .get('/api/v1/interventions/10')
@@ -129,7 +130,7 @@ describe ('GET Requests', () => {
     });
   });
 
-  describe ('GET /api/v1/interventions/1', () => {
+  describe('GET /api/v1/interventions/1', () => {
     it('should get one intervention', (done) => {
       request(app)
         .get('/api/v1/interventions/1')
@@ -143,13 +144,15 @@ describe ('GET Requests', () => {
   });
 });
 
-/* PATCH Routes*/
-describe ('PATCH Requests', () => {
-  describe ('PATCH /api/v1/redflags/1/comment', () => {
+/* PATCH Routes */
+describe('PATCH Requests', () => {
+  describe('PATCH /api/v1/redflags/2/comment', () => {
     it('should edit the comment', (done) => {
       request(app)
         .patch('/api/v1/redflags/1/comment')
+        .send(redflag)
         .end((err, res) => {
+          console.log(res)
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
@@ -159,10 +162,11 @@ describe ('PATCH Requests', () => {
     });
   });
 
-  describe ('PATCH /api/v1/interventions/1/comment', () => {
+  describe('PATCH /api/v1/interventions/1/comment', () => {
     it('should edit the intervention comment', (done) => {
       request(app)
         .patch('/api/v1/interventions/1/comment')
+        .send(redflag)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
@@ -173,10 +177,11 @@ describe ('PATCH Requests', () => {
     });
   });
 
-  describe ('PATCH /api/v1/redflags/1/location', () => {
+  describe('PATCH /api/v1/redflags/1/location', () => {
     it('should edit the location', (done) => {
       request(app)
         .patch('/api/v1/redflags/1/location')
+        .send(redflag)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
@@ -187,10 +192,11 @@ describe ('PATCH Requests', () => {
     });
   });
 
-  describe ('PATCH /api/v1/interventions/1/location', () => {
+  describe('PATCH /api/v1/interventions/1/location', () => {
     it('should edit the location', (done) => {
       request(app)
         .patch('/api/v1/interventions/1/location')
+        .send(redflag)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
@@ -202,9 +208,9 @@ describe ('PATCH Requests', () => {
   });
 });
 
-/* DELETE Routes*/
-describe ('DELETE Requests', () => {
-  describe ('DELETE /api/v1/interventions/1', () => {
+/* DELETE Routes */
+describe('DELETE Requests', () => {
+  describe('DELETE /api/v1/interventions/1', () => {
     it('should delete the intervention', (done) => {
       request(app)
         .delete('/api/v1/interventions/1')
@@ -218,7 +224,7 @@ describe ('DELETE Requests', () => {
     });
   });
 
-  describe ('DELETE /api/v1/redflags/1', () => {
+  describe('DELETE /api/v1/redflags/1', () => {
     it('should delete a redflag if not found', (done) => {
       request(app)
         .delete('/api/v1/redflags/1')

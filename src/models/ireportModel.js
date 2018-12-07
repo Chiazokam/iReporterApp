@@ -43,22 +43,22 @@ class Record {
   }
 
   // record from the controller will be req.body
-  updateComment(id, record) {
+  updateComment(id, recordComment) {
     const { foundRecord, foundIndex } = this.findOneRecord(id);
-    this.records[foundIndex].comment = record.comment;
-    return {};
+    this.records[foundIndex].comment = recordComment;
+    return { foundRecord };
   }
 
-  updateLocation(id, record) {
+  updateLocation(id, recordLocation) {
     const { foundRecord, foundIndex } = this.findOneRecord(id);
-    this.records[foundIndex].location = record.location;
-    return {};
+    this.records[foundIndex].location = recordLocation;
+    return { foundRecord };
   }
 
   deleteRecord(id) {
     const { foundRecord, foundIndex } = this.findOneRecord(id);
     this.records.splice(foundIndex, 1);
-    return {};
+    return { foundRecord };
   }
 }
 export default Record;

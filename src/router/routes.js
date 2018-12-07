@@ -21,16 +21,16 @@ router.get('/api/v1/redflags/:id', recordController.viewOneRedflag);
 router.get('/api/v1/interventions/:id', recordController.viewOneIntervention);
 
 /* Edit Redflag Comment */
-router.patch('/api/v1/redflags/:id/comment', recordController.editRedflagComment);
+router.patch('/api/v1/redflags/:id/comment', recordController.editRecordComment);
 
 /* Edit Intervention Comment */
-router.patch('/api/v1/interventions/:id/comment', recordController.editRedflagComment);
+router.patch('/api/v1/interventions/:id/comment', recordController.editRecordComment);
 
 /* Edit Redflag Location */
-router.patch('/api/v1/redflags/:id/location', recordController.editRedflagLocation);
+router.patch('/api/v1/redflags/:id/location', recordController.editRecordLocation);
 
 /* Edit Intervention Location */
-router.patch('/api/v1/interventions/:id/location', recordController.editRedflagLocation);
+router.patch('/api/v1/interventions/:id/location', recordController.editRecordLocation);
 
 /* Delete an Intervention */
 router.delete('/api/v1/interventions/:id', recordController.deleteIntervention);
