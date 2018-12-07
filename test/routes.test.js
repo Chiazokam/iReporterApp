@@ -19,6 +19,20 @@ describe('POST Requests', () => {
   };
 
   describe('POST /api/v1/redflags', () => {
+    it('should return an error if record is not created', (done) => {
+      request(app)
+        .post('/api/v1/records')
+        .send()   // sending no data should return an error
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('Incomplete data');
+          done();
+        });
+    });
+  });
+
+  describe('POST /api/v1/redflags', () => {
     it('should create a new redflag', (done) => {
       request(app)
         .post('/api/v1/records')
@@ -76,6 +90,19 @@ describe ('GET Requests', () => {
     });
   });
 
+  describe ('GET /api/v1/redflags/10', () => {
+    it('should return an error if record is not found', (done) => {
+      request(app)
+        .get('/api/v1/redflags/10')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('Record not found');
+          done();
+        });
+    });
+  });
+
   describe ('GET /api/v1/redflags/1', () => {
     it('should get one redflag', (done) => {
       request(app)
@@ -84,6 +111,19 @@ describe ('GET Requests', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
+          done();
+        });
+    });
+  });
+
+  describe ('GET /api/v1/interventions/10', () => {
+    it('should return an error if record is not found', (done) => {
+      request(app)
+        .get('/api/v1/interventions/10')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('Record not found');
           done();
         });
     });
@@ -109,6 +149,20 @@ describe ('PATCH Requests', () => {
     it('should edit the comment', (done) => {
       request(app)
         .patch('/api/v1/redflags/1/comment')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('object');
+          expect(res.body.data.id).to.equal(1);
+          done();
+        });
+    });
+  });
+
+  describe ('PATCH /api/v1/interventions/1/comment', () => {
+    it('should edit the intervention comment', (done) => {
+      request(app)
+        .patch('/api/v1/interventions/1/comment')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');

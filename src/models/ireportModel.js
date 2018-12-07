@@ -32,28 +32,30 @@ class Record {
 
   findOneRecord(id) {
     const foundRecord = this.records.find(record => record.id === Number(id));
-    return (foundRecord);
+    const foundIndex = this.records.findIndex(record => record.id === Number(id));
+    const foundObject = {
+      foundRecord: foundRecord,
+      foundIndex: foundIndex,
+    }
+    return (foundObject);
   }
 
   // record from the controller will be req.body
   updateComment(id, record) {
-    const foundRecord = this.findOneRecord(id);
-    const recordIndex = this.records.indexOf(foundRecord);
-    this.records[recordIndex].comment = record.comment;
+    const { foundRecord, foundIndex } = this.findOneRecord(id);
+    this.records[foundIndex].comment = record.comment;
     return {};
   }
 
   updateLocation(id, record) {
-    const foundRecord = this.findOneRecord(id);
-    const recordIndex = this.records.indexOf(foundRecord);
-    this.records[recordIndex].location = record.location;
+    const { foundRecord, foundIndex } = this.findOneRecord(id);
+    this.records[foundIndex].location = record.location;
     return {};
   }
 
   deleteRecord(id) {
-    const foundRecord = this.findOneRecord(id);
-    const recordIndex = this.records.indexOf(foundRecord);
-    this.records[recordIndex].splice(recordIndex, 1);
+    const { foundRecord, foundIndex } = this.findOneRecord(id);
+    this.records[foundIndex].splice(foundIndex, 1);
     return {};
   }
 }

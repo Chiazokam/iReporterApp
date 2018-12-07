@@ -3,8 +3,8 @@ const recordObject = new Record();
 
 const recordControllers = {
   createNewRecord(req, res) {
-    if (!req.body.title || !req.body.createdOn || !req.body.location
-      || !req.body.comment || !req.body.image || !req.body.video) {
+    const { title, createdOn, location, comment, image, video } = req.body;
+    if (!title || !createdOn || !location || !comment || !image || !video) {
       return res.status(400).send({ error: 'Incomplete data' });
     }
     return res.status(201).send({ data: [recordObject.createRecord(req.body)] });
@@ -19,18 +19,20 @@ const recordControllers = {
   },
 
   viewOneRedflag(req, res) {
-    if (!recordObject.findOneRecord(req.params.id)) {
+    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    if (!foundRecord) {
       res.status(404).send({ error: 'Record not found' });
     } else {
-      res.status(200).send({ data: [recordObject.findOneRecord(req.params.id)] });
+      res.status(200).send({ data: [foundRecord] });
     }
   },
 
   viewOneIntervention(req, res) {
-    if (!recordObject.findOneRecord(req.params.id)) {
+    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    if (!foundRecord) {
       res.status(404).send({ error: 'Record not found' });
     } else {
-      res.status(200).send({ data: [recordObject.findOneRecord(req.params.id)] });
+      res.status(200).send({ data: [foundRecord] });
     }
   },
 
@@ -42,7 +44,7 @@ const recordControllers = {
       res.status(200).send({ data: { id: Number(req.params.id), message: 'Updated red-flag record\'s comment' } });
     }
   },
+
 };
 
-// module.exports = recordControllers;
 export default recordControllers;
