@@ -1,3 +1,5 @@
+
+/* Idea of implementation got from https://www.codementor.io/olawalealadeusi896/building-simple-api-with-es6-krn8xx3k6 */
 class Record {
   constructor() {
     this.records = [];
@@ -55,7 +57,8 @@ class Record {
 
   deleteRecord(id) {
     const { foundRecord, foundIndex } = this.findOneRecord(id);
-    this.records[foundIndex].splice(foundIndex, 1);
+    console.log(this.records[foundIndex]);
+    this.records.splice(foundIndex, 1);
     return {};
   }
 }

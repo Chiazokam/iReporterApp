@@ -51,14 +51,14 @@ describe('POST Requests', () => {
 
 /* GET Routes*/
 describe ('GET Requests', () => {
-  describe ('GET /api/v1', () => {
+  describe ('GET /', () => {
     it('should get the homepage', (done) => {
       request(app)
-        .get('/api/v1')
+        .get('/')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.empty;
+          expect(res.body.message).to.equal('Welcome to iReporter');
           done();
         });
     });
@@ -152,8 +152,8 @@ describe ('PATCH Requests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data.id).to.equal(1);
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0].id).to.equal(1);
           done();
         });
     });
@@ -166,8 +166,8 @@ describe ('PATCH Requests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data.id).to.equal(1);
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0].id).to.equal(1);
           done();
         });
     });
@@ -180,8 +180,8 @@ describe ('PATCH Requests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data.id).to.equal(1);
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0].id).to.equal(1);
           done();
         });
     });
@@ -194,10 +194,27 @@ describe ('PATCH Requests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data.id).to.equal(1);
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0].id).to.equal(1);
           done();
         });
     });
   });
 });
+
+/* DELETE Routes*/
+describe ('DELETE Requests', () => {
+  describe ('DELETE /api/v1/interventions/1', () => {
+    it('should delete the intervention', (done) => {
+      request(app)
+        .delete('/api/v1/interventions/1')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0].id).to.equal(1);
+          done();
+        });
+    });
+  });
+})
