@@ -36,6 +36,9 @@ app.patch('/api/v1/interventions/:id/comment', recordController.editRedflagComme
 
 /* Edit Redflag Location */
 app.patch('/api/v1/redflags/:id/location', recordController.editRedflagLocation);
+
+/* Edit Intervention Location */
+app.patch('/api/v1/interventions/:id/location', recordController.editRedflagLocation);
 module.exports = app;
 
 const port = process.env.PORT || 3000;
