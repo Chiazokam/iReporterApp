@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import recordController from './src/controllers/ireportControl';
+import recordController from './controllers/ireportControl';
 /* const express = require('express');
 const bodyParser = require('body-parser');
 const recordController = require('./src/controllers/ireportControl'); */
