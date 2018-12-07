@@ -9,7 +9,8 @@
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "build": "babel src --out-dir build/src",
     "start:dev": "babel-watch src/app.js",
-    "start": "node build/src/app.js"
+    "start": "node build/src/app.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build"
   },
   "author": "zokky",
   "license": "ISC",
