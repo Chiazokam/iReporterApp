@@ -172,4 +172,18 @@ describe ('PATCH Requests', () => {
         });
     });
   });
+
+  describe ('PATCH /api/v1/redflags/1/location', () => {
+    it('should edit the location', (done) => {
+      request(app)
+        .patch('/api/v1/redflags/1/location')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('object');
+          expect(res.body.data.id).to.equal(1);
+          done();
+        });
+    });
+  });
 });
