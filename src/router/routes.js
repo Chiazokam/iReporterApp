@@ -32,7 +32,10 @@ router.patch('/api/v1/redflags/:id/location', recordController.editRedflagLocati
 /* Edit Intervention Location */
 router.patch('/api/v1/interventions/:id/location', recordController.editRedflagLocation);
 
-/* Delete Intervention Location */
+/* Delete an Intervention */
 router.delete('/api/v1/interventions/:id', recordController.deleteIntervention);
+
+/* Delete a Redflag */
+router.delete('/api/v1/redflags/:id', recordController.deleteIntervention);
 
 export default router;

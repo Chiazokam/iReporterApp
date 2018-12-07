@@ -57,7 +57,6 @@ class Record {
 
   deleteRecord(id) {
     const { foundRecord, foundIndex } = this.findOneRecord(id);
-    console.log(this.records[foundIndex]);
     this.records.splice(foundIndex, 1);
     return {};
   }
