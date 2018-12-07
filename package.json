@@ -5,11 +5,10 @@
   "main": "app.js",
   "scripts": {
     "lint": "eslint",
-    "test": "mocha --require babel-register --exit",
-    "coveralls": "nyc --report --reporter=text-lcov | coveralls",
+    "test": "nyc mocha test/routes.test.js --compilers js:babel-core/register --exit",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "build": "babel app.js --out-dir build",
-    "dev-start": "babel-watch app.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build "
+    "dev-start": "babel-watch app.js"
   },
   "author": "zokky",
   "license": "ISC",
