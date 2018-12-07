@@ -217,4 +217,16 @@ describe ('DELETE Requests', () => {
         });
     });
   });
-})
+
+  describe ('DELETE /api/v1/redflags/1', () => {
+    it('should delete a redflag if not found', (done) => {
+      request(app)
+        .delete('/api/v1/redflags/1')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.error).to.equal('Record not found');
+          done();
+        });
+    });
+  });
+});
