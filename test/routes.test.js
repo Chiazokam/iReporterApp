@@ -18,7 +18,6 @@ const redflag = {
 
 describe('POST Requests', () => {
 
-
   describe('POST /api/v1/redflags', () => {
     it('should return an error if record is not created', (done) => {
       request(app)
@@ -27,7 +26,10 @@ describe('POST Requests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
-          expect(res.body.error).to.equal('Incomplete data');
+          expect(res.body.error.title).to.equal('Missing title');
+          expect(res.body.error.createdOn).to.equal('Missing date');
+          expect(res.body.error.location).to.equal('Missing location');
+          expect(res.body.error.comment).to.equal('Missing comment');
           done();
         });
     });
@@ -152,7 +154,6 @@ describe('PATCH Requests', () => {
         .patch('/api/v1/redflags/1/comment')
         .send(redflag)
         .end((err, res) => {
-          console.log(res)
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');

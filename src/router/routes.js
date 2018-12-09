@@ -1,12 +1,13 @@
 import express from 'express';
 const router = express.Router();
+import middleware from '../middleware'
 import recordController from '../controllers/ireportControl';
 
 /* HomePage Endpoint */
 router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Record Endpoint */
-router.post('/api/v1/records', recordController.createNewRecord);
+router.post('/api/v1/records', middleware.postValidation, recordController.createNewRecord);
 
 /* View Redflags Endpoint */
 router.get('/api/v1/redflags', recordController.viewAllRedflags);

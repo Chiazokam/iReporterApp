@@ -3,10 +3,6 @@ const recordObject = new Record();
 
 const recordControllers = {
   createNewRecord(req, res) {
-    const { title, createdOn, location, comment, image, video } = req.body;
-    if (!title || !createdOn || !location || !comment || !image || !video) {
-      return res.status(400).send({ error: 'Incomplete data' });
-    }
     return res.status(201).send({ data: [recordObject.createRecord(req.body)] });
   },
 
@@ -39,7 +35,6 @@ const recordControllers = {
   editRecordComment(req, res) {
     const { foundRecord } = recordObject.findOneRecord(req.params.id);
     if (req.body.comment) {
-      console.log(req.body.comment);
       recordObject.updateComment(req.params.id, req.body.comment)
       return res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
     }
