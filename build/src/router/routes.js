@@ -1,17 +1,35 @@
-import express from 'express';
-const router = express.Router();
-import recordController from '../controllers/controller';
-import Middleware from '../middleware';
-const postValidator = new Middleware();
+'use strict';
 
- // /* HomePage Endpoint */
- // router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _controller = require('../controllers/controller');
+
+var _controller2 = _interopRequireDefault(_controller);
+
+var _middleware = require('../middleware');
+
+var _middleware2 = _interopRequireDefault(_middleware);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
+
+var postValidator = new _middleware2.default();
+
+// /* HomePage Endpoint */
+// router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Redflag Endpoint */
-router.post('/api/v1/redflags', postValidator.postValidation, recordController.createRecord);
+router.post('/api/v1/redflags', postValidator.postValidation, _controller2.default.createRecord);
 
 /* Create Intervention Endpoint */
-router.post('/api/v1/interventions', postValidator.postValidation, recordController.createRecord);
+router.post('/api/v1/interventions', postValidator.postValidation, _controller2.default.createRecord);
 //
 // /* View Redflags Endpoint */
 // router.get('/api/v1/redflags', recordController.viewAllRedflags);
@@ -43,4 +61,4 @@ router.post('/api/v1/interventions', postValidator.postValidation, recordControl
 // /* Delete a Redflag */
 // router.delete('/api/v1/redflags/:id', recordController.deleteIntervention);"""
 
-export default router;
+exports.default = router;
