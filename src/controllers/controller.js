@@ -1,38 +1,69 @@
-import db from '../db';
-import moment from 'moment';
-// import 'babel-polyfill';
+import Record from '../models/ireportModel';
+const recordObject = new Record();
 
-const recordController = {
-  createRecord(req, res) {
-    const { title, createdOn, createdBy, type, location, comment, images, videos } = req.body;
-    db.any(`INSERT INTO records(title, createdOn, createdBy, type, comment, location, status, images, videos)
-          VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`, [
-            title,
-            createdOn,
-            createdBy,
-            type,
-            comment,
-            location,
-            'draft',
-            images,
-            videos
-          ])
-    .then((record) => {
-      const recordData = record[0].id;
-      return res.status(201).send({
-        status: 201,
-        data: [{
-          id: recordData,
-          message: 'Record posted'
-        }]
-      })
-    })
-    .catch((error) => {
-      res.status(500).send({
-        error
-      });
-    });
- }
-}
+const recordControllers = {
+  createNewRecord(req, res) {
+    const { title, createdOn, location, comment, image, video } = req.body;
+    if (!title || !createdOn || !location || !comment || !image || !video) {
+      return res.status(400).send({ error: 'Incomplete data' });
+    }
+    return res.status(201).send({ data: [recordObject.createRecord(req.body)] });
+  },
 
-export default recordController;
+  viewAllRedflags(req, res) {
+    res.status(200).send({ data: [recordObject.findAllRecords('redflag')] });
+  },
+
+  viewAllInterventions(req, res) {
+    res.status(200).send({ data: [recordObject.findAllRecords('intervention')] });
+  },
+
+  viewOneRedflag(req, res) {
+    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    if (!foundRecord) {
+      res.status(404).send({ error: 'Record not found' });
+    } else {
+      res.status(200).send({ data: [foundRecord] });
+    }
+  },
+
+  viewOneIntervention(req, res) {
+    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    if (!foundRecord) {
+      res.status(404).send({ error: 'Record not found' });
+    } else {
+      res.status(200).send({ data: [foundRecord] });
+    }
+  },
+
+  editRedflagComment(req, res) {
+    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    if (!foundRecord) {
+      res.status(404).send({ error: 'Record not found' });
+    } else {
+      recordObject.updateComment(req.params.id, req.body)
+      res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
+    }
+  },
+
+  editRedflagLocation(req, res) {
+    if (!recordObject.findOneRecord(req.params.id)) {
+      res.status(404).send({ error: 'Record not found' });
+    } else {
+      recordObject.updateLocation(req.params.id, req.body)
+      res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
+    }
+  },
+
+  deleteIntervention(req, res) {
+    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
+    if (!foundRecord) {
+      res.status(404).send({ error: 'Record not found' });
+    } else {
+      recordObject.deleteRecord(req.params.id)
+      res.status(200).send({ data: [{ id: Number(req.params.id), message: 'intervention record has been deleted' }] })
+    }
+  }
+};
+
+export default recordControllers;
