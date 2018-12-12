@@ -8,9 +8,15 @@
     "test": "nyc mocha test/routes.test.js --compilers js:babel-core/register --exit",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "build": "babel src --out-dir build/src",
+<<<<<<< HEAD
     "start:dev": "npm run build && babel-watch src/app.js",
     "start": "node build/src/app.js",
     "createTable": "node ./build/src/models/createTables.js",
+=======
+    "start:dev": "npm run build && node ./build/src/models/createTables.js && babel-watch src/app.js",
+    "start": "node build/src/app.js",
+    "start:db": "",
+>>>>>>> db082357e3a6c3774f68bf39b4681900dad4c546
     "heroku-postbuild": "npm run build"
   },
   "author": "zokky",
