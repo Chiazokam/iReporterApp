@@ -4,14 +4,6 @@ import 'babel-polyfill';
 dotenv.config();
 
 const createTables = async () => {
-  const development = 'dev';
-  if (process.env.ENVIRONMENT === development) {
-    await db.none(`BEGIN;
-      DROP TABLE IF EXISTS records;
-      DROP TABLE IF EXISTS users;
-      COMMIT;`
-    ).catch(err => console.log(err));
-  }
    await db.none(`BEGIN;
     CREATE TABLE IF NOT EXISTS users(
       id SERIAL PRIMARY KEY,
@@ -22,8 +14,8 @@ const createTables = async () => {
       email VARCHAR(128) UNIQUE NOT NULL,
       password VARCHAR(128) NOT NULL,
       phone VARCHAR(128) UNIQUE NOT NULL,
-      isAdmin VARCHAR(128),
-      registered TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      isAdmin BOOLEAN DEFAULT false,
+      createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
     CREATE TABLE IF NOT EXISTS records(
@@ -49,9 +41,8 @@ const createTables = async () => {
                       email,
                       password,
                       phone,
-                      isAdmin,
-                      registered)
-          VALUES('Zokky', 'Chiazokam', 'Echeta', 'Chioma' , 'chiazokamecheta@gmail.com', 'root', '07032425466', 'yes', '03-06-18');
+                      isAdmin)
+          VALUES('Zokky', 'Chiazokam', 'Echeta', 'Chioma' , 'chiazokamecheta@gmail.com', 'root', '07032425466', true);
     COMMIT;
     `).catch(console.log);
 };

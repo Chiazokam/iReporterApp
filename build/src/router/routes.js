@@ -19,18 +19,25 @@ var _middleware2 = _interopRequireDefault(_middleware);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express2.default.Router();
-
-var postValidator = new _middleware2.default();
+var postValidation = _middleware2.default.postValidation,
+    validateSpace = _middleware2.default.validateSpace,
+    validateEmail = _middleware2.default.validateEmail,
+    doesUserExist = _middleware2.default.doesUserExist,
+    validatePhonenumber = _middleware2.default.validatePhonenumber;
 
 // /* HomePage Endpoint */
 // router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Redflag Endpoint */
-router.post('/api/v1/redflags', postValidator.postValidation, _controller2.default.createRecord);
+
+router.post('/api/v1/redflags', postValidation, _controller2.default.createRecord);
 
 /* Create Intervention Endpoint */
-router.post('/api/v1/interventions', postValidator.postValidation, _controller2.default.createRecord);
-//
+router.post('/api/v1/interventions', postValidation, _controller2.default.createRecord);
+
+/* Create User Endpoint */
+router.post('/api/v1/users', validateSpace, validateEmail, doesUserExist, _controller2.default.createUser);
+
 // /* View Redflags Endpoint */
 // router.get('/api/v1/redflags', recordController.viewAllRedflags);
 //

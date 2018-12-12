@@ -26,9 +26,10 @@ var config = {
   password: process.env.PASSWORD,
   database: process.env.DATABASE
 };
-var connectionString = config;
+
+var connectionString = process.env.DATABASE_URL;
 var pgProm = (0, _pgPromise2.default)();
 
-var db = pgProm(config);
+var db = pgProm(connectionString);
 
 exports.default = db;
