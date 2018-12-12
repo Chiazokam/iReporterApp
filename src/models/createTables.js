@@ -48,3 +48,4 @@ const createTables = async () => {
 };
 
 createTables();
+export default createTables;

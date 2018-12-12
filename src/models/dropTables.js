@@ -14,3 +14,5 @@ const dropTables = async () => {
 };
 
 dropTables();
+
+export default dropTables;
