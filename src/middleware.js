@@ -1,19 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+import { Queries } from './helpers'
+
+const query = new Queries();
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-class Middleware {
+const middleware = {
   postValidation(req, res, next) {
     const { title, createdOn, location, comment, image, video } = req.body;
     const errors = {};
-    if (!title || !createdOn || !location || !comment) {
+    if (!title || !location || !comment) {
       if (!title) {
         errors['title'] = 'Missing title';
-      }
-      if (!createdOn) {
-        errors['createdOn'] = 'Missing date';
       }
       if (!location) {
         errors['location'] = 'Missing location';
@@ -26,7 +26,51 @@ class Middleware {
       }
     }
     next();
+  },
+
+  doesUserExist(req, res, next) {
+    const { email, phone, username } = req.body;
+    query.userExistence(email, phone, username)
+      .then((data) => {
+        if(data.length > 0) {
+          res.status(400).send({
+            status: 400,
+            error: 'User already exists'
+          });
+        } else {
+          next();
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({error: err.message});
+      })
+  },
+
+  validateSpace(req, res, next) {
+    const { firstname, lastname, othername } = req.body;
+    // Idea from https://stackoverflow.com/questions/17616624/detect-if-string-contains-any-spaces
+    if (/\s/.test(firstname) || /\s/.test(lastname) || /\s/.test(othername)) {
+      res.status(400).send({
+        status: 400,
+        error: 'Remove the white spaces please'
+      })
+    } else {
+      next();
+    }
+  },
+
+  // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+  validateEmail(req, res, next) {
+    const { email } = req.body;
+    if (/\S+@\S+\.\S+/.test(email)) {
+      next();
+    } else {
+      res.status(400).send({
+        status: 400,
+        error: 'Wrong email format'
+      })
+    }
   }
 };
 
-export default Middleware;
+export default middleware;

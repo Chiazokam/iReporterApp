@@ -20,17 +20,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = _express2.default.Router();
 
-var postValidator = new _middleware2.default();
 
 // /* HomePage Endpoint */
 // router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Redflag Endpoint */
-router.post('/api/v1/redflags', postValidator.postValidation, _controller2.default.createRecord);
+router.post('/api/v1/redflags', _middleware2.default.postValidation, _controller2.default.createRecord);
 
 /* Create Intervention Endpoint */
-router.post('/api/v1/interventions', postValidator.postValidation, _controller2.default.createRecord);
-//
+router.post('/api/v1/interventions', _middleware2.default.postValidation, _controller2.default.createRecord);
+
+/* Create User Endpoint */
+router.post('/api/v1/users', _middleware2.default.validateSpace, _middleware2.default.validateEmail, _middleware2.default.doesUserExist, _controller2.default.createUser);
+
 // /* View Redflags Endpoint */
 // router.get('/api/v1/redflags', recordController.viewAllRedflags);
 //
