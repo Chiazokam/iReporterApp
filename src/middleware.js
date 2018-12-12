@@ -71,7 +71,7 @@ const middleware = {
       })
     }
   },
-
+  
   validatePhonenumber(req, res, next) {
     const { phone } = req.body;
     if(typeof(Number(phone)) !== Number){

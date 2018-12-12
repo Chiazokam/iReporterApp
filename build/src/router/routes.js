@@ -38,6 +38,14 @@ router.post('/api/v1/interventions', postValidation, _controller2.default.create
 /* Create User Endpoint */
 router.post('/api/v1/users', validateSpace, validateEmail, doesUserExist, _controller2.default.createUser);
 
+router.post('/api/v1/redflags', _middleware2.default.postValidation, _controller2.default.createRecord);
+
+/* Create Intervention Endpoint */
+router.post('/api/v1/interventions', _middleware2.default.postValidation, _controller2.default.createRecord);
+
+/* Create User Endpoint */
+router.post('/api/v1/users', _middleware2.default.validateSpace, _middleware2.default.validateEmail, _middleware2.default.doesUserExist, _controller2.default.createUser);
+
 // /* View Redflags Endpoint */
 // router.get('/api/v1/redflags', recordController.viewAllRedflags);
 //
