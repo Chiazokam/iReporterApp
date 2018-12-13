@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 import recordController from '../controllers/controller';
 import middleware from '../middleware';
+import { verifyToken } from '../helpers' 
 
 const { postValidation, validateSpace, validateEmail, doesUserExist, validatePhonenumber } = middleware;
 
@@ -9,10 +10,10 @@ const { postValidation, validateSpace, validateEmail, doesUserExist, validatePho
  // router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Redflag Endpoint */
-router.post('/api/v1/redflags', postValidation, recordController.createRecord);
+router.post('/api/v1/redflags', verifyToken, postValidation, recordController.createRedflag);
 
 /* Create Intervention Endpoint */
-router.post('/api/v1/interventions', postValidation, recordController.createRecord);
+//router.post('/api/v1/interventions', postValidation, recordController.createRecord);
 
 /* Create User Endpoint */
 router.post('/api/v1/auth/signup', validateSpace, validateEmail, doesUserExist, recordController.createUser);

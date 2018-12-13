@@ -44,42 +44,6 @@ var middleware = {
   doesUserExist: function doesUserExist(req, res, next) {
     var _req$body2 = req.body,
         email = _req$body2.email,
-        phone = _req$body2.phone,
-        username = _req$body2.username;
-
-    query.userExistence(email, phone, username).then(function (data) {
-      if (data.length > 0) {
-        res.status(400).send({
-          status: 400,
-          error: 'User already exists'
-        });
-      } else {
-        next();
-      }
-        createdOn = _req$body.createdOn,
-        location = _req$body.location,
-        comment = _req$body.comment;
-
-    var errors = {};
-    if (!title || !location || !comment) {
-      if (!title) {
-        errors['title'] = 'Missing title';
-      }
-      if (!location) {
-        errors['location'] = 'Missing location';
-      }
-      if (!comment) {
-        errors['comment'] = 'Missing comment';
-      }
-      if (errors) {
-        return res.status(400).send({ error: errors });
-      }
-    }
-    next();
-  },
-  doesUserExist: function doesUserExist(req, res, next) {
-    var _req$body2 = req.body,
-        email = _req$body2.email,
         username = _req$body2.username;
 
     query.userExistence(email, username).then(function (data) {

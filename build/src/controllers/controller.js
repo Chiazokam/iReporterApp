@@ -33,23 +33,24 @@ var query = new _helpers.Queries();
 _dotenv2.default.load();
 
 var recordController = {
-  createRecord: function createRecord(req, res) {
+  createRedflag: function createRedflag(req, res) {
     var _req$body = req.body,
         title = _req$body.title,
-        type = _req$body.type,
         location = _req$body.location,
         comment = _req$body.comment,
         images = _req$body.images,
         videos = _req$body.videos;
 
-    var recordDetails = { title: title, type: type, location: location, draft: 'draft', comment: comment, images: images, videos: videos };
+    var userId = req.userData.id;
+    var recordDetails = { title: title, location: location, createdBy: userId, type: 'redflag', draft: 'draft', comment: comment, images: images, videos: videos };
     query.createRecordQuery(recordDetails).then(function (record) {
+      console.log('inserted');
       var recordData = record[0].id;
       return res.status(201).send({
         status: 201,
         data: [{
           id: recordData,
-          message: 'Record posted'
+          message: 'Redflag posted'
         }]
       });
     }).catch(function (error) {
@@ -111,7 +112,7 @@ var recordController = {
           return res.status(401).send({
             status: 401,
             data: [{
-              message: 'Incorrect password'
+              message: 'Username or password is incorrect'
             }]
           });
         }
@@ -126,19 +127,18 @@ var recordController = {
           isAdmin: user.isadmin
         };
         var token = _jsonwebtoken2.default.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' });
-        // return res.status(201).send({
-        //   status: 201,
-        //   data: [{
-        //     token,
-        //     user: userObject
-        //   }]
-        // })
-        console.log('success');
+        return res.status(200).send({
+          status: 201,
+          data: [{
+            token: token,
+            user: userObject
+          }]
+        });
       } else {
         return res.status(401).send({
           status: 401,
           data: [{
-            message: 'Sorry, User does not exist'
+            message: 'Username or password is incorrect'
           }]
         });
       }

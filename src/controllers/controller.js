@@ -9,27 +9,28 @@ const query = new Queries();
 dotenv.load();
 
 const recordController = {
-  createRecord(req, res) {
-    const { title, type, location, comment, images, videos } = req.body;
-    const recordDetails = { title, type, location, draft: 'draft', comment, images, videos }
-    query.createRecordQuery(recordDetails)
-    .then((record) => {
-      const recordData = record[0].id;
-      return res.status(201).send({
-        status: 201,
-        data: [{
-          id: recordData,
-          message: 'Record posted'
-        }]
+  createRedflag(req, res) {
+      const { title, location, comment, images, videos } = req.body;
+      const userId  = req.userData.id;
+      const recordDetails = { title, location, createdBy: userId, type: 'redflag', status: 'draft', comment, images, videos };
+      query.createRecordQuery(recordDetails)
+      .then((record) => {
+        const recordData = record[0].id;
+        return res.status(201).send({
+          status: 201,
+          data: [{
+            id: recordData,
+            message: 'Redflag posted'
+          }]
+        })
+  
       })
-
-    })
-    .catch((error) => {
-      res.status(500).send({
-        error: error.message
+      .catch((error) => {
+        res.status(500).send({
+          error: error.message
+        });
       });
-    });
- },
+    },
 
  createUser(req, res) {
    const { firstname, lastname, othername, email, password, phone, username } = req.body;
@@ -115,6 +116,7 @@ const recordController = {
         });
       });
   },
+  
 
 }
 

@@ -22,6 +22,7 @@ var Queries = function () {
   _createClass(Queries, [{
     key: 'createRecordQuery',
     value: function createRecordQuery(recordDetails) {
+
       _db2.default.any('INSERT INTO records(title, createdBy, type, comment, location, status, images, videos)\n          VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [recordDetails.title, recordDetails.createdBy, recordDetails.type, recordDetails.comment, recordDetails.location, recordDetails.draft, recordDetails.images, recordDetails.videos]);
     }
   }, {
