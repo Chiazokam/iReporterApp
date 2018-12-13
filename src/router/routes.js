@@ -6,8 +6,8 @@ import { verifyToken } from '../helpers'
 
 const { postValidation, validateEmail, validateLocation, doesUserExist, validatePhonenumber } = middleware;
 
- // /* HomePage Endpoint */
- // router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
+  /* HomePage Endpoint */
+ router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Redflag Endpoint */
 router.post('/api/v1/redflags', verifyToken, validateLocation, postValidation, recordController.createRedflag);

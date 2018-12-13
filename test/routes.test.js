@@ -99,7 +99,7 @@ describe('POST Requests', () => {
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
-          expect(res.body.data[0].message).to.equal('Redflag posted');
+          expect(res.body.data[0].message).to.equal('Created Red-flag Record');
           done();
         });
     });
@@ -117,7 +117,7 @@ describe ('POST /api/v1/interventions', () => {
         expect(res.body).to.be.an('object');
         expect(res.body.data).to.be.an('array');
         expect(res.body.data[0]).to.be.an('object');
-        expect(res.body.data[0].message).to.equal('Intervention posted');
+        expect(res.body.data[0].message).to.equal('Created Intervention Record');
         done();
       });
   });
