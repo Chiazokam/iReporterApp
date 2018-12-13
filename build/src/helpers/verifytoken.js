@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.verifyToken = undefined;
 
 var _jsonwebtoken = require('jsonwebtoken');
 
@@ -10,7 +11,7 @@ var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var verifyToken = function verifyToken(req, res, next) {
+var verifyToken = exports.verifyToken = function verifyToken(req, res, next) {
     var bearerHeader = req.headers['token'];
 
     if (typeof bearerHeader !== 'undefined') {
@@ -34,5 +35,3 @@ var verifyToken = function verifyToken(req, res, next) {
         });
     }
 };
-
-exports.default = verifyToken;

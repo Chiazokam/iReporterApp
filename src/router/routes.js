@@ -4,22 +4,22 @@ import recordController from '../controllers/controller';
 import middleware from '../middleware';
 import { verifyToken } from '../helpers' 
 
-const { postValidation, validateSpace, validateEmail, doesUserExist, validatePhonenumber } = middleware;
+const { postValidation, validateEmail, validateLocation, doesUserExist, validatePhonenumber } = middleware;
 
  // /* HomePage Endpoint */
  // router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Redflag Endpoint */
-router.post('/api/v1/redflags', verifyToken, postValidation, recordController.createRedflag);
+router.post('/api/v1/redflags', verifyToken, validateLocation, postValidation, recordController.createRedflag);
 
 /* Create Intervention Endpoint */
 //router.post('/api/v1/interventions', postValidation, recordController.createRecord);
 
 /* Create User Endpoint */
-router.post('/api/v1/auth/signup', validateSpace, validateEmail, doesUserExist, recordController.createUser);
+router.post('/api/v1/auth/signup', validateEmail, doesUserExist, recordController.createUser);
 
 /* Sign In Endpoint */
-router.post('/api/v1/auth/login', validateSpace, validateEmail, recordController.signInUser);
+router.post('/api/v1/auth/login', validateEmail, recordController.signInUser);
 
 // /* View Redflags Endpoint */
 // router.get('/api/v1/redflags', recordController.viewAllRedflags);

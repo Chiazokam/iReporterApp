@@ -47,19 +47,6 @@ const middleware = {
       })
   },
 
-  validateSpace(req, res, next) {
-    const { firstname, lastname, othername, email, phone } = req.body;
-    // Idea from https://stackoverflow.com/questions/17616624/detect-if-string-contains-any-spaces
-    if (/\s/.test(firstname) || /\s/.test(lastname) || /\s/.test(othername) || /\s/.test(email) || /\s/.test(phone)) {
-      res.status(400).send({
-        status: 400,
-        error: 'Remove the white spaces please'
-      })
-    } else {
-      next();
-    }
-  },
-
   // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
   validateEmail(req, res, next) {
     const { email } = req.body;
@@ -72,6 +59,20 @@ const middleware = {
       })
     }
   },
+
+  validateLocation(req, res, next) {
+    let { location } = req.body;
+    location = location.trim();
+    if(/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/gm.test(location)){
+      next();
+    } else {
+      res.status(400).send({
+        status: 400,
+        error: 'Wrong location format'
+    })
+    }
+  },
+
   validatePhonenumber(req, res, next) {
     const { phone } = req.body;
     if(typeof(Number(phone)) !== Number){
@@ -82,7 +83,7 @@ const middleware = {
     } else {
       next();
     }
-  },
-};
+  }
+}
 
 export default middleware;

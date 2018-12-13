@@ -60,24 +60,6 @@ var middleware = {
       res.status(500).send({ error: err.message });
     });
   },
-  validateSpace: function validateSpace(req, res, next) {
-    var _req$body3 = req.body,
-        firstname = _req$body3.firstname,
-        lastname = _req$body3.lastname,
-        othername = _req$body3.othername,
-        email = _req$body3.email,
-        phone = _req$body3.phone;
-    // Idea from https://stackoverflow.com/questions/17616624/detect-if-string-contains-any-spaces
-
-    if (/\s/.test(firstname) || /\s/.test(lastname) || /\s/.test(othername) || /\s/.test(email) || /\s/.test(phone)) {
-      res.status(400).send({
-        status: 400,
-        error: 'Remove the white spaces please'
-      });
-    } else {
-      next();
-    }
-  },
 
 
   // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -90,6 +72,19 @@ var middleware = {
       res.status(400).send({
         status: 400,
         error: 'Wrong email format'
+      });
+    }
+  },
+  validateLocation: function validateLocation(req, res, next) {
+    var location = req.body.location;
+
+    location = location.trim();
+    if (/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/gm.test(location)) {
+      next();
+    } else {
+      res.status(400).send({
+        status: 400,
+        error: 'Wrong location format'
       });
     }
   },

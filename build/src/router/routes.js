@@ -18,14 +18,12 @@ var _middleware2 = _interopRequireDefault(_middleware);
 
 var _helpers = require('../helpers');
 
-var _helpers2 = _interopRequireDefault(_helpers);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express2.default.Router();
 var postValidation = _middleware2.default.postValidation,
-    validateSpace = _middleware2.default.validateSpace,
     validateEmail = _middleware2.default.validateEmail,
+    validateLocation = _middleware2.default.validateLocation,
     doesUserExist = _middleware2.default.doesUserExist,
     validatePhonenumber = _middleware2.default.validatePhonenumber;
 
@@ -34,16 +32,16 @@ var postValidation = _middleware2.default.postValidation,
 
 /* Create Redflag Endpoint */
 
-router.post('/api/v1/redflags', _helpers2.default, postValidation, _controller2.default.createRedflag);
+router.post('/api/v1/redflags', _helpers.verifyToken, validateLocation, postValidation, _controller2.default.createRedflag);
 
 /* Create Intervention Endpoint */
 //router.post('/api/v1/interventions', postValidation, recordController.createRecord);
 
 /* Create User Endpoint */
-router.post('/api/v1/auth/signup', validateSpace, validateEmail, doesUserExist, _controller2.default.createUser);
+router.post('/api/v1/auth/signup', validateEmail, doesUserExist, _controller2.default.createUser);
 
 /* Sign In Endpoint */
-router.post('/api/v1/auth/login', validateSpace, validateEmail, _controller2.default.signInUser);
+router.post('/api/v1/auth/login', validateEmail, _controller2.default.signInUser);
 
 // /* View Redflags Endpoint */
 // router.get('/api/v1/redflags', recordController.viewAllRedflags);

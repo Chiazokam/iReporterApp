@@ -10,7 +10,13 @@ dotenv.load();
 
 const recordController = {
   createRedflag(req, res) {
-      const { title, location, comment, images, videos } = req.body;
+      let { title, location, comment, images, videos } = req.body;
+      title = title.trim();
+      comment = comment.trim();
+      images = images.trim();
+      location = location.trim();
+      videos = videos.trim();
+
       const userId  = req.userData.id;
       const recordDetails = { title, location, createdBy: userId, type: 'redflag', status: 'draft', comment, images, videos };
       query.createRecordQuery(recordDetails)
@@ -33,7 +39,14 @@ const recordController = {
     },
 
  createUser(req, res) {
-   const { firstname, lastname, othername, email, password, phone, username } = req.body;
+   let { firstname, lastname, othername, email, password, phone, username } = req.body;
+   firstname = firstname.trim();
+   lastname = lastname.trim();
+   othername = othername.trim();
+   email = email.trim();
+   phone = phone.trim();
+   username = username.trim();
+
    const hash = bcrypt.hashSync(password, 10);
    const userDetails = { firstname, lastname, othername, email, hash, phone, username };
    query.createUserQuery(userDetails)

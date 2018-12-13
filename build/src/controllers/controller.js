@@ -41,10 +41,15 @@ var recordController = {
         images = _req$body.images,
         videos = _req$body.videos;
 
+    title = title.trim();
+    comment = comment.trim();
+    images = images.trim();
+    location = location.trim();
+    videos = videos.trim();
+
     var userId = req.userData.id;
-    var recordDetails = { title: title, location: location, createdBy: userId, type: 'redflag', draft: 'draft', comment: comment, images: images, videos: videos };
+    var recordDetails = { title: title, location: location, createdBy: userId, type: 'redflag', status: 'draft', comment: comment, images: images, videos: videos };
     query.createRecordQuery(recordDetails).then(function (record) {
-      console.log('inserted');
       var recordData = record[0].id;
       return res.status(201).send({
         status: 201,
@@ -68,6 +73,13 @@ var recordController = {
         password = _req$body2.password,
         phone = _req$body2.phone,
         username = _req$body2.username;
+
+    firstname = firstname.trim();
+    lastname = lastname.trim();
+    othername = othername.trim();
+    email = email.trim();
+    phone = phone.trim();
+    username = username.trim();
 
     var hash = _bcrypt2.default.hashSync(password, 10);
     var userDetails = { firstname: firstname, lastname: lastname, othername: othername, email: email, hash: hash, phone: phone, username: username };
