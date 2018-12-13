@@ -8,7 +8,7 @@ cache:
   directories:
   - node_modules
 before_script:
-  - psql -f src/db.sql
+  - psql -f ./src/db.sql -U postgres
 after_success:
 - npm run coveralls
 deploy:
