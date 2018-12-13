@@ -155,14 +155,37 @@ const recordController = {
   viewAllRedflags(req, res) {
     const type = 'redflag';
     const userId  = req.userData.id;
-    query.viewAllRedflagsQuery(type, userId)
+    query.viewAllRecordsQuery(type, userId)
     .then((records) => {
       const userRecords = records[0];
-      console.log(records);
       if (records.length === 0){
         res.status(204).send({
           status: 204,
           message: 'User has no redflags'
+        })
+      }
+      res.status(200).send({
+        status: 200,
+        data: records
+      })
+    })
+    .catch((error) => {
+      res.status(500).send({
+        error: error.message
+      });
+    })
+  },
+
+  viewAllInterventions(req, res) {
+    const type = 'intervention';
+    const userId  = req.userData.id;
+    query.viewAllRecordsQuery(type, userId)
+    .then((records) => {
+      const userRecords = records[0];
+      if (records.length === 0){
+        res.status(204).send({
+          status: 204,
+          message: 'User has no interventions'
         })
       }
       res.status(200).send({

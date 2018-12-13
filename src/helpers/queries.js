@@ -37,7 +37,7 @@ class Queries {
     return db.any("SELECT * FROM users WHERE email = $1 OR password = $2", [email.trim(), password]);
   }
 
-  viewAllRedflagsQuery(type, id) {
+  viewAllRecordsQuery(type, id) {
     return db.any("SELECT * FROM records WHERE type = $1 AND createdBy = $2", [type, id])
   }
 }
