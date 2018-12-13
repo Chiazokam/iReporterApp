@@ -15,8 +15,8 @@ class Queries {
           ]);
   }
 
-  userExistence (email, phone, username) {
-    return db.any('SELECT * FROM users WHERE email = $1 OR phone = $2 OR username = $3', [email.trim(), phone.trim(), username.trim()]);
+  userExistence (email, username) {
+    return db.any('SELECT * FROM users WHERE email = $1 OR username = $2', [email.trim(), username.trim()]);
   }
 
   // userDetails is an object
@@ -31,6 +31,10 @@ class Queries {
             userDetails.phone,
             userDetails.username,
           ])
+  }
+
+  userRegisteredQuery(email, password) {
+    return db.any("SELECT * FROM users WHERE email = $1 OR password = $2", [email.trim(), password]);
   }
 }
 

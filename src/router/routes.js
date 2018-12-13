@@ -15,7 +15,10 @@ router.post('/api/v1/redflags', postValidation, recordController.createRecord);
 router.post('/api/v1/interventions', postValidation, recordController.createRecord);
 
 /* Create User Endpoint */
-router.post('/api/v1/users', validateSpace, validateEmail, doesUserExist, recordController.createUser);
+router.post('/api/v1/auth/signup', validateSpace, validateEmail, doesUserExist, recordController.createUser);
+
+/* Sign In Endpoint */
+router.post('/api/v1/auth/login', validateSpace, validateEmail, recordController.signInUser);
 
 // /* View Redflags Endpoint */
 // router.get('/api/v1/redflags', recordController.viewAllRedflags);

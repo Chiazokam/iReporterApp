@@ -38,7 +38,7 @@ const recordController = {
    query.createUserQuery(userDetails)
    .then((data) => {
      const user = data[0];
-     const userData = {
+     const userObject = {
        id: user.id,
        username: user.username,
        email: user.email,
@@ -48,12 +48,12 @@ const recordController = {
        phone: user.phone,
        isAdmin: user.isadmin
      };
-     const token = jwt.sign(userData, process.env.SECRET_KEY, { expiresIn: '2d' });
+     const token = jwt.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' });
      return res.status(201).send({
        status: 201,
        data: [{
          token: token,
-         user: userData
+         user: userObject
        }]
      })
 
@@ -63,7 +63,59 @@ const recordController = {
        error: error.message
      });
    });
-}
+},
+
+  signInUser(req, res) {
+    const { email, password } = req.body;
+    const hash = bcrypt.hashSync(password, 10);
+    const userDetails = { email, hash }
+
+    query.userRegisteredQuery(email, hash)
+      .then((data) => {
+        const user = data[0]
+        if (data.length > 0) {
+          if (!bcrypt.compareSync(password, user.password)) {
+              return res.status(401).send({
+                status: 401,
+                data: [{
+                  message: 'Username or password is incorrect'
+                }]
+              });
+            }
+            const userObject = {
+              id: user.id,
+              username: user.username,
+              email: user.email,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              othername: user.othername,
+              phone: user.phone,
+              isAdmin: user.isadmin
+            }
+            const token = jwt.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' });
+            return res.status(200).send({
+              status: 201,
+              data: [{
+                token,
+                user: userObject
+              }]
+            })
+          } else {
+          return res.status(401).send({
+            status: 401,
+            data: [{
+              message: 'Username or password is incorrect'
+            }]
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).send({
+          error: error.message
+        });
+      });
+  },
+
 }
 
 export default recordController;
