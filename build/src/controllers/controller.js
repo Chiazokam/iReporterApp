@@ -33,23 +33,29 @@ var query = new _helpers.Queries();
 _dotenv2.default.load();
 
 var recordController = {
-  createRecord: function createRecord(req, res) {
+  createRedflag: function createRedflag(req, res) {
     var _req$body = req.body,
         title = _req$body.title,
-        type = _req$body.type,
         location = _req$body.location,
         comment = _req$body.comment,
         images = _req$body.images,
         videos = _req$body.videos;
 
-    var recordDetails = { title: title, type: type, location: location, draft: 'draft', comment: comment, images: images, videos: videos };
+    title = title.trim();
+    comment = comment.trim();
+    images = images.trim();
+    location = location.trim();
+    videos = videos.trim();
+
+    var userId = req.userData.id;
+    var recordDetails = { title: title, location: location, createdBy: userId, type: 'redflag', status: 'draft', comment: comment, images: images, videos: videos };
     query.createRecordQuery(recordDetails).then(function (record) {
       var recordData = record[0].id;
       return res.status(201).send({
         status: 201,
         data: [{
           id: recordData,
-          message: 'Record posted'
+          message: 'Redflag posted'
         }]
       });
     }).catch(function (error) {
@@ -67,6 +73,13 @@ var recordController = {
         password = _req$body2.password,
         phone = _req$body2.phone,
         username = _req$body2.username;
+
+    firstname = firstname.trim();
+    lastname = lastname.trim();
+    othername = othername.trim();
+    email = email.trim();
+    phone = phone.trim();
+    username = username.trim();
 
     var hash = _bcrypt2.default.hashSync(password, 10);
     var userDetails = { firstname: firstname, lastname: lastname, othername: othername, email: email, hash: hash, phone: phone, username: username };
@@ -111,7 +124,7 @@ var recordController = {
           return res.status(401).send({
             status: 401,
             data: [{
-              message: 'Incorrect password'
+              message: 'Username or password is incorrect'
             }]
           });
         }
@@ -126,19 +139,18 @@ var recordController = {
           isAdmin: user.isadmin
         };
         var token = _jsonwebtoken2.default.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' });
-        // return res.status(201).send({
-        //   status: 201,
-        //   data: [{
-        //     token,
-        //     user: userObject
-        //   }]
-        // })
-        console.log('success');
+        return res.status(200).send({
+          status: 201,
+          data: [{
+            token: token,
+            user: userObject
+          }]
+        });
       } else {
         return res.status(401).send({
           status: 401,
           data: [{
-            message: 'Sorry, User does not exist'
+            message: 'Username or password is incorrect'
           }]
         });
       }

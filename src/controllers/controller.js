@@ -9,30 +9,42 @@ const query = new Queries();
 dotenv.load();
 
 const recordController = {
-  createRecord(req, res) {
-    const { title, type, location, comment, images, videos } = req.body;
-    const recordDetails = { title, type, location, draft: 'draft', comment, images, videos }
-    query.createRecordQuery(recordDetails)
-    .then((record) => {
-      const recordData = record[0].id;
-      return res.status(201).send({
-        status: 201,
-        data: [{
-          id: recordData,
-          message: 'Record posted'
-        }]
-      })
+  createRedflag(req, res) {
+      let { title, location, comment, images, videos } = req.body;
+      title = title.trim();
+      comment = comment.trim();
+      location = location.trim();
 
-    })
-    .catch((error) => {
-      res.status(500).send({
-        error: error.message
+      const userId  = req.userData.id;
+      const recordDetails = { title, location, createdBy: userId, type: 'redflag', status: 'draft', comment, images, videos };
+      query.createRecordQuery(recordDetails)
+      .then((record) => {
+        const recordData = record[0].id;
+        return res.status(201).send({
+          status: 201,
+          data: [{
+            id: recordData,
+            message: 'Redflag posted'
+          }]
+        })
+  
+      })
+      .catch((error) => {
+        res.status(500).send({
+          error: error.message
+        });
       });
-    });
- },
+    },
 
  createUser(req, res) {
-   const { firstname, lastname, othername, email, password, phone, username } = req.body;
+   let { firstname, lastname, othername, email, password, phone, username } = req.body;
+   firstname = firstname.trim();
+   lastname = lastname.trim();
+   othername = othername.trim();
+   email = email.trim();
+   phone = phone.trim();
+   username = username.trim();
+
    const hash = bcrypt.hashSync(password, 10);
    const userDetails = { firstname, lastname, othername, email, hash, phone, username };
    query.createUserQuery(userDetails)
@@ -115,6 +127,7 @@ const recordController = {
         });
       });
   },
+  
 
 }
 

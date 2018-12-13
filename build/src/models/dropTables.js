@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+      value: true
+});
+
 var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
@@ -41,3 +45,5 @@ var dropTables = function () {
 }();
 
 dropTables();
+
+exports.default = dropTables;

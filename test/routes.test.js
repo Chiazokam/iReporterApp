@@ -2,16 +2,15 @@ import chai, { expect } from 'chai';
 import request from 'supertest';
 import app from '../src/app';
 
+let token;
 
-const record = {
+
+const redflag = {
   title: 'Money hidden in soak away',
-  createdBy: 1,
-  type: 'redflag',
-  status: 'draft',
   location: '4.34454, 7.88838',
   comment: 'Hidden by some poliyician nearby',
-  image: 'girl',
-  video: 'https://images.unsplash.com/photo-1543738096-79099a610293?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc86c5221409d8d4a93d34c017ecefee&auto=format&fit=crop&w=334&q=80',
+  images: 'girl',
+  videos: 'google.com',
 };
 
 const user = {
@@ -42,6 +41,7 @@ describe('POST Requests', () => {
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
           expect(res.body.data[0].user.firstname).to.equal('Marcel');
+          token = res.body.data[0].token;
           done();
         });
     });
@@ -75,6 +75,23 @@ describe('POST Requests', () => {
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
           expect(res.body.data[0].message).to.equal('Username or password is incorrect');
+          done();
+        });
+    });
+  });
+
+  describe ('POST /api/v1/redflags', () => {
+    it('should create a new redflag', (done) => {
+      request(app)
+        .post('/api/v1/redflags')
+        .set('token', token)
+        .send(redflag)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].message).to.equal('Redflag posted');
           done();
         });
     });

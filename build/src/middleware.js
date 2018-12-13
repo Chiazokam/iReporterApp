@@ -25,54 +25,18 @@ var middleware = {
         comment = _req$body.comment;
 
     var errors = {};
-    if (!title || !location || !comment) {
-      if (!title) {
-        errors['title'] = 'Missing title';
+    if (!title || !title.trim() || !location || !location.trim() || !comment || !comment.trim()) {
+      if (!title || !title.trim()) {
+        errors['title'] = 'Improper title format';
       }
-      if (!location) {
-        errors['location'] = 'Missing location';
+      if (!location || !location.trim()) {
+        errors['location'] = 'Improper location format';
       }
-      if (!comment) {
-        errors['comment'] = 'Missing comment';
-      }
-      if (errors) {
-        return res.status(400).send({ error: errors });
-      }
-    }
-    next();
-  },
-  doesUserExist: function doesUserExist(req, res, next) {
-    var _req$body2 = req.body,
-        email = _req$body2.email,
-        phone = _req$body2.phone,
-        username = _req$body2.username;
-
-    query.userExistence(email, phone, username).then(function (data) {
-      if (data.length > 0) {
-        res.status(400).send({
-          status: 400,
-          error: 'User already exists'
-        });
-      } else {
-        next();
-      }
-        createdOn = _req$body.createdOn,
-        location = _req$body.location,
-        comment = _req$body.comment;
-
-    var errors = {};
-    if (!title || !location || !comment) {
-      if (!title) {
-        errors['title'] = 'Missing title';
-      }
-      if (!location) {
-        errors['location'] = 'Missing location';
-      }
-      if (!comment) {
-        errors['comment'] = 'Missing comment';
+      if (!comment || !comment.trim()) {
+        errors['comment'] = 'Improper comment format  ';
       }
       if (errors) {
-        return res.status(400).send({ error: errors });
+        return res.status(400).send({ status: 400, error: errors });
       }
     }
     next();
@@ -96,24 +60,6 @@ var middleware = {
       res.status(500).send({ error: err.message });
     });
   },
-  validateSpace: function validateSpace(req, res, next) {
-    var _req$body3 = req.body,
-        firstname = _req$body3.firstname,
-        lastname = _req$body3.lastname,
-        othername = _req$body3.othername,
-        email = _req$body3.email,
-        phone = _req$body3.phone;
-    // Idea from https://stackoverflow.com/questions/17616624/detect-if-string-contains-any-spaces
-
-    if (/\s/.test(firstname) || /\s/.test(lastname) || /\s/.test(othername) || /\s/.test(email) || /\s/.test(phone)) {
-      res.status(400).send({
-        status: 400,
-        error: 'Remove the white spaces please'
-      });
-    } else {
-      next();
-    }
-  },
 
 
   // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -126,6 +72,19 @@ var middleware = {
       res.status(400).send({
         status: 400,
         error: 'Wrong email format'
+      });
+    }
+  },
+  validateLocation: function validateLocation(req, res, next) {
+    var location = req.body.location;
+
+    location = location.trim();
+    if (/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/gm.test(location)) {
+      next();
+    } else {
+      res.status(400).send({
+        status: 400,
+        error: 'Wrong location format'
       });
     }
   },
