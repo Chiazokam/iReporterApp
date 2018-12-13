@@ -13,6 +13,14 @@ const redflag = {
   videos: 'google.com',
 };
 
+const intervention = {
+  title: 'Money hidden in soak away',
+  location: '4.34454, 7.88838',
+  comment: 'Hidden by some poliyician nearby',
+  images: 'girl',
+  videos: 'google.com',
+};
+
 const user = {
             firstname: 'Marcel',
             lastname: 'Marce',
@@ -96,4 +104,23 @@ describe('POST Requests', () => {
         });
     });
   });
+
+  
+describe ('POST /api/v1/interventions', () => {
+  it('should create a new intervention', (done) => {
+    request(app)
+      .post('/api/v1/interventions')
+      .set('token', token)
+      .send(intervention)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body).to.be.an('object');
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data[0]).to.be.an('object');
+        expect(res.body.data[0].message).to.equal('Intervention posted');
+        done();
+      });
+  });
+});
+
 });

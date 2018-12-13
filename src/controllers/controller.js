@@ -36,6 +36,30 @@ const recordController = {
       });
     },
 
+    createIntervention(req, res) {
+      const { title, location, comment, images, videos } = req.body;
+      const userId  = req.userData.id;
+      const recordDetails = { title, location, createdBy: userId, type: 'intervention', status: 'draft', comment, images, videos };
+      query.createRecordQuery(recordDetails)
+      .then((record) => {
+        const recordData = record[0].id;
+        return res.status(201).send({
+          status: 201,
+          data: [{
+            id: recordData,
+            message: 'Intervention posted'
+          }]
+        })
+  
+      })
+      .catch((error) => {
+        res.status(500).send({
+          error: error.message
+        });
+      });
+    },
+
+
  createUser(req, res) {
    let { firstname, lastname, othername, email, password, phone, username } = req.body;
    firstname = firstname.trim();

@@ -13,7 +13,7 @@ const { postValidation, validateEmail, validateLocation, doesUserExist, validate
 router.post('/api/v1/redflags', verifyToken, validateLocation, postValidation, recordController.createRedflag);
 
 /* Create Intervention Endpoint */
-//router.post('/api/v1/interventions', postValidation, recordController.createRecord);
+router.post('/api/v1/interventions', verifyToken, validateLocation, postValidation, recordController.createIntervention)
 
 /* Create User Endpoint */
 router.post('/api/v1/auth/signup', validateEmail, doesUserExist, recordController.createUser);
