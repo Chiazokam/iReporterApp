@@ -1,7 +1,7 @@
--- DROP DATABASE IF EXISTS ireporter;
--- CREATE DATABASE ireporter;
+ DROP DATABASE IF EXISTS ireporter;
+ CREATE DATABASE ireporter;
 
--- \c ireporter;
+ \c ireporter;
 
 -- USERS TABLE
 CREATE TABLE IF NOT EXISTS users(
