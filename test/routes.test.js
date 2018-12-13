@@ -57,7 +57,7 @@ describe('POST Requests', () => {
         .post('/api/v1/auth/signin')
         .send(userSignin)
         .end((err, res) => {
-          expect(res.statusCode).to.equal(201);
+          expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');

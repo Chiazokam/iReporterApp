@@ -78,7 +78,7 @@ const recordController = {
               return res.status(401).send({
                 status: 401,
                 data: [{
-                  message: 'Incorrect password'
+                  message: 'Username or password is incorrect'
                 }]
               });
             }
@@ -93,7 +93,7 @@ const recordController = {
               isAdmin: user.isadmin
             }
             const token = jwt.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' });
-            return res.status(201).send({
+            return res.status(200).send({
               status: 201,
               data: [{
                 token,
@@ -104,7 +104,7 @@ const recordController = {
           return res.status(401).send({
             status: 401,
             data: [{
-              message: 'Sorry, User does not exist'
+              message: 'Username or password is incorrect'
             }]
           });
         }
