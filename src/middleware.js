@@ -29,10 +29,10 @@ const middleware = {
   },
 
   doesUserExist(req, res, next) {
-    const { email, phone, username } = req.body;
-    query.userExistence(email, phone, username)
+    const { email, username } = req.body;
+    query.userExistence(email, username)
       .then((data) => {
-        if(data.length > 0) {
+        if (data.length > 0) {
           res.status(400).send({
             status: 400,
             error: 'User already exists'
@@ -42,14 +42,15 @@ const middleware = {
         }
       })
       .catch((err) => {
+        console.log("Failing....")
         res.status(500).send({error: err.message});
       })
   },
 
   validateSpace(req, res, next) {
-    const { firstname, lastname, othername } = req.body;
+    const { firstname, lastname, othername, email, phone } = req.body;
     // Idea from https://stackoverflow.com/questions/17616624/detect-if-string-contains-any-spaces
-    if (/\s/.test(firstname) || /\s/.test(lastname) || /\s/.test(othername)) {
+    if (/\s/.test(firstname) || /\s/.test(lastname) || /\s/.test(othername) || /\s/.test(email) || /\s/.test(phone)) {
       res.status(400).send({
         status: 400,
         error: 'Remove the white spaces please'
@@ -71,7 +72,6 @@ const middleware = {
       })
     }
   },
-  
   validatePhonenumber(req, res, next) {
     const { phone } = req.body;
     if(typeof(Number(phone)) !== Number){

@@ -72,7 +72,7 @@ var recordController = {
     var userDetails = { firstname: firstname, lastname: lastname, othername: othername, email: email, hash: hash, phone: phone, username: username };
     query.createUserQuery(userDetails).then(function (data) {
       var user = data[0];
-      var userData = {
+      var userObject = {
         id: user.id,
         username: user.username,
         email: user.email,
@@ -82,14 +82,66 @@ var recordController = {
         phone: user.phone,
         isAdmin: user.isadmin
       };
-      var token = _jsonwebtoken2.default.sign(userData, process.env.SECRET_KEY, { expiresIn: '2d' });
+      var token = _jsonwebtoken2.default.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' });
       return res.status(201).send({
         status: 201,
         data: [{
           token: token,
-          user: userData
+          user: userObject
         }]
       });
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  signInUser: function signInUser(req, res) {
+    var _req$body3 = req.body,
+        email = _req$body3.email,
+        password = _req$body3.password;
+
+    var hash = _bcrypt2.default.hashSync(password, 10);
+    var userDetails = { email: email, hash: hash };
+
+    query.userRegisteredQuery(email, hash).then(function (data) {
+      var user = data[0];
+      if (data.length > 0) {
+        if (!_bcrypt2.default.compareSync(password, user.password)) {
+          return res.status(401).send({
+            status: 401,
+            data: [{
+              message: 'Incorrect password'
+            }]
+          });
+        }
+        var userObject = {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          othername: user.othername,
+          phone: user.phone,
+          isAdmin: user.isadmin
+        };
+        var token = _jsonwebtoken2.default.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' });
+        // return res.status(201).send({
+        //   status: 201,
+        //   data: [{
+        //     token,
+        //     user: userObject
+        //   }]
+        // })
+        console.log('success');
+      } else {
+        return res.status(401).send({
+          status: 401,
+          data: [{
+            message: 'Sorry, User does not exist'
+          }]
+        });
+      }
     }).catch(function (error) {
       res.status(500).send({
         error: error.message

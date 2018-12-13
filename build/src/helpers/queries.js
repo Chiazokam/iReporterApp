@@ -26,8 +26,8 @@ var Queries = function () {
     }
   }, {
     key: 'userExistence',
-    value: function userExistence(email, phone, username) {
-      return _db2.default.any('SELECT * FROM users WHERE email = $1 OR phone = $2 OR username = $3', [email.trim(), phone.trim(), username.trim()]);
+    value: function userExistence(email, username) {
+      return _db2.default.any('SELECT * FROM users WHERE email = $1 OR username = $2', [email.trim(), username.trim()]);
     }
 
     // userDetails is an object
@@ -36,6 +36,11 @@ var Queries = function () {
     key: 'createUserQuery',
     value: function createUserQuery(userDetails) {
       return _db2.default.any('INSERT INTO users(firstname, lastname, othername, email, password, phone, username)\n          VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *', [userDetails.firstname, userDetails.lastname, userDetails.othername, userDetails.email, userDetails.hash, userDetails.phone, userDetails.username]);
+    }
+  }, {
+    key: 'userRegisteredQuery',
+    value: function userRegisteredQuery(email, password) {
+      return _db2.default.any("SELECT * FROM users WHERE email = $1 OR password = $2", [email.trim(), password]);
     }
   }]);
 

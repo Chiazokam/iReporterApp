@@ -13,7 +13,7 @@ const createTables = async () => {
       othername VARCHAR(128),
       email VARCHAR(128) UNIQUE NOT NULL,
       password VARCHAR(128) NOT NULL,
-      phone VARCHAR(128) UNIQUE NOT NULL,
+      phone VARCHAR(128) NOT NULL,
       isAdmin BOOLEAN DEFAULT false,
       createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
