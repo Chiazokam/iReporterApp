@@ -24,7 +24,7 @@ const recordController = {
           status: 201,
           data: [{
             id: recordData,
-            message: 'Redflag posted'
+            message: 'Created Red-flag Record'
           }]
         })
   
@@ -47,7 +47,7 @@ const recordController = {
           status: 201,
           data: [{
             id: recordData,
-            message: 'Intervention posted'
+            message: 'Created Intervention Record'
           }]
         })
   
