@@ -1,203 +1,161 @@
-const chai = require('chai');
-const request = require('supertest');
-const app = require('../src/app');
+import chai, { expect } from 'chai';
+import request from 'supertest';
+import app from '../src/app';
 
-const expect = chai.expect;
+let token;
+
+
+const redflag = {
+  title: 'Money hidden in soak away',
+  location: '4.34454, 7.88838',
+  comment: 'Hidden by some poliyician nearby',
+  images: 'girl',
+  videos: 'google.com',
+};
+
+const intervention = {
+  title: 'Money hidden in soak away',
+  location: '4.34454, 7.88838',
+  comment: 'Hidden by some poliyician nearby',
+  images: 'girl',
+  videos: 'google.com',
+};
+
+const user = {
+            firstname: 'Marcel',
+            lastname: 'Marce',
+            othername: 'Aug',
+            email: 'marcel@gmail.com',
+            password: 'may',
+            phone: '0906746459',
+            username: 'augma'
+          }
+
+  const userSignin = {
+    email: 'marcel@gmail.com',
+    password: 'may'
+  }
 
 describe('POST Requests', () => {
-  const redflag = {
-    id: 98,
-    title: 'Money hidden in soak away',
-    createdOn: '02-11-18',
-    createdBy: 453,
-    type: 'redflag',
-    status: 'draft',
-    location: '4.34454, 7.88838',
-    comment: 'Hidden by some poliyician nearby',
-    image: 'girl',
-    video: 'https://images.unsplash.com/photo-1543738096-79099a610293?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc86c5221409d8d4a93d34c017ecefee&auto=format&fit=crop&w=334&q=80',
-  };
 
-  describe('POST /api/v1/redflags', () => {
-    it('should return an error if record is not created', (done) => {
+  describe ('POST /api/v1/auth/signup', () => {
+    it('should create a new user', (done) => {
       request(app)
-        .post('/api/v1/records')
-        .send()   // sending no data should return an error
+        .post('/api/v1/auth/signup')
+        .send(user)
         .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
+          expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
-          expect(res.body.error).to.equal('Incomplete data');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].user.firstname).to.equal('Marcel');
+          token = res.body.data[0].token;
           done();
         });
     });
   });
 
-  describe('POST /api/v1/redflags', () => {
+  describe('POST /api/v1/auth/login', () => {
+    it('should sign in a user', (done) => {
+      request(app)
+        .post('/api/v1/auth/login')
+        .send(userSignin)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].user.firstname).to.equal('Marcel');
+          done();
+        });
+    });
+  });
+
+  describe('POST /api/v1/auth/login', () => {
+    it('should not sign in a non-existent user', (done) => {
+      request(app)
+        .post('/api/v1/auth/login')
+        .send({ email: 'madea@gmail.com',
+                password: 'mapody' })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].message).to.equal('Username or password is incorrect');
+          done();
+        });
+    });
+  });
+
+  describe ('POST /api/v1/redflags', () => {
     it('should create a new redflag', (done) => {
       request(app)
-        .post('/api/v1/records')
+        .post('/api/v1/redflags')
+        .set('token', token)
         .send(redflag)
         .end((err, res) => {
           expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
-          expect(res.body.data[0].title).to.equal('Money hidden in soak away');
+          expect(res.body.data[0].message).to.equal('Created Red-flag Record');
           done();
         });
     });
+  });
+
+  
+describe ('POST /api/v1/interventions', () => {
+  it('should create a new intervention', (done) => {
+    request(app)
+      .post('/api/v1/interventions')
+      .set('token', token)
+      .send(intervention)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        expect(res.body).to.be.an('object');
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data[0]).to.be.an('object');
+        expect(res.body.data[0].message).to.equal('Created Intervention Record');
+        done();
+      });
   });
 });
 
-/* GET Routes*/
-describe ('GET Requests', () => {
-  describe ('GET /api/v1', () => {
-    it('should get the homepage', (done) => {
-      request(app)
-        .get('/api/v1')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.empty;
-          done();
-        });
-    });
-  });
+});
+
+
+describe('GET Requests', () => {
 
   describe ('GET /api/v1/redflags', () => {
-    it('should get all the redflag records', (done) => {
+    it('should get all redflags', (done) => {
       request(app)
         .get('/api/v1/redflags')
+        .set('token', token)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
           done();
         });
     });
   });
 
   describe ('GET /api/v1/interventions', () => {
-    it('should get all the intervention records', (done) => {
+    it('should get all interventions', (done) => {
       request(app)
         .get('/api/v1/interventions')
+        .set('token', token)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
           done();
         });
     });
   });
 
-  describe ('GET /api/v1/redflags/10', () => {
-    it('should return an error if record is not found', (done) => {
-      request(app)
-        .get('/api/v1/redflags/10')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
-          expect(res.body).to.be.an('object');
-          expect(res.body.error).to.equal('Record not found');
-          done();
-        });
-    });
-  });
-
-  describe ('GET /api/v1/redflags/1', () => {
-    it('should get one redflag', (done) => {
-      request(app)
-        .get('/api/v1/redflags/1')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('array');
-          done();
-        });
-    });
-  });
-
-  describe ('GET /api/v1/interventions/10', () => {
-    it('should return an error if record is not found', (done) => {
-      request(app)
-        .get('/api/v1/interventions/10')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(404);
-          expect(res.body).to.be.an('object');
-          expect(res.body.error).to.equal('Record not found');
-          done();
-        });
-    });
-  });
-
-  describe ('GET /api/v1/interventions/1', () => {
-    it('should get one intervention', (done) => {
-      request(app)
-        .get('/api/v1/interventions/1')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('array');
-          done();
-        });
-    });
-  });
-});
-
-/* PATCH Routes*/
-describe ('PATCH Requests', () => {
-  describe ('PATCH /api/v1/redflags/1/comment', () => {
-    it('should edit the comment', (done) => {
-      request(app)
-        .patch('/api/v1/redflags/1/comment')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data.id).to.equal(1);
-          done();
-        });
-    });
-  });
-
-  describe ('PATCH /api/v1/interventions/1/comment', () => {
-    it('should edit the intervention comment', (done) => {
-      request(app)
-        .patch('/api/v1/interventions/1/comment')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data.id).to.equal(1);
-          done();
-        });
-    });
-  });
-
-  describe ('PATCH /api/v1/redflags/1/location', () => {
-    it('should edit the location', (done) => {
-      request(app)
-        .patch('/api/v1/redflags/1/location')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data.id).to.equal(1);
-          done();
-        });
-    });
-  });
-
-  describe ('PATCH /api/v1/interventions/1/location', () => {
-    it('should edit the location', (done) => {
-      request(app)
-        .patch('/api/v1/interventions/1/location')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('object');
-          expect(res.body.data.id).to.equal(1);
-          done();
-        });
-    });
-  });
-});
+})
