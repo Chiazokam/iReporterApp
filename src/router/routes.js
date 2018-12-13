@@ -6,14 +6,14 @@ import { verifyToken } from '../helpers'
 
 const { postValidation, validateEmail, validateLocation, doesUserExist, validatePhonenumber } = middleware;
 
- // /* HomePage Endpoint */
- // router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
+  /* HomePage Endpoint */
+ router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Redflag Endpoint */
 router.post('/api/v1/redflags', verifyToken, validateLocation, postValidation, recordController.createRedflag);
 
 /* Create Intervention Endpoint */
-//router.post('/api/v1/interventions', postValidation, recordController.createRecord);
+router.post('/api/v1/interventions', verifyToken, validateLocation, postValidation, recordController.createIntervention)
 
 /* Create User Endpoint */
 router.post('/api/v1/auth/signup', validateEmail, doesUserExist, recordController.createUser);
