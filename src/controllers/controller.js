@@ -1,69 +1,69 @@
-import Record from '../models/ireportModel';
-const recordObject = new Record();
+import db from '../models/db';
+import { Queries } from '../helpers';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import moment from 'moment';
+const query = new Queries();
 
-const recordControllers = {
-  createNewRecord(req, res) {
-    const { title, createdOn, location, comment, image, video } = req.body;
-    if (!title || !createdOn || !location || !comment || !image || !video) {
-      return res.status(400).send({ error: 'Incomplete data' });
-    }
-    return res.status(201).send({ data: [recordObject.createRecord(req.body)] });
-  },
+dotenv.load();
 
-  viewAllRedflags(req, res) {
-    res.status(200).send({ data: [recordObject.findAllRecords('redflag')] });
-  },
+const recordController = {
+  createRecord(req, res) {
+    const { title, type, location, comment, images, videos } = req.body;
+    const recordDetails = { title, type, location, draft: 'draft', comment, images, videos }
+    query.createRecordQuery(recordDetails)
+    .then((record) => {
+      const recordData = record[0].id;
+      return res.status(201).send({
+        status: 201,
+        data: [{
+          id: recordData,
+          message: 'Record posted'
+        }]
+      })
 
-  viewAllInterventions(req, res) {
-    res.status(200).send({ data: [recordObject.findAllRecords('intervention')] });
-  },
+    })
+    .catch((error) => {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+ },
 
-  viewOneRedflag(req, res) {
-    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
-    if (!foundRecord) {
-      res.status(404).send({ error: 'Record not found' });
-    } else {
-      res.status(200).send({ data: [foundRecord] });
-    }
-  },
+ createUser(req, res) {
+   const { firstname, lastname, othername, email, password, phone, username } = req.body;
+   const hash = bcrypt.hashSync(password, 10);
+   const userDetails = { firstname, lastname, othername, email, hash, phone, username };
+   query.createUserQuery(userDetails)
+   .then((data) => {
+     const user = data[0];
+     const userData = {
+       id: user.id,
+       username: user.username,
+       email: user.email,
+       firstname: user.firstname,
+       lastname: user.lastname,
+       othername: user.othername,
+       phone: user.phone,
+       isAdmin: user.isadmin
+     };
+     const token = jwt.sign(userData, process.env.SECRET_KEY, { expiresIn: '2d' });
+     return res.status(201).send({
+       status: 201,
+       data: [{
+         token: token,
+         user: userData
+       }]
+     })
 
-  viewOneIntervention(req, res) {
-    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
-    if (!foundRecord) {
-      res.status(404).send({ error: 'Record not found' });
-    } else {
-      res.status(200).send({ data: [foundRecord] });
-    }
-  },
+   })
+   .catch((error) => {
+     res.status(500).send({
+       error: error.message
+     });
+   });
+}
+}
 
-  editRedflagComment(req, res) {
-    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
-    if (!foundRecord) {
-      res.status(404).send({ error: 'Record not found' });
-    } else {
-      recordObject.updateComment(req.params.id, req.body)
-      res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
-    }
-  },
-
-  editRedflagLocation(req, res) {
-    if (!recordObject.findOneRecord(req.params.id)) {
-      res.status(404).send({ error: 'Record not found' });
-    } else {
-      recordObject.updateLocation(req.params.id, req.body)
-      res.status(200).send({ data: [{ id: Number(req.params.id), message: 'Updated record\'s comment' }] });
-    }
-  },
-
-  deleteIntervention(req, res) {
-    const { foundRecord, foundIndex } = recordObject.findOneRecord(req.params.id);
-    if (!foundRecord) {
-      res.status(404).send({ error: 'Record not found' });
-    } else {
-      recordObject.deleteRecord(req.params.id)
-      res.status(200).send({ data: [{ id: Number(req.params.id), message: 'intervention record has been deleted' }] })
-    }
-  }
-};
-
-export default recordControllers;
+export default recordController;
