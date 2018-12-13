@@ -43,9 +43,7 @@ var recordController = {
 
     title = title.trim();
     comment = comment.trim();
-    images = images.trim();
     location = location.trim();
-    videos = videos.trim();
 
     var userId = req.userData.id;
     var recordDetails = { title: title, location: location, createdBy: userId, type: 'redflag', status: 'draft', comment: comment, images: images, videos: videos };
@@ -55,7 +53,32 @@ var recordController = {
         status: 201,
         data: [{
           id: recordData,
-          message: 'Redflag posted'
+          message: 'Created Red-flag Record'
+        }]
+      });
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  createIntervention: function createIntervention(req, res) {
+    var _req$body2 = req.body,
+        title = _req$body2.title,
+        location = _req$body2.location,
+        comment = _req$body2.comment,
+        images = _req$body2.images,
+        videos = _req$body2.videos;
+
+    var createdBy = req.userData.id;
+    var recordDetails = { title: title, location: location, createdBy: createdBy, type: 'intervention', status: 'draft', comment: comment, images: images, videos: videos };
+    query.createRecordQuery(recordDetails).then(function (record) {
+      var recordData = record[0].id;
+      return res.status(201).send({
+        status: 201,
+        data: [{
+          id: recordData,
+          message: 'Created Intervention Record'
         }]
       });
     }).catch(function (error) {
@@ -65,14 +88,14 @@ var recordController = {
     });
   },
   createUser: function createUser(req, res) {
-    var _req$body2 = req.body,
-        firstname = _req$body2.firstname,
-        lastname = _req$body2.lastname,
-        othername = _req$body2.othername,
-        email = _req$body2.email,
-        password = _req$body2.password,
-        phone = _req$body2.phone,
-        username = _req$body2.username;
+    var _req$body3 = req.body,
+        firstname = _req$body3.firstname,
+        lastname = _req$body3.lastname,
+        othername = _req$body3.othername,
+        email = _req$body3.email,
+        password = _req$body3.password,
+        phone = _req$body3.phone,
+        username = _req$body3.username;
 
     firstname = firstname.trim();
     lastname = lastname.trim();
@@ -110,9 +133,9 @@ var recordController = {
     });
   },
   signInUser: function signInUser(req, res) {
-    var _req$body3 = req.body,
-        email = _req$body3.email,
-        password = _req$body3.password;
+    var _req$body4 = req.body,
+        email = _req$body4.email,
+        password = _req$body4.password;
 
     var hash = _bcrypt2.default.hashSync(password, 10);
     var userDetails = { email: email, hash: hash };
@@ -154,6 +177,28 @@ var recordController = {
           }]
         });
       }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  viewAllRedflags: function viewAllRedflags(req, res) {
+    var type = 'redflag';
+    var userId = req.userData.id;
+    query.viewAllRedflagsQuery(type, userId).then(function (records) {
+      var userRecords = records[0];
+      console.log(records);
+      if (records.length === 0) {
+        res.status(204).send({
+          status: 204,
+          message: 'User has no redflags'
+        });
+      }
+      res.status(200).send({
+        status: 200,
+        data: records
+      });
     }).catch(function (error) {
       res.status(500).send({
         error: error.message

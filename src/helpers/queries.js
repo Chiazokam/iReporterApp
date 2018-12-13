@@ -2,7 +2,6 @@ import db from '../models/db';
 
 class Queries {
   createRecordQuery (recordDetails) {
-    
     return db.any(`INSERT INTO records(title, createdBy, type, comment, location, status, images, videos)
           VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`, [
             recordDetails.title,
@@ -36,6 +35,10 @@ class Queries {
 
   userRegisteredQuery(email, password) {
     return db.any("SELECT * FROM users WHERE email = $1 OR password = $2", [email.trim(), password]);
+  }
+
+  viewAllRedflagsQuery(type, id) {
+    return db.any("SELECT * FROM records WHERE type = $1 AND createdBy = $2", [type, id])
   }
 }
 

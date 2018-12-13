@@ -1,12 +1,12 @@
 import jwt from 'jsonwebtoken';
 
-export const verifyToken =(req, res, next)=>{
+export const verifyToken = (req, res, next) =>{
     const bearerHeader = req.headers['token'];
 
     if(typeof bearerHeader !== 'undefined'){
         req.token = bearerHeader;
 
-        jwt.sign(req.token, process.env.SECRET_KEY, (error, result) => {
+        jwt.verify(req.token, process.env.SECRET_KEY, (error, result) => {
             if (error) {
                 res.status(401).send({
                     status: 401,

@@ -17,7 +17,7 @@ var verifyToken = exports.verifyToken = function verifyToken(req, res, next) {
     if (typeof bearerHeader !== 'undefined') {
         req.token = bearerHeader;
 
-        _jsonwebtoken2.default.sign(req.token, process.env.SECRET_KEY, function (error, result) {
+        _jsonwebtoken2.default.verify(req.token, process.env.SECRET_KEY, function (error, result) {
             if (error) {
                 res.status(401).send({
                     status: 401,

@@ -21,8 +21,8 @@ router.post('/api/v1/auth/signup', validateEmail, doesUserExist, recordControlle
 /* Sign In Endpoint */
 router.post('/api/v1/auth/login', validateEmail, recordController.signInUser);
 
-// /* View Redflags Endpoint */
-// router.get('/api/v1/redflags', recordController.viewAllRedflags);
+ /* View Redflags Endpoint */
+router.get('/api/v1/redflags', verifyToken, recordController.viewAllRedflags);
 //
 // /* View interventions Endpoint */
 // router.get('/api/v1/interventions', recordController.viewAllInterventions);

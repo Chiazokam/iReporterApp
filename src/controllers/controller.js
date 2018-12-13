@@ -1,5 +1,5 @@
 import db from '../models/db';
-import { Queries } from '../helpers';
+import { Queries, verifyToken  } from '../helpers';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -38,8 +38,8 @@ const recordController = {
 
     createIntervention(req, res) {
       const { title, location, comment, images, videos } = req.body;
-      const userId  = req.userData.id;
-      const recordDetails = { title, location, createdBy: userId, type: 'intervention', status: 'draft', comment, images, videos };
+      const createdBy  = req.userData.id;
+      const recordDetails = { title, location, createdBy, type: 'intervention', status: 'draft', comment, images, videos };
       query.createRecordQuery(recordDetails)
       .then((record) => {
         const recordData = record[0].id;
@@ -150,6 +150,31 @@ const recordController = {
           error: error.message
         });
       });
+  },
+
+  viewAllRedflags(req, res) {
+    const type = 'redflag';
+    const userId  = req.userData.id;
+    query.viewAllRedflagsQuery(type, userId)
+    .then((records) => {
+      const userRecords = records[0];
+      console.log(records);
+      if (records.length === 0){
+        res.status(204).send({
+          status: 204,
+          message: 'User has no redflags'
+        })
+      }
+      res.status(200).send({
+        status: 200,
+        data: records
+      })
+    })
+    .catch((error) => {
+      res.status(500).send({
+        error: error.message
+      });
+    })
   },
   
 

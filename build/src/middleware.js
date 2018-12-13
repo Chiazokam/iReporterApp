@@ -69,7 +69,7 @@ var middleware = {
     if (/\S+@\S+\.\S+/.test(email)) {
       next();
     } else {
-      res.status(400).send({
+      return res.status(400).send({
         status: 400,
         error: 'Wrong email format'
       });
@@ -82,7 +82,7 @@ var middleware = {
     if (/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/gm.test(location)) {
       next();
     } else {
-      res.status(400).send({
+      return res.status(400).send({
         status: 400,
         error: 'Wrong location format'
       });

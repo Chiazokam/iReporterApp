@@ -22,7 +22,6 @@ var Queries = function () {
   _createClass(Queries, [{
     key: 'createRecordQuery',
     value: function createRecordQuery(recordDetails) {
-
       return _db2.default.any('INSERT INTO records(title, createdBy, type, comment, location, status, images, videos)\n          VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [recordDetails.title, recordDetails.createdBy, recordDetails.type, recordDetails.comment, recordDetails.location, recordDetails.status, recordDetails.images, recordDetails.videos]);
     }
   }, {
@@ -42,6 +41,11 @@ var Queries = function () {
     key: 'userRegisteredQuery',
     value: function userRegisteredQuery(email, password) {
       return _db2.default.any("SELECT * FROM users WHERE email = $1 OR password = $2", [email.trim(), password]);
+    }
+  }, {
+    key: 'viewAllRedflagsQuery',
+    value: function viewAllRedflagsQuery(type, id) {
+      return _db2.default.any("SELECT * FROM records WHERE type = $1 AND createdBy = $2", [type, id]);
     }
   }]);
 
