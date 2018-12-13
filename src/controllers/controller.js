@@ -13,9 +13,7 @@ const recordController = {
       let { title, location, comment, images, videos } = req.body;
       title = title.trim();
       comment = comment.trim();
-      images = images.trim();
       location = location.trim();
-      videos = videos.trim();
 
       const userId  = req.userData.id;
       const recordDetails = { title, location, createdBy: userId, type: 'redflag', status: 'draft', comment, images, videos };

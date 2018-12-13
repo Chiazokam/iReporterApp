@@ -9,8 +9,8 @@ const redflag = {
   title: 'Money hidden in soak away',
   location: '4.34454, 7.88838',
   comment: 'Hidden by some poliyician nearby',
-  image: 'girl',
-  video: 'https://images.unsplash.com/photo-1543738096-79099a610293?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc86c5221409d8d4a93d34c017ecefee&auto=format&fit=crop&w=334&q=80',
+  images: 'girl',
+  videos: 'google.com',
 };
 
 const user = {

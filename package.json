@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint",
     "test": "nyc mocha test/routes.test.js --compilers js:babel-core/register --exit",
+    "test:dev": "npm run dropTable && npm run createTable && npm test",
     "coveralls": "nyc report --reporter=lcov --reporter=text-lcov | coveralls",
     "build": "babel src --out-dir build/src",
     "start:dev": "npm run build && babel-watch src/app.js",

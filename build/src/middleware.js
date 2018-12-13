@@ -25,18 +25,18 @@ var middleware = {
         comment = _req$body.comment;
 
     var errors = {};
-    if (!title || !location || !comment) {
-      if (!title) {
-        errors['title'] = 'Missing title';
+    if (!title || !title.trim() || !location || !location.trim() || !comment || !comment.trim()) {
+      if (!title || !title.trim()) {
+        errors['title'] = 'Improper title format';
       }
-      if (!location) {
-        errors['location'] = 'Missing location';
+      if (!location || !location.trim()) {
+        errors['location'] = 'Improper location format';
       }
-      if (!comment) {
-        errors['comment'] = 'Missing comment';
+      if (!comment || !comment.trim()) {
+        errors['comment'] = 'Improper comment format  ';
       }
       if (errors) {
-        return res.status(400).send({ error: errors });
+        return res.status(400).send({ status: 400, error: errors });
       }
     }
     next();
