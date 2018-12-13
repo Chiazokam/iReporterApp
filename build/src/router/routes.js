@@ -27,15 +27,17 @@ var postValidation = _middleware2.default.postValidation,
     doesUserExist = _middleware2.default.doesUserExist,
     validatePhonenumber = _middleware2.default.validatePhonenumber;
 
-// /* HomePage Endpoint */
-// router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
+/* HomePage Endpoint */
+
+router.get('/', function (req, res) {
+  return res.status(200).send({ message: 'Welcome to iReporter' });
+});
 
 /* Create Redflag Endpoint */
-
 router.post('/api/v1/redflags', _helpers.verifyToken, validateLocation, postValidation, _controller2.default.createRedflag);
 
 /* Create Intervention Endpoint */
-//router.post('/api/v1/interventions', postValidation, recordController.createRecord);
+router.post('/api/v1/interventions', _helpers.verifyToken, validateLocation, postValidation, _controller2.default.createIntervention);
 
 /* Create User Endpoint */
 router.post('/api/v1/auth/signup', validateEmail, doesUserExist, _controller2.default.createUser);
@@ -43,8 +45,8 @@ router.post('/api/v1/auth/signup', validateEmail, doesUserExist, _controller2.de
 /* Sign In Endpoint */
 router.post('/api/v1/auth/login', validateEmail, _controller2.default.signInUser);
 
-// /* View Redflags Endpoint */
-// router.get('/api/v1/redflags', recordController.viewAllRedflags);
+/* View Redflags Endpoint */
+router.get('/api/v1/redflags', _helpers.verifyToken, _controller2.default.viewAllRedflags);
 //
 // /* View interventions Endpoint */
 // router.get('/api/v1/interventions', recordController.viewAllInterventions);

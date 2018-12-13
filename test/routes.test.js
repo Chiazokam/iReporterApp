@@ -124,3 +124,21 @@ describe ('POST /api/v1/interventions', () => {
 });
 
 });
+
+
+describe('GET Requests', () => {
+  describe ('POST /api/v1/redflags', () => {
+    it('should get all redflags', (done) => {
+      request(app)
+        .get('/api/v1/redflags')
+        .set('token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          done();
+        });
+    });
+  });
+})
