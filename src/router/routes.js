@@ -18,7 +18,7 @@ router.post('/api/v1/interventions', postValidation, recordController.createReco
 router.post('/api/v1/auth/signup', validateSpace, validateEmail, doesUserExist, recordController.createUser);
 
 /* Sign In Endpoint */
-router.post('/api/v1/auth/signin', validateSpace, validateEmail, recordController.signInUser);
+router.post('/api/v1/auth/login', validateSpace, validateEmail, recordController.signInUser);
 
 // /* View Redflags Endpoint */
 // router.get('/api/v1/redflags', recordController.viewAllRedflags);

@@ -1,11 +1,7 @@
 import chai, { expect } from 'chai';
 import request from 'supertest';
 import app from '../src/app';
-import createTables from '../src/models/createTables'
-import dropTables from '../src/models/dropTables'
 
-dropTables();
-createTables();
 
 const record = {
   title: 'Money hidden in soak away',
@@ -51,10 +47,10 @@ describe('POST Requests', () => {
     });
   });
 
-  describe('POST /api/v1/auth/signin', () => {
+  describe('POST /api/v1/auth/login', () => {
     it('should sign in a user', (done) => {
       request(app)
-        .post('/api/v1/auth/signin')
+        .post('/api/v1/auth/login')
         .send(userSignin)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
@@ -67,10 +63,10 @@ describe('POST Requests', () => {
     });
   });
 
-  describe('POST /api/v1/auth/signin', () => {
-    it('should sign in a non-existent user', (done) => {
+  describe('POST /api/v1/auth/login', () => {
+    it('should not sign in a non-existent user', (done) => {
       request(app)
-        .post('/api/v1/auth/signin')
+        .post('/api/v1/auth/login')
         .send({ email: 'madea@gmail.com',
                 password: 'mapody' })
         .end((err, res) => {
@@ -78,7 +74,7 @@ describe('POST Requests', () => {
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
-          expect(res.body.data[0].message).to.equal('Sorry, User does not exist');
+          expect(res.body.data[0].message).to.equal('Username or password is incorrect');
           done();
         });
     });
