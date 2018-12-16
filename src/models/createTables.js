@@ -42,9 +42,16 @@ const createTables = async () => {
                       password,
                       phone,
                       isAdmin)
-          VALUES('Zokky', 'Chiazokam', 'Echeta', 'Chioma' , 'chiazokamecheta@gmail.com', 'root', '07032425466', true);
+          VALUES('Zokky', 'Chiazokam', 'Echeta', 'Chioma' , 'chiazokamecheta@gmail.com', '$2b$10$LAkfreG/ayNEne9.cnJnp.HnvjsJzraz/uN.Mcv4XIKzQxY.W6/fW', '07032425466', true);
     COMMIT;
     `).catch(console.log);
+
+    /* Token
+    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJDYXJ0YSIsImVtYWlsIjoi
+    Y2FydEBnbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJDb2xsaW5zIiwibGFzdG5hbWUiOiJDYXJ0ZWwiLCJvdGhlcm5hbWUi
+    OiJDYXJ0IiwicGhvbmUiOiIwOTA2NzU0Njc4MCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NDUwMDA5NDQsImV4cCI6MTU
+    0NTE3Mzc0NH0.3YGFfVvUS88YpzMcPuM70p15N4hBRK0yH8hw92on1r8
+    */
 };
 
 createTables();

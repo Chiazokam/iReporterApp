@@ -43,9 +43,14 @@ var Queries = function () {
       return _db2.default.any("SELECT * FROM users WHERE email = $1 OR password = $2", [email.trim(), password]);
     }
   }, {
-    key: 'viewAllRedflagsQuery',
-    value: function viewAllRedflagsQuery(type, id) {
+    key: 'viewAllRecordsQuery',
+    value: function viewAllRecordsQuery(type, id) {
       return _db2.default.any("SELECT * FROM records WHERE type = $1 AND createdBy = $2", [type, id]);
+    }
+  }, {
+    key: 'viewOneRecordQuery',
+    value: function viewOneRecordQuery(type, userId, recordId) {
+      return _db2.default.any("SELECT * FROM records WHERE id = $1 AND type = $2 AND createdBy = $3", [recordId, type, userId]);
     }
   }]);
 

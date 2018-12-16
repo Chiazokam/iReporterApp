@@ -40,6 +40,10 @@ class Queries {
   viewAllRecordsQuery(type, id) {
     return db.any("SELECT * FROM records WHERE type = $1 AND createdBy = $2", [type, id])
   }
+
+  viewOneRecordQuery(type, userId, recordId) {
+    return db.any("SELECT * FROM records WHERE id = $1 AND type = $2 AND createdBy = $3", [recordId, type, userId]);
+  }
 }
 
 export default Queries;
