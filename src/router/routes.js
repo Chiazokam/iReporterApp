@@ -23,12 +23,12 @@ router.post('/api/v1/auth/login', validateEmail, recordController.signInUser);
 
  /* View Redflags Endpoint */
 router.get('/api/v1/redflags', verifyToken, recordController.viewAllRedflags);
-//
-// /* View interventions Endpoint */
+
+ /* View interventions Endpoint */
 router.get('/api/v1/interventions', verifyToken, recordController.viewAllInterventions);
-//
-//  /* View One redflag Endpoint */
-// router.get('/api/v1/redflags/:id', recordController.viewOneRedflag);
+
+   /* View One redflag Endpoint */
+router.get('/api/v1/redflags/:id', verifyToken, recordController.viewOneRedflag);
 //
 // /* View One intervention Endpoint */
 //  router.get('/api/v1/interventions/:id', recordController.viewOneIntervention);

@@ -1,14 +1,13 @@
-import db from '../models/db';
-import { Queries, verifyToken  } from '../helpers';
+import { Queries } from '../helpers';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import moment from 'moment';
 const query = new Queries();
 
 dotenv.load();
 
 const recordController = {
+
   createRedflag(req, res) {
       let { title, location, comment, images, videos } = req.body;
       title = title.trim();
@@ -159,15 +158,17 @@ const recordController = {
     .then((records) => {
       const userRecords = records[0];
       if (records.length === 0){
-        res.status(204).send({
-          status: 204,
+        res.status(404).send({
+          status: 404,
           message: 'User has no redflags'
         })
       }
-      res.status(200).send({
-        status: 200,
-        data: records
-      })
+      else {
+          res.status(200).send({
+          status: 200,
+          data: records
+        })
+      }
     })
     .catch((error) => {
       res.status(500).send({
@@ -183,15 +184,17 @@ const recordController = {
     .then((records) => {
       const userRecords = records[0];
       if (records.length === 0){
-        res.status(204).send({
-          status: 204,
+        res.status(404).send({
+          status: 404,
           message: 'User has no interventions'
         })
       }
-      res.status(200).send({
-        status: 200,
-        data: records
-      })
+      else {
+          res.status(200).send({
+          status: 200,
+          data: records
+        })
+      }
     })
     .catch((error) => {
       res.status(500).send({
@@ -200,6 +203,31 @@ const recordController = {
     })
   },
   
+  viewOneRedflag(req, res) {
+    const userId = req.userData.id;
+    const redflagId = req.params.id;
+    const type = 'redflag';
+    query.viewOneRecordQuery(type, userId, redflagId)
+    .then((record) => {   // Returns an array with one object
+      if (record.length === 0) {
+          res.status(404).send({
+          status: 404,
+          message: 'Redflag does not exist'
+        })
+      } 
+      else {
+        res.status(200).send({
+        status: 200,
+        data: record
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+      error: error.message
+      });
+    })
+  },
 
 }
 

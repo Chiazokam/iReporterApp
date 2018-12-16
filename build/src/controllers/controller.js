@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _db = require('../models/db');
-
-var _db2 = _interopRequireDefault(_db);
-
 var _helpers = require('../helpers');
 
 var _bcrypt = require('bcrypt');
@@ -21,10 +17,6 @@ var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
-
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -186,19 +178,65 @@ var recordController = {
   viewAllRedflags: function viewAllRedflags(req, res) {
     var type = 'redflag';
     var userId = req.userData.id;
-    query.viewAllRedflagsQuery(type, userId).then(function (records) {
+    query.viewAllRecordsQuery(type, userId).then(function (records) {
       var userRecords = records[0];
-      console.log(records);
       if (records.length === 0) {
-        res.status(204).send({
-          status: 204,
+        res.status(404).send({
+          status: 404,
           message: 'User has no redflags'
         });
+      } else {
+        res.status(200).send({
+          status: 200,
+          data: records
+        });
       }
-      res.status(200).send({
-        status: 200,
-        data: records
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
       });
+    });
+  },
+  viewAllInterventions: function viewAllInterventions(req, res) {
+    var type = 'intervention';
+    var userId = req.userData.id;
+    query.viewAllRecordsQuery(type, userId).then(function (records) {
+      var userRecords = records[0];
+      if (records.length === 0) {
+        res.status(404).send({
+          status: 404,
+          message: 'User has no interventions'
+        });
+      } else {
+        res.status(200).send({
+          status: 200,
+          data: records
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  viewOneRedflag: function viewOneRedflag(req, res) {
+    var userId = req.userData.id;
+    var redflagId = req.params.id;
+    var type = 'redflag';
+    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+      // Returns an array with one object
+      if (record.length === 0) {
+        console.log('ran no content');
+        res.status(404).send({
+          status: 404,
+          message: 'Redflag does not exist'
+        });
+      } else {
+        res.status(200).send({
+          status: 200,
+          data: record
+        });
+      }
     }).catch(function (error) {
       res.status(500).send({
         error: error.message
