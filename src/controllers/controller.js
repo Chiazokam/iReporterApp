@@ -229,6 +229,32 @@ const recordController = {
     })
   },
 
+  viewOneIntervention(req, res) {
+    const userId = req.userData.id;
+    const intervId = req.params.id;
+    const type = 'intervention';
+    query.viewOneRecordQuery(type, userId, intervId)
+    .then((record) => {   // Returns an array with one object
+      if (record.length === 0) {
+          res.status(404).send({
+          status: 404,
+          message: 'Intervention does not exist'
+        })
+      } 
+      else {
+        res.status(200).send({
+        status: 200,
+        data: record
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+      error: error.message
+      });
+    })
+  },
+
 }
 
 export default recordController;

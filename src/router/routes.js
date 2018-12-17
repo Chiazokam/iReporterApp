@@ -29,9 +29,9 @@ router.get('/api/v1/interventions', verifyToken, recordController.viewAllInterve
 
    /* View One redflag Endpoint */
 router.get('/api/v1/redflags/:id', verifyToken, recordController.viewOneRedflag);
-//
-// /* View One intervention Endpoint */
-//  router.get('/api/v1/interventions/:id', recordController.viewOneIntervention);
+
+ /* View One intervention Endpoint */
+ router.get('/api/v1/interventions/:id', verifyToken, recordController.viewOneIntervention);
 //
 // /* Edit Redflag Comment */
 // router.patch('/api/v1/redflags/:id/comment', recordController.editRecordComment);
