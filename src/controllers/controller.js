@@ -278,19 +278,10 @@ const recordController = {
                   message: "Updated Redflag's comment"
                 }]
               })
-            } else if (type === 'intervention'){
-                res.status(200).send({
-                  status: 200,
-                  data: [{
-                    id: record[0].id,
-                    message: "Updated Intervention's comment"
-                  }]
-              })
             }
       }
     })
     .catch((error) => {
-      console.log('Ran down')
       res.status(500).send({
       error: error.message
       });
@@ -320,13 +311,38 @@ const recordController = {
                   message: "Updated Redflag's location"
                 }]
               })
-            } else if (type === 'intervention'){
+            }
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+      error: error.message
+      });
+    })
+  },
+
+  editIntervComment(req, res) {
+    const { comment } = req.body;
+    const userId = req.userData.id;
+    const intervId = req.params.id;
+    const type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, intervId)
+    .then((record) => {
+      if (record.length < 1) {
+          res.status(404).send({
+          status: 404,
+          message: 'Record does not exist'
+        })
+      } else {
+          query.updateRecordComment(comment, intervId)
+            if (type === 'intervention'){
                 res.status(200).send({
-                  status: 200,
-                  data: [{
-                    id: record[0].id,
-                    message: "Updated Intervention's location"
-                  }]
+                status: 200,
+                data: [{
+                  id: record[0].id,
+                  message: "Updated Intervention's comment"
+                }]
               })
             }
       }
@@ -337,6 +353,40 @@ const recordController = {
       });
     })
   },
+
+  editIntervLocation(req, res) {
+    const { location } = req.body;
+    const userId = req.userData.id;
+    const intervId = req.params.id;
+    const type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, intervId)
+    .then((record) => {
+      if (record.length < 1) {
+          res.status(404).send({
+          status: 404,
+          message: 'Record does not exist'
+        })
+      } else {
+          query.updateRecordLocation(location, intervId)
+            if (type === 'intervention'){
+                res.status(200).send({
+                status: 200,
+                data: [{
+                  id: record[0].id,
+                  message: "Updated Intervention's location"
+                }]
+              })
+            }
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+      error: error.message
+      });
+    })
+  },
+
 
 }
 

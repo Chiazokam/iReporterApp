@@ -35,15 +35,15 @@ router.get('/api/v1/redflags/:id', verifyToken, recordController.viewOneRedflag)
 
  /* Edit Redflag Comment */
  router.patch('/api/v1/redflags/:id/comment', verifyToken, recordController.editRedflagComment);
-//
-// /* Edit Intervention Comment */
-// router.patch('/api/v1/interventions/:id/comment', recordController.editRecordComment);
+
+/* Edit Intervention Comment */
+router.patch('/api/v1/interventions/:id/comment', verifyToken, recordController.editIntervComment);
 
  /* Edit Redflag Location */
  router.patch('/api/v1/redflags/:id/location', verifyToken, recordController.editRedflagLocation);
-//
-//  /* Edit Intervention Location */
-// router.patch('/api/v1/interventions/:id/location', recordController.editRecordLocation);
+
+  /* Edit Intervention Location */
+ router.patch('/api/v1/interventions/:id/location', verifyToken, recordController.editIntervLocation);
 //
 //  /* Delete an Intervention */
 // router.delete('/api/v1/interventions/:id', recordController.deleteIntervention);
