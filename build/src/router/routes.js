@@ -40,7 +40,7 @@ router.post('/api/v1/redflags', _helpers.verifyToken, validateLocation, postVali
 router.post('/api/v1/interventions', _helpers.verifyToken, validateLocation, postValidation, _controller2.default.createIntervention);
 
 /* Create User Endpoint */
-router.post('/api/v1/auth/signup', validateEmail, doesUserExist, _controller2.default.createUser);
+router.post('/api/v1/auth/signup', validateEmail, validatePhonenumber, doesUserExist, _controller2.default.createUser);
 
 /* Sign In Endpoint */
 router.post('/api/v1/auth/login', validateEmail, _controller2.default.signInUser);
@@ -53,12 +53,12 @@ router.get('/api/v1/interventions', _helpers.verifyToken, _controller2.default.v
 
 /* View One redflag Endpoint */
 router.get('/api/v1/redflags/:id', _helpers.verifyToken, _controller2.default.viewOneRedflag);
-//
-// /* View One intervention Endpoint */
-//  router.get('/api/v1/interventions/:id', recordController.viewOneIntervention);
-//
-// /* Edit Redflag Comment */
-// router.patch('/api/v1/redflags/:id/comment', recordController.editRecordComment);
+
+/* View One intervention Endpoint */
+router.get('/api/v1/interventions/:id', _helpers.verifyToken, _controller2.default.viewOneIntervention);
+
+/* Edit Redflag Comment */
+router.patch('/api/v1/redflags/:id/comment', _helpers.verifyToken, _controller2.default.editRedflagComment);
 //
 // /* Edit Intervention Comment */
 // router.patch('/api/v1/interventions/:id/comment', recordController.editRecordComment);

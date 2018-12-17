@@ -44,6 +44,15 @@ class Queries {
   viewOneRecordQuery(type, userId, recordId) {
     return db.any("SELECT * FROM records WHERE id = $1 AND type = $2 AND createdBy = $3", [recordId, type, userId]);
   }
+
+  updateRecordComment(editField, recordId) {
+    db.any("UPDATE records SET comment = $1 WHERE id = $2", [editField, recordId])
+  }
+
+  updateRecordLocation(editField, recordId) {
+    db.any("UPDATE records SET location = $1 WHERE id = $2", [editField, recordId])
+  }
+
 }
 
 export default Queries;

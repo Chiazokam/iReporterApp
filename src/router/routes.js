@@ -16,7 +16,7 @@ router.post('/api/v1/redflags', verifyToken, validateLocation, postValidation, r
 router.post('/api/v1/interventions', verifyToken, validateLocation, postValidation, recordController.createIntervention)
 
 /* Create User Endpoint */
-router.post('/api/v1/auth/signup', validateEmail, doesUserExist, recordController.createUser);
+router.post('/api/v1/auth/signup', validateEmail, validatePhonenumber, doesUserExist, recordController.createUser);
 
 /* Sign In Endpoint */
 router.post('/api/v1/auth/login', validateEmail, recordController.signInUser);
@@ -32,15 +32,15 @@ router.get('/api/v1/redflags/:id', verifyToken, recordController.viewOneRedflag)
 
  /* View One intervention Endpoint */
  router.get('/api/v1/interventions/:id', verifyToken, recordController.viewOneIntervention);
-//
-// /* Edit Redflag Comment */
-// router.patch('/api/v1/redflags/:id/comment', recordController.editRecordComment);
+
+ /* Edit Redflag Comment */
+ router.patch('/api/v1/redflags/:id/comment', verifyToken, recordController.editRedflagComment);
 //
 // /* Edit Intervention Comment */
 // router.patch('/api/v1/interventions/:id/comment', recordController.editRecordComment);
-//
-// /* Edit Redflag Location */
-// router.patch('/api/v1/redflags/:id/location', recordController.editRecordLocation);
+
+ /* Edit Redflag Location */
+ router.patch('/api/v1/redflags/:id/location', verifyToken, recordController.editRedflagLocation);
 //
 //  /* Edit Intervention Location */
 // router.patch('/api/v1/interventions/:id/location', recordController.editRecordLocation);
