@@ -198,7 +198,7 @@ describe('PATCH Requests', () => {
         .set('token', token)
         .send({ comment: 'This is the updated comment' })
         .end((err, res) => {
-          //expect(res.statusCode).to.equal(200);
+          expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
@@ -220,6 +220,40 @@ describe('PATCH Requests', () => {
             expect(res.body.data).to.be.an('array');
             expect(res.body.data[0]).to.be.an('object');
             expect(res.body.data[0].message).to.equal("Updated Redflag's location");
+            done();
+          });
+      });
+    });
+
+    describe('PATCH /api/v1/interventions/2/comment', () => {
+      it('should edit the comment of the intervention', (done) => {
+        request(app)
+          .patch('/api/v1/interventions/2/comment')
+          .set('token', token)
+          .send({ comment: 'This is the updated comment' })
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body.data).to.be.an('array');
+            expect(res.body.data[0]).to.be.an('object');
+            expect(res.body.data[0].message).to.equal("Updated Intervention's comment");
+            done();
+          });
+      });
+    });
+
+    describe('PATCH /api/v1/interventions/2/location', () => {
+      it('should edit the location of the intervention', (done) => {
+        request(app)
+          .patch('/api/v1/interventions/2/location')
+          .set('token', token)
+          .send({ location: '3.4563, 9.46663' })
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body.data).to.be.an('array');
+            expect(res.body.data[0]).to.be.an('object');
+            expect(res.body.data[0].message).to.equal("Updated Intervention's location");
             done();
           });
       });
