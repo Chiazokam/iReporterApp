@@ -8,7 +8,7 @@ let token;
 const redflag = {
   title: 'Money hidden in soak away',
   location: '4.34454, 7.88838',
-  comment: 'Hidden by some poliyician nearby',
+  comment: 'Hidden by some politician nearby',
   images: 'girl',
   videos: 'google.com',
 };
@@ -187,4 +187,41 @@ describe('GET Requests', () => {
         });
     });
   });
+})
+
+
+describe('PATCH Requests', () => {
+  describe('PATCH /api/v1/redflags/1/comment', () => {
+    it('should edit the comment of the redflag', (done) => {
+      request(app)
+        .patch('/api/v1/redflags/1/comment')
+        .set('token', token)
+        .send({ comment: 'This is the updated comment' })
+        .end((err, res) => {
+          //expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].message).to.equal("Updated Redflag's comment");
+          done();
+        });
+    });
+  });
+
+    describe('PATCH /api/v1/redflags/1/location', () => {
+      it('should edit the location of the redflag', (done) => {
+        request(app)
+          .patch('/api/v1/redflags/1/location')
+          .set('token', token)
+          .send({ location: '3.4563, 9.46663' })
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body.data).to.be.an('array');
+            expect(res.body.data[0]).to.be.an('object');
+            expect(res.body.data[0].message).to.equal("Updated Redflag's location");
+            done();
+          });
+      });
+    });
 })

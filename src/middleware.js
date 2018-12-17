@@ -75,7 +75,7 @@ const middleware = {
 
   validatePhonenumber(req, res, next) {
     const { phone } = req.body;
-    if(typeof(Number(phone)) !== Number){
+    if(typeof(Number(phone)) !== 'number'){
       res.status(400).send({
         status: 400,
         error: 'Wrong Phone Number format'

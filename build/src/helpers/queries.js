@@ -52,6 +52,11 @@ var Queries = function () {
     value: function viewOneRecordQuery(type, userId, recordId) {
       return _db2.default.any("SELECT * FROM records WHERE id = $1 AND type = $2 AND createdBy = $3", [recordId, type, userId]);
     }
+  }, {
+    key: 'updateRecordComment',
+    value: function updateRecordComment(editField, recordId) {
+      _db2.default.any("UPDATE records SET comment = $1 WHERE id = $2", [editField, recordId]);
+    }
   }]);
 
   return Queries;

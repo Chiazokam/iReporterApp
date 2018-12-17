@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _helpers = require('./helpers');
 
 var express = require('express');
@@ -91,7 +89,7 @@ var middleware = {
   validatePhonenumber: function validatePhonenumber(req, res, next) {
     var phone = req.body.phone;
 
-    if (_typeof(Number(phone)) !== Number) {
+    if (typeof Number(phone) !== 'number') {
       res.status(400).send({
         status: 400,
         error: 'Wrong Phone Number format'
