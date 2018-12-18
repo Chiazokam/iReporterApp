@@ -112,9 +112,7 @@ const recordController = {
           if (!bcrypt.compareSync(password, user.password)) {
               return res.status(401).send({
                 status: 401,
-                data: [{
-                  message: 'Username or password is incorrect'
-                }]
+                error: 'Username or password is incorrect'
               });
             }
             const userObject = {
@@ -138,9 +136,7 @@ const recordController = {
           } else {
           return res.status(401).send({
             status: 401,
-            data: [{
-              message: 'Username or password is incorrect'
-            }]
+            error: 'Username or password is incorrect'
           });
         }
       })
@@ -160,7 +156,7 @@ const recordController = {
       if (records.length === 0){
         res.status(404).send({
           status: 404,
-          message: 'User has no redflags'
+          error: 'User has no redflags'
         })
       }
       else {
@@ -186,7 +182,7 @@ const recordController = {
       if (records.length === 0){
         res.status(404).send({
           status: 404,
-          message: 'User has no interventions'
+          error: 'User has no interventions'
         })
       }
       else {
@@ -212,7 +208,7 @@ const recordController = {
       if (record.length === 0) {
           res.status(404).send({
           status: 404,
-          message: 'Redflag does not exist'
+          error: 'Redflag does not exist'
         })
       } 
       else {
@@ -238,7 +234,7 @@ const recordController = {
       if (record.length === 0) {
           res.status(404).send({
           status: 404,
-          message: 'Intervention does not exist'
+          error: 'Intervention does not exist'
         })
       } 
       else {
@@ -266,7 +262,7 @@ const recordController = {
       if (record.length < 1) {
           res.status(404).send({
           status: 404,
-          message: 'Record does not exist'
+          error: 'Record does not exist'
         })
       } else {
           query.updateRecordComment(comment, redflagId)
@@ -299,7 +295,7 @@ const recordController = {
       if (record.length < 1) {
           res.status(404).send({
           status: 404,
-          message: 'Record does not exist'
+          error: 'Record does not exist'
         })
       } else {
           query.updateRecordLocation(location, redflagId)
@@ -332,7 +328,7 @@ const recordController = {
       if (record.length < 1) {
           res.status(404).send({
           status: 404,
-          message: 'Record does not exist'
+          error: 'Record does not exist'
         })
       } else {
           query.updateRecordComment(comment, intervId)
@@ -365,7 +361,7 @@ const recordController = {
       if (record.length < 1) {
           res.status(404).send({
           status: 404,
-          message: 'Record does not exist'
+          error: 'Record does not exist'
         })
       } else {
           query.updateRecordLocation(location, intervId)
@@ -397,7 +393,7 @@ const recordController = {
       if (record.length < 1) {
           res.status(404).send({
           status: 404,
-          message: 'Redflag does not exist'
+          error: 'Redflag does not exist'
         })
       } else {
           query.deleteRecord(type, userId, redflagId)
@@ -427,7 +423,7 @@ const recordController = {
       if (record.length < 1) {
           res.status(404).send({
           status: 404,
-          message: 'Intervention does not exist'
+          error: 'Intervention does not exist'
         })
       } else {
           query.deleteRecord(type, userId, intervId)
@@ -445,6 +441,49 @@ const recordController = {
       error: error.message
       });
     })
+  },
+
+  adminViewAll(req, res) {
+    const userId  = req.userData.id;
+
+    query.isUserAdmin(userId)
+    .then((user) => {
+      const adminObject = {
+        id: user[0].id,
+        email: user[0].email,
+        isAdmin: user[0].isadmin
+      }
+
+      if (adminObject.isAdmin === true) {
+        query.adminViewAllQuery()
+        .then((records) => {
+          if (records.length < 1) {
+            res.status(404).send({
+              status: 404,
+              error: "No records found"
+            });
+          } else {
+            res.status(200).send({
+              status: 200,
+              data: records
+            });
+          }
+        })
+      } else if (adminObject.isAdmin === false) {
+        res.status(403).send({
+          status: 403,
+          error: "Unauthorized access"
+        });
+      }
+
+    })
+    .catch((error) => {
+      res.status(500).send({
+        status: 500,
+        error: error.message
+      });
+    })
+   
   },
 
 

@@ -421,25 +421,62 @@ var recordController = {
     var userId = req.userData.id;
     var type = 'intervention';
 
-    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+    query.viewOneRecordQuery(type, userId, intervId).then(function (record) {
       if (record.length < 1) {
         res.status(404).send({
           status: 404,
-          message: 'Redflag does not exist'
+          message: 'Intervention does not exist'
         });
       } else {
-        query.deleteRecord(type, userId, redflagId);
+        query.deleteRecord(type, userId, intervId);
         res.status(200).send({
           status: 200,
           data: [{
             id: record[0].id,
-            message: "Redflag record has been deleted"
+            message: "Intervention record has been deleted"
           }]
         });
       }
     }).catch(function (error) {
       res.status(500).send({
         error: error.message
+      });
+    });
+  },
+  adminViewAll: function adminViewAll(req, res) {
+    var userId = req.userData.id;
+
+    query.isUserAdmin(userId).then(function (user) {
+      var adminObject = {
+        id: user[0].id,
+        email: user[0].email,
+        isAdmin: user[0].isadmin
+      };
+
+      if (adminObject.isAdmin === true) {
+        query.adminViewAllQuery().then(function (records) {
+          if (records.length < 1) {
+            res.status(404).send({
+              status: 404,
+              message: "No records found"
+            });
+          } else {
+            res.status(200).send({
+              status: 200,
+              data: records
+            });
+          }
+        });
+      } else if (adminObject.isAdmin === false) {
+        res.status(403).send({
+          status: 403,
+          message: "Request forbidden"
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        status: 500,
+        message: error.message
       });
     });
   }

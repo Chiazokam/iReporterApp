@@ -21,6 +21,7 @@ var _helpers = require('../helpers');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express2.default.Router();
+
 var postValidation = _middleware2.default.postValidation,
     validateEmail = _middleware2.default.validateEmail,
     validateLocation = _middleware2.default.validateLocation,
@@ -68,11 +69,14 @@ router.patch('/api/v1/redflags/:id/location', _helpers.verifyToken, _controller2
 
 /* Edit Intervention Location */
 router.patch('/api/v1/interventions/:id/location', _helpers.verifyToken, _controller2.default.editIntervLocation);
-//
-//  /* Delete an Intervention */
-// router.delete('/api/v1/interventions/:id', recordController.deleteIntervention);
+
+/* Delete an Intervention */
+router.delete('/api/v1/interventions/:id', _helpers.verifyToken, _controller2.default.deleteIntervention);
 
 /* Delete a Redflag */
 router.delete('/api/v1/redflags/:id', _helpers.verifyToken, _controller2.default.deleteRedflag);
+
+/* Admin View All*/
+router.get('/api/v1/records', _helpers.verifyToken, _controller2.default.adminViewAll);
 
 exports.default = router;

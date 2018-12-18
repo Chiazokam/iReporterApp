@@ -52,4 +52,7 @@ router.delete('/api/v1/interventions/:id', verifyToken, recordController.deleteI
  /* Delete a Redflag */
 router.delete('/api/v1/redflags/:id', verifyToken, recordController.deleteRedflag);
 
+/* Admin View All*/
+router.get('/api/v1/records', verifyToken, recordController.adminViewAll);
+
 export default router;
