@@ -77,6 +77,16 @@ var Queries = function () {
     value: function adminViewAllQuery() {
       return _db2.default.any("SELECT * FROM records");
     }
+  }, {
+    key: 'editStatusQuery',
+    value: function editStatusQuery(status, recordId) {
+      return _db2.default.any("UPDATE records SET status = $1 WHERE id = $2", [status, recordId]);
+    }
+  }, {
+    key: 'adminViewOneRecord',
+    value: function adminViewOneRecord(recordId) {
+      return _db2.default.any("SELECT * FROM records WHERE id = $1", [recordId]);
+    }
   }]);
 
   return Queries;

@@ -138,9 +138,7 @@ var recordController = {
         if (!_bcrypt2.default.compareSync(password, user.password)) {
           return res.status(401).send({
             status: 401,
-            data: [{
-              message: 'Username or password is incorrect'
-            }]
+            error: 'Username or password is incorrect'
           });
         }
         var userObject = {
@@ -164,9 +162,7 @@ var recordController = {
       } else {
         return res.status(401).send({
           status: 401,
-          data: [{
-            message: 'Username or password is incorrect'
-          }]
+          error: 'Username or password is incorrect'
         });
       }
     }).catch(function (error) {
@@ -183,7 +179,7 @@ var recordController = {
       if (records.length === 0) {
         res.status(404).send({
           status: 404,
-          message: 'User has no redflags'
+          error: 'User has no redflags'
         });
       } else {
         res.status(200).send({
@@ -205,7 +201,7 @@ var recordController = {
       if (records.length === 0) {
         res.status(404).send({
           status: 404,
-          message: 'User has no interventions'
+          error: 'User has no interventions'
         });
       } else {
         res.status(200).send({
@@ -228,7 +224,7 @@ var recordController = {
       if (record.length === 0) {
         res.status(404).send({
           status: 404,
-          message: 'Redflag does not exist'
+          error: 'Redflag does not exist'
         });
       } else {
         res.status(200).send({
@@ -251,7 +247,7 @@ var recordController = {
       if (record.length === 0) {
         res.status(404).send({
           status: 404,
-          message: 'Intervention does not exist'
+          error: 'Intervention does not exist'
         });
       } else {
         res.status(200).send({
@@ -276,7 +272,7 @@ var recordController = {
       if (record.length < 1) {
         res.status(404).send({
           status: 404,
-          message: 'Record does not exist'
+          error: 'Record does not exist'
         });
       } else {
         query.updateRecordComment(comment, redflagId);
@@ -307,7 +303,7 @@ var recordController = {
       if (record.length < 1) {
         res.status(404).send({
           status: 404,
-          message: 'Record does not exist'
+          error: 'Record does not exist'
         });
       } else {
         query.updateRecordLocation(location, redflagId);
@@ -338,7 +334,7 @@ var recordController = {
       if (record.length < 1) {
         res.status(404).send({
           status: 404,
-          message: 'Record does not exist'
+          error: 'Record does not exist'
         });
       } else {
         query.updateRecordComment(comment, intervId);
@@ -369,7 +365,7 @@ var recordController = {
       if (record.length < 1) {
         res.status(404).send({
           status: 404,
-          message: 'Record does not exist'
+          error: 'Record does not exist'
         });
       } else {
         query.updateRecordLocation(location, intervId);
@@ -398,7 +394,7 @@ var recordController = {
       if (record.length < 1) {
         res.status(404).send({
           status: 404,
-          message: 'Redflag does not exist'
+          error: 'Redflag does not exist'
         });
       } else {
         query.deleteRecord(type, userId, redflagId);
@@ -425,7 +421,7 @@ var recordController = {
       if (record.length < 1) {
         res.status(404).send({
           status: 404,
-          message: 'Intervention does not exist'
+          error: 'Intervention does not exist'
         });
       } else {
         query.deleteRecord(type, userId, intervId);
@@ -458,7 +454,7 @@ var recordController = {
           if (records.length < 1) {
             res.status(404).send({
               status: 404,
-              message: "No records found"
+              error: "No records found"
             });
           } else {
             res.status(200).send({
@@ -470,13 +466,56 @@ var recordController = {
       } else if (adminObject.isAdmin === false) {
         res.status(403).send({
           status: 403,
-          message: "Request forbidden"
+          error: "Unauthorized access"
         });
       }
     }).catch(function (error) {
       res.status(500).send({
         status: 500,
-        message: error.message
+        error: error.message
+      });
+    });
+  },
+  adminEditStatus: function adminEditStatus(req, res) {
+    var status = req.body.status;
+
+    var userId = req.userData.id;
+    var recordId = req.params.id;
+
+    query.isUserAdmin(userId).then(function (user) {
+      var adminObject = {
+        id: user[0].id,
+        email: user[0].email,
+        isAdmin: user[0].isadmin
+      };
+      if (adminObject.isAdmin === true) {
+        query.adminViewOneRecord(recordId).then(function (record) {
+          if (record.length < 1) {
+            res.status(404).send({
+              status: 404,
+              error: "Record unavailable"
+            });
+          } else {
+            query.editStatusQuery(status, recordId);
+            res.status(200).send({
+              id: record[0].id,
+              data: [{
+                status: 200,
+                message: "Status updated"
+              }]
+            });
+          }
+        });
+      } else if (adminObject.isAdmin === false) {
+        res.status(403).send({
+          status: 403,
+          error: "Action unauthorized"
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        status: 500,
+        error: error.message
       });
     });
   }

@@ -65,6 +65,14 @@ class Queries {
     return db.any("SELECT * FROM records")
   }
 
+  editStatusQuery(status, recordId) {
+    return db.any("UPDATE records SET status = $1 WHERE id = $2", [status, recordId])
+  }
+
+  adminViewOneRecord(recordId) {
+    return db.any("SELECT * FROM records WHERE id = $1", [recordId])
+  }
+
 }
 
 export default Queries;

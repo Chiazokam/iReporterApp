@@ -486,6 +486,52 @@ const recordController = {
    
   },
 
+  adminEditStatus(req, res) {
+    const { status } = req.body;
+    const userId = req.userData.id;
+    const recordId = req.params.id;
+
+    query.isUserAdmin(userId)
+    .then((user) => {
+      const adminObject = {
+        id: user[0].id,
+        email: user[0].email,
+        isAdmin: user[0].isadmin
+      }
+      if (adminObject.isAdmin === true) {
+        query.adminViewOneRecord(recordId)
+        .then((record) => {
+          if (record.length < 1) {
+            res.status(404).send({
+              status: 404,
+              error: "Record unavailable"
+            });
+          } else {
+            query.editStatusQuery(status, recordId)
+            res.status(200).send({
+              id: record[0].id,
+              data: [{
+                status: 200,
+                message: "Status updated"
+              }]
+            });
+          }
+        })
+      } else if (adminObject.isAdmin === false) {
+        res.status(403).send({
+          status: 403,
+          error: "Action unauthorized"
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+        status: 500,
+        error: error.message
+      });
+    })
+  },
+
 
 
 }
