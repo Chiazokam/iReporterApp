@@ -1,8 +1,9 @@
 import express from 'express';
-const router = express.Router();
 import recordController from '../controllers/controller';
 import middleware from '../middleware';
 import { verifyToken } from '../helpers' 
+
+const router = express.Router();
 
 const { postValidation, validateEmail, validateLocation, doesUserExist, validatePhonenumber } = middleware;
 
@@ -44,9 +45,9 @@ router.patch('/api/v1/interventions/:id/comment', verifyToken, recordController.
 
   /* Edit Intervention Location */
  router.patch('/api/v1/interventions/:id/location', verifyToken, recordController.editIntervLocation);
-//
-//  /* Delete an Intervention */
-// router.delete('/api/v1/interventions/:id', recordController.deleteIntervention);
+
+  /* Delete an Intervention */
+router.delete('/api/v1/interventions/:id', verifyToken, recordController.deleteIntervention);
 
  /* Delete a Redflag */
 router.delete('/api/v1/redflags/:id', verifyToken, recordController.deleteRedflag);
