@@ -288,7 +288,61 @@ var recordController = {
               message: "Updated Redflag's comment"
             }]
           });
-        } else if (type === 'intervention') {
+        }
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  editRedflagLocation: function editRedflagLocation(req, res) {
+    var location = req.body.location;
+
+    var userId = req.userData.id;
+    var redflagId = req.params.id;
+    var type = 'redflag';
+
+    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          message: 'Record does not exist'
+        });
+      } else {
+        query.updateRecordLocation(location, redflagId);
+        if (type === 'redflag') {
+          res.status(200).send({
+            status: 200,
+            data: [{
+              id: record[0].id,
+              message: "Updated Redflag's location"
+            }]
+          });
+        }
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  editIntervComment: function editIntervComment(req, res) {
+    var comment = req.body.comment;
+
+    var userId = req.userData.id;
+    var intervId = req.params.id;
+    var type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, intervId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          message: 'Record does not exist'
+        });
+      } else {
+        query.updateRecordComment(comment, intervId);
+        if (type === 'intervention') {
           res.status(200).send({
             status: 200,
             data: [{
@@ -299,7 +353,64 @@ var recordController = {
         }
       }
     }).catch(function (error) {
-      console.log('Ran down');
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  editIntervLocation: function editIntervLocation(req, res) {
+    var location = req.body.location;
+
+    var userId = req.userData.id;
+    var intervId = req.params.id;
+    var type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, intervId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          message: 'Record does not exist'
+        });
+      } else {
+        query.updateRecordLocation(location, intervId);
+        if (type === 'intervention') {
+          res.status(200).send({
+            status: 200,
+            data: [{
+              id: record[0].id,
+              message: "Updated Intervention's location"
+            }]
+          });
+        }
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  deleteRedflag: function deleteRedflag(req, res) {
+    var redflagId = req.params.id;
+    var userId = req.userData.id;
+    var type = 'redflag';
+
+    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          message: 'Redflag does not exist'
+        });
+      } else {
+        query.deleteRecord(type, userId, redflagId);
+        res.status(200).send({
+          status: 200,
+          data: [{
+            id: record[0].id,
+            message: "Redflag record has been deleted"
+          }]
+        });
+      }
+    }).catch(function (error) {
       res.status(500).send({
         error: error.message
       });

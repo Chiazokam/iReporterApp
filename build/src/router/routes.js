@@ -59,20 +59,20 @@ router.get('/api/v1/interventions/:id', _helpers.verifyToken, _controller2.defau
 
 /* Edit Redflag Comment */
 router.patch('/api/v1/redflags/:id/comment', _helpers.verifyToken, _controller2.default.editRedflagComment);
-//
-// /* Edit Intervention Comment */
-// router.patch('/api/v1/interventions/:id/comment', recordController.editRecordComment);
-//
-// /* Edit Redflag Location */
-// router.patch('/api/v1/redflags/:id/location', recordController.editRecordLocation);
-//
-//  /* Edit Intervention Location */
-// router.patch('/api/v1/interventions/:id/location', recordController.editRecordLocation);
+
+/* Edit Intervention Comment */
+router.patch('/api/v1/interventions/:id/comment', _helpers.verifyToken, _controller2.default.editIntervComment);
+
+/* Edit Redflag Location */
+router.patch('/api/v1/redflags/:id/location', _helpers.verifyToken, _controller2.default.editRedflagLocation);
+
+/* Edit Intervention Location */
+router.patch('/api/v1/interventions/:id/location', _helpers.verifyToken, _controller2.default.editIntervLocation);
 //
 //  /* Delete an Intervention */
 // router.delete('/api/v1/interventions/:id', recordController.deleteIntervention);
-//
-// /* Delete a Redflag */
-// router.delete('/api/v1/redflags/:id', recordController.deleteIntervention);"""
+
+/* Delete a Redflag */
+router.delete('/api/v1/redflags/:id', _helpers.verifyToken, _controller2.default.deleteRedflag);
 
 exports.default = router;

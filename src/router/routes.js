@@ -47,8 +47,8 @@ router.patch('/api/v1/interventions/:id/comment', verifyToken, recordController.
 //
 //  /* Delete an Intervention */
 // router.delete('/api/v1/interventions/:id', recordController.deleteIntervention);
-//
-// /* Delete a Redflag */
-// router.delete('/api/v1/redflags/:id', recordController.deleteIntervention);"""
+
+ /* Delete a Redflag */
+router.delete('/api/v1/redflags/:id', verifyToken, recordController.deleteRedflag);
 
 export default router;

@@ -55,7 +55,17 @@ var Queries = function () {
   }, {
     key: 'updateRecordComment',
     value: function updateRecordComment(editField, recordId) {
-      _db2.default.any("UPDATE records SET comment = $1 WHERE id = $2", [editField, recordId]);
+      return _db2.default.any("UPDATE records SET comment = $1 WHERE id = $2", [editField, recordId]);
+    }
+  }, {
+    key: 'updateRecordLocation',
+    value: function updateRecordLocation(editField, recordId) {
+      return _db2.default.any("UPDATE records SET location = $1 WHERE id = $2", [editField, recordId]);
+    }
+  }, {
+    key: 'deleteRecord',
+    value: function deleteRecord(type, userId, recordId) {
+      return _db2.default.any("DELETE FROM records WHERE type = $1 AND id = $2 AND createdBy = $3", [type, recordId, userId]);
     }
   }]);
 

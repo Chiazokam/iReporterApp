@@ -46,11 +46,15 @@ class Queries {
   }
 
   updateRecordComment(editField, recordId) {
-    db.any("UPDATE records SET comment = $1 WHERE id = $2", [editField, recordId])
+    return db.any("UPDATE records SET comment = $1 WHERE id = $2", [editField, recordId])
   }
 
   updateRecordLocation(editField, recordId) {
-    db.any("UPDATE records SET location = $1 WHERE id = $2", [editField, recordId])
+    return db.any("UPDATE records SET location = $1 WHERE id = $2", [editField, recordId])
+  }
+
+  deleteRecord(type, userId, recordId) {
+    return db.any("DELETE FROM records WHERE type = $1 AND id = $2 AND createdBy = $3", [type, recordId, userId])
   }
 
 }
