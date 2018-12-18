@@ -259,3 +259,21 @@ describe('PATCH Requests', () => {
       });
     });
 })
+
+describe('DELETE Requests', () => {
+  describe('DELETE /api/v1/redflags/1', () => {
+    it('should delete a redflag', (done) => {
+      request(app)
+        .delete('/api/v1/redflags/1')
+        .set('token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].message).to.equal("Redflag record has been deleted");
+          done();
+        });
+    });
+  });
+})
