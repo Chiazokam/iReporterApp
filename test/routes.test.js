@@ -276,4 +276,48 @@ describe('DELETE Requests', () => {
         });
     });
   });
+
+  describe('DELETE /api/v1/redflags/2', () => {
+    it('should return an error in deleting a redflag', (done) => {
+      request(app)
+        .delete('/api/v1/redflags/2')
+        .set('token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message).to.equal("Redflag does not exist");
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /api/v1/interventions/2', () => {
+    it('should delete an intervention', (done) => {
+      request(app)
+        .delete('/api/v1/interventions/2')
+        .set('token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].message).to.equal("Intervention record has been deleted");
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /api/v1/interventions/1', () => {
+    it('should return an error in deleting an intervention', (done) => {
+      request(app)
+        .delete('/api/v1/interventions/1')
+        .set('token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message).to.equal("Intervention does not exist");
+          done();
+        });
+    });
+  });
 })

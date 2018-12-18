@@ -415,6 +415,33 @@ var recordController = {
         error: error.message
       });
     });
+  },
+  deleteIntervention: function deleteIntervention(req, res) {
+    var intervId = req.params.id;
+    var userId = req.userData.id;
+    var type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          message: 'Redflag does not exist'
+        });
+      } else {
+        query.deleteRecord(type, userId, redflagId);
+        res.status(200).send({
+          status: 200,
+          data: [{
+            id: record[0].id,
+            message: "Redflag record has been deleted"
+          }]
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
   }
 };
 

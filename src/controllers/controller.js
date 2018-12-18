@@ -417,6 +417,37 @@ const recordController = {
     })
   },
 
+  deleteIntervention(req, res) {
+    const intervId = req.params.id;
+    const userId = req.userData.id;
+    const type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, intervId)
+    .then((record) => {
+      if (record.length < 1) {
+          res.status(404).send({
+          status: 404,
+          message: 'Intervention does not exist'
+        })
+      } else {
+          query.deleteRecord(type, userId, intervId)
+                res.status(200).send({
+                status: 200,
+                data: [{
+                  id: record[0].id,
+                  message: "Intervention record has been deleted"
+                }]
+              })
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+      error: error.message
+      });
+    })
+  },
+
+
 
 }
 
