@@ -67,6 +67,16 @@ var Queries = function () {
     value: function deleteRecord(type, userId, recordId) {
       return _db2.default.any("DELETE FROM records WHERE type = $1 AND id = $2 AND createdBy = $3", [type, recordId, userId]);
     }
+  }, {
+    key: 'isUserAdmin',
+    value: function isUserAdmin(id) {
+      return _db2.default.any("SELECT * FROM users WHERE id = $1", [id]);
+    }
+  }, {
+    key: 'adminViewAllQuery',
+    value: function adminViewAllQuery() {
+      return _db2.default.any("SELECT * FROM records");
+    }
   }]);
 
   return Queries;

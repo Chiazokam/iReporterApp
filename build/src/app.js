@@ -12,10 +12,6 @@ var _routes = require('./router/routes');
 
 var _routes2 = _interopRequireDefault(_routes);
 
-var _controller = require('./controllers/controller');
-
-var _controller2 = _interopRequireDefault(_controller);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -27,4 +23,4 @@ module.exports = app;
 
 var port = process.env.PORT || 3000;
 app.listen(port);
-console.log('Listening port', port);
+console.log('Listening on port', port);

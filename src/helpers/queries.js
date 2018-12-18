@@ -57,6 +57,14 @@ class Queries {
     return db.any("DELETE FROM records WHERE type = $1 AND id = $2 AND createdBy = $3", [type, recordId, userId])
   }
 
+  isUserAdmin(id) {
+    return db.any("SELECT * FROM users WHERE id = $1", [id])
+  }
+
+  adminViewAllQuery() {
+    return db.any("SELECT * FROM records")
+  }
+
 }
 
 export default Queries;

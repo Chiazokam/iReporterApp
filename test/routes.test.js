@@ -80,9 +80,7 @@ describe('POST Requests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(401);
           expect(res.body).to.be.an('object');
-          expect(res.body.data).to.be.an('array');
-          expect(res.body.data[0]).to.be.an('object');
-          expect(res.body.data[0].message).to.equal('Username or password is incorrect');
+          expect(res.body.error).to.equal('Username or password is incorrect');
           done();
         });
     });
@@ -168,6 +166,7 @@ describe('GET Requests', () => {
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].id).to.equal(1);
           done();
         });
     });
@@ -183,6 +182,21 @@ describe('GET Requests', () => {
           expect(res.body).to.be.an('object');
           expect(res.body.data).to.be.an('array');
           expect(res.body.data[0]).to.be.an('object');
+          expect(res.body.data[0].id).to.equal(2);
+          done();
+        });
+    });
+  });
+
+  describe ('GET /api/v1/records', () => {
+    it('should get all the records', (done) => {
+      request(app)
+        .get('/api/v1/records')
+        .set('token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(403);
+          expect(res.body).to.be.an('object');
+          expect(res.body.error).to.equal('Unauthorized access');
           done();
         });
     });
@@ -285,7 +299,7 @@ describe('DELETE Requests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal("Redflag does not exist");
+          expect(res.body.error).to.equal("Redflag does not exist");
           done();
         });
     });
@@ -315,7 +329,7 @@ describe('DELETE Requests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal("Intervention does not exist");
+          expect(res.body.error).to.equal("Intervention does not exist");
           done();
         });
     });
