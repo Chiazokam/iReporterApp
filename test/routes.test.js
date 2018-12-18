@@ -272,6 +272,21 @@ describe('PATCH Requests', () => {
           });
       });
     });
+
+    describe('PATCH /api/v1/records/1/status', () => {
+      it('should attempt to edit the status of a record', (done) => {
+        request(app)
+          .patch('/api/v1/records/1/status')
+          .set('token', token)
+          .send({ status: 'resolved' })
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(403);
+            expect(res.body).to.be.an('object');
+            expect(res.body.error).to.equal("Action unauthorized");
+            done();
+          });
+      });
+    });
 })
 
 describe('DELETE Requests', () => {

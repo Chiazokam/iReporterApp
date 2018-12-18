@@ -79,4 +79,7 @@ router.delete('/api/v1/redflags/:id', _helpers.verifyToken, _controller2.default
 /* Admin View All*/
 router.get('/api/v1/records', _helpers.verifyToken, _controller2.default.adminViewAll);
 
+/* Edit Record Status */
+router.patch('/api/v1/records/:id/status', _helpers.verifyToken, _controller2.default.adminEditStatus);
+
 exports.default = router;

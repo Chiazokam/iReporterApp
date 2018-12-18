@@ -55,4 +55,7 @@ router.delete('/api/v1/redflags/:id', verifyToken, recordController.deleteRedfla
 /* Admin View All*/
 router.get('/api/v1/records', verifyToken, recordController.adminViewAll);
 
+/* Edit Record Status */
+router.patch('/api/v1/records/:id/status', verifyToken, recordController.adminEditStatus);
+
 export default router;
