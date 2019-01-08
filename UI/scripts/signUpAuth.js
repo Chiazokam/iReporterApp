@@ -1,9 +1,5 @@
 document.getElementById('signup-form').addEventListener('submit', signUp);
 
-// Redirects
-const redirect = (link) => {
-    location.href = link;
-  };
 
 function signUp(e) {
     e.preventDefault();
@@ -33,7 +29,7 @@ function signUp(e) {
     } )
     .then((res) => res.json())
     .then((response) => {
-        const { error, status, data } = response;
+        const { error, data } = response;
         if (error) {
             console.log(error);   
         }
@@ -43,4 +39,3 @@ function signUp(e) {
     })
     .catch((error) => console.log(error))
 }
-

@@ -10,18 +10,18 @@
   <body id="signin-body">
     <section class="half-page left-content">
       <div class="container">
-        <form id="signin-form" action="" method="post">
+        <form id="signin-form">
 
           <div class="form-field">
-            <input type="text" name="email" value="" placeholder="Email">
+            <input type="text" name="email" id="email" placeholder="Email">
           </div>
           <div class="form-field">
-            <input type="password" name="password" value="" placeholder="Password">
+            <input type="password" name="password" id="password" placeholder="Password">
           </div>
 
           <p>New user? Sign Up <span><a href="signup.html">Here</a></span></p>
           <p>Admin? Just take <span><a href="admin.html">Here</a></span> in the meantime!</p>
-          <button type="button" class="btn-colored btn-signup-button"><a href="profile.html">Submit</a></button>
+          <input type="submit" class="btn btn-colored btn-signup-button" value="Submit">
         </form>
       </div>
     </section>
@@ -31,10 +31,11 @@
         <div class="content">
           <p>Welcome Back!</p>
           <p>Let's make another voice heard</p>
-            <button type="button" class="btn-colored"><a href="about.html">Learn More</a></button>
-            <button type="button" class="btn-trans"><a href="index.html">Back To Home</a></button>
+            <button type="button" class="btn btn-colored"><a href="about.html">Learn More</a></button>
+            <button type="button" class="btn btn-trans"><a href="index.html">Back To Home</a></button>
         </div>
       </div>
     </section>
+    <script src="scripts/signInAuth.js"></script>
   </body>
 </html>
