@@ -10,40 +10,31 @@
   <body id="signup-body">
     <section class="half-page left-content">
       <div class="container">
-        <form id="signup-form" action="" method="post">
+        <form id="signup-form">
 
           <div class="form-field">
-            <input type="text" name="fname" value="" placeholder="First Name">
+            <input type="text" name="fname" id="fname" placeholder="First Name">
           </div>
           <div class="form-field">
-            <input type="text" name="lname" value="" placeholder="Last Name">
+            <input type="text" name="lname" id="lname" placeholder="Last Name">
           </div>
           <div class="form-field">
-            <input type="text" name="othername" value="" placeholder="Other Names">
+            <input type="text" name="othername" id="othername" placeholder="Other Names">
           </div>
           <div class="form-field">
-            <input type="text" name="phone" value="" placeholder="Phone Number">
+            <input type="text" name="phone" id="phone" placeholder="Phone Number">
           </div>
           <div class="form-field">
-            <input type="text" name="othername" value="" placeholder="Other Name">
+            <input type="email" name="email" id="email" placeholder="Email">
           </div>
           <div class="form-field">
-            <input type="email" name="email" value="" placeholder="Email">
+            <input type="text" name="username" id="username" placeholder="Username">
           </div>
           <div class="form-field">
-            <input type="text" name="phone" value="" placeholder="Phone Number">
-          </div>
-          <div class="form-field">
-            <input type="text" name="username" value="" placeholder="Username">
-          </div>
-          <div class="form-field">
-            <input type="password" name="password" value="" placeholder="Password">
-          </div>
-          <div class="form-field">
-            <input type="password" name="confpassword" value="" placeholder="Confirm Password">
+            <input type="password" name="password" id="password" placeholder="Password">
           </div>
           <p>Already a user? Sign In <span><a href="signin.html">Here</a></span></p>
-          <button type="button" class="btn-colored btn-signup-button"><a href="signin.html">Submit</a></button>
+          <input type="submit" class="btn btn-colored btn-signup-button" value="Submit">
         </form>
       </div>
     </section>
@@ -52,10 +43,11 @@
         <h2>- <span class="span-bold-letter">S</span>ign Up -</h2>
         <div class="content">
           <p>Join the band of iReporters changing the community one voice at a time</p>
-            <button type="button" class="btn-colored"><a href="about.html">Learn More</a></button>
-            <button type="button" class="btn-trans"><a href="index.html">Back To Home</a></button>
+            <button type="button" class="btn btn-colored"><a href="about.html">Learn More</a></button>
+            <button type="button" class="btn btn-trans"><a href="index.html">Back To Home</a></button>
         </div>
       </div>
     </section>
+    <script src="scripts/userAuth.js"></script>
   </body>
 </html>
