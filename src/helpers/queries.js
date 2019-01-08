@@ -26,11 +26,11 @@ class Queries {
             userDetails.firstname,
             userDetails.lastname,
             userDetails.othername,
-            userDetails.email,
+            userDetails.email, 
             userDetails.hash,
             userDetails.phone,
             userDetails.username,
-          ])
+          ]) 
   }
 
   userRegisteredQuery(email, password) {
@@ -75,4 +75,4 @@ class Queries {
 
 }
 
-export default Queries;
+export default Queries; 

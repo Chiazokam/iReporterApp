@@ -66,7 +66,7 @@ const recordController = {
    othername = othername.trim();
    email = email.trim();
    phone = phone.trim();
-   username = username.trim();
+   username = username.trim(); 
 
    const hash = bcrypt.hashSync(password, 10);
    const userDetails = { firstname, lastname, othername, email, hash, phone, username };
@@ -83,7 +83,7 @@ const recordController = {
        phone: user.phone,
        isAdmin: user.isadmin
      };
-     const token = jwt.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' });
+     const token = jwt.sign(userObject, process.env.SECRET_KEY, { expiresIn: '2d' }); 
      return res.status(201).send({
        status: 201,
        data: [{
