@@ -43,9 +43,49 @@ var Queries = function () {
       return _db2.default.any("SELECT * FROM users WHERE email = $1 OR password = $2", [email.trim(), password]);
     }
   }, {
-    key: 'viewAllRedflagsQuery',
-    value: function viewAllRedflagsQuery(type, id) {
+    key: 'viewAllRecordsQuery',
+    value: function viewAllRecordsQuery(type, id) {
       return _db2.default.any("SELECT * FROM records WHERE type = $1 AND createdBy = $2", [type, id]);
+    }
+  }, {
+    key: 'viewOneRecordQuery',
+    value: function viewOneRecordQuery(type, userId, recordId) {
+      return _db2.default.any("SELECT * FROM records WHERE id = $1 AND type = $2 AND createdBy = $3", [recordId, type, userId]);
+    }
+  }, {
+    key: 'updateRecordComment',
+    value: function updateRecordComment(editField, recordId) {
+      return _db2.default.any("UPDATE records SET comment = $1 WHERE id = $2", [editField, recordId]);
+    }
+  }, {
+    key: 'updateRecordLocation',
+    value: function updateRecordLocation(editField, recordId) {
+      return _db2.default.any("UPDATE records SET location = $1 WHERE id = $2", [editField, recordId]);
+    }
+  }, {
+    key: 'deleteRecord',
+    value: function deleteRecord(type, userId, recordId) {
+      return _db2.default.any("DELETE FROM records WHERE type = $1 AND id = $2 AND createdBy = $3", [type, recordId, userId]);
+    }
+  }, {
+    key: 'isUserAdmin',
+    value: function isUserAdmin(id) {
+      return _db2.default.any("SELECT * FROM users WHERE id = $1", [id]);
+    }
+  }, {
+    key: 'adminViewAllQuery',
+    value: function adminViewAllQuery() {
+      return _db2.default.any("SELECT * FROM records");
+    }
+  }, {
+    key: 'editStatusQuery',
+    value: function editStatusQuery(status, recordId) {
+      return _db2.default.any("UPDATE records SET status = $1 WHERE id = $2", [status, recordId]);
+    }
+  }, {
+    key: 'adminViewOneRecord',
+    value: function adminViewOneRecord(recordId) {
+      return _db2.default.any("SELECT * FROM records WHERE id = $1", [recordId]);
     }
   }]);
 

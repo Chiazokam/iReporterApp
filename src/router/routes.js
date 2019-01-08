@@ -1,8 +1,9 @@
 import express from 'express';
-const router = express.Router();
 import recordController from '../controllers/controller';
 import middleware from '../middleware';
 import { verifyToken } from '../helpers' 
+
+const router = express.Router();
 
 const { postValidation, validateEmail, validateLocation, doesUserExist, validatePhonenumber } = middleware;
 
@@ -16,39 +17,45 @@ router.post('/api/v1/redflags', verifyToken, validateLocation, postValidation, r
 router.post('/api/v1/interventions', verifyToken, validateLocation, postValidation, recordController.createIntervention)
 
 /* Create User Endpoint */
-router.post('/api/v1/auth/signup', validateEmail, doesUserExist, recordController.createUser);
+router.post('/api/v1/auth/signup', validateEmail, validatePhonenumber, doesUserExist, recordController.createUser);
 
 /* Sign In Endpoint */
 router.post('/api/v1/auth/login', validateEmail, recordController.signInUser);
 
  /* View Redflags Endpoint */
 router.get('/api/v1/redflags', verifyToken, recordController.viewAllRedflags);
-//
-// /* View interventions Endpoint */
-// router.get('/api/v1/interventions', recordController.viewAllInterventions);
-//
-//  /* View One redflag Endpoint */
-// router.get('/api/v1/redflags/:id', recordController.viewOneRedflag);
-//
-// /* View One intervention Endpoint */
-//  router.get('/api/v1/interventions/:id', recordController.viewOneIntervention);
-//
-// /* Edit Redflag Comment */
-// router.patch('/api/v1/redflags/:id/comment', recordController.editRecordComment);
-//
-// /* Edit Intervention Comment */
-// router.patch('/api/v1/interventions/:id/comment', recordController.editRecordComment);
-//
-// /* Edit Redflag Location */
-// router.patch('/api/v1/redflags/:id/location', recordController.editRecordLocation);
-//
-//  /* Edit Intervention Location */
-// router.patch('/api/v1/interventions/:id/location', recordController.editRecordLocation);
-//
-//  /* Delete an Intervention */
-// router.delete('/api/v1/interventions/:id', recordController.deleteIntervention);
-//
-// /* Delete a Redflag */
-// router.delete('/api/v1/redflags/:id', recordController.deleteIntervention);"""
+
+ /* View interventions Endpoint */
+router.get('/api/v1/interventions', verifyToken, recordController.viewAllInterventions);
+
+   /* View One redflag Endpoint */
+router.get('/api/v1/redflags/:id', verifyToken, recordController.viewOneRedflag);
+
+ /* View One intervention Endpoint */
+ router.get('/api/v1/interventions/:id', verifyToken, recordController.viewOneIntervention);
+
+ /* Edit Redflag Comment */
+ router.patch('/api/v1/redflags/:id/comment', verifyToken, recordController.editRedflagComment);
+
+/* Edit Intervention Comment */
+router.patch('/api/v1/interventions/:id/comment', verifyToken, recordController.editIntervComment);
+
+ /* Edit Redflag Location */
+ router.patch('/api/v1/redflags/:id/location', verifyToken, recordController.editRedflagLocation);
+
+  /* Edit Intervention Location */
+ router.patch('/api/v1/interventions/:id/location', verifyToken, recordController.editIntervLocation);
+
+  /* Delete an Intervention */
+router.delete('/api/v1/interventions/:id', verifyToken, recordController.deleteIntervention);
+
+ /* Delete a Redflag */
+router.delete('/api/v1/redflags/:id', verifyToken, recordController.deleteRedflag);
+
+/* Admin View All*/
+router.get('/api/v1/records', verifyToken, recordController.adminViewAll);
+
+/* Edit Record Status */
+router.patch('/api/v1/records/:id/status', verifyToken, recordController.adminEditStatus);
 
 export default router;

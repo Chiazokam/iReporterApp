@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _db = require('../models/db');
-
-var _db2 = _interopRequireDefault(_db);
-
 var _helpers = require('../helpers');
 
 var _bcrypt = require('bcrypt');
@@ -21,10 +17,6 @@ var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
-
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -146,9 +138,7 @@ var recordController = {
         if (!_bcrypt2.default.compareSync(password, user.password)) {
           return res.status(401).send({
             status: 401,
-            data: [{
-              message: 'Username or password is incorrect'
-            }]
+            error: 'Username or password is incorrect'
           });
         }
         var userObject = {
@@ -172,9 +162,7 @@ var recordController = {
       } else {
         return res.status(401).send({
           status: 401,
-          data: [{
-            message: 'Username or password is incorrect'
-          }]
+          error: 'Username or password is incorrect'
         });
       }
     }).catch(function (error) {
@@ -186,21 +174,347 @@ var recordController = {
   viewAllRedflags: function viewAllRedflags(req, res) {
     var type = 'redflag';
     var userId = req.userData.id;
-    query.viewAllRedflagsQuery(type, userId).then(function (records) {
+    query.viewAllRecordsQuery(type, userId).then(function (records) {
       var userRecords = records[0];
-      console.log(records);
       if (records.length === 0) {
-        res.status(204).send({
-          status: 204,
-          message: 'User has no redflags'
+        res.status(404).send({
+          status: 404,
+          error: 'User has no redflags'
+        });
+      } else {
+        res.status(200).send({
+          status: 200,
+          data: records
         });
       }
-      res.status(200).send({
-        status: 200,
-        data: records
-      });
     }).catch(function (error) {
       res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  viewAllInterventions: function viewAllInterventions(req, res) {
+    var type = 'intervention';
+    var userId = req.userData.id;
+    query.viewAllRecordsQuery(type, userId).then(function (records) {
+      var userRecords = records[0];
+      if (records.length === 0) {
+        res.status(404).send({
+          status: 404,
+          error: 'User has no interventions'
+        });
+      } else {
+        res.status(200).send({
+          status: 200,
+          data: records
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  viewOneRedflag: function viewOneRedflag(req, res) {
+    var userId = req.userData.id;
+    var redflagId = req.params.id;
+    var type = 'redflag';
+    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+      // Returns an array with one object
+      if (record.length === 0) {
+        res.status(404).send({
+          status: 404,
+          error: 'Redflag does not exist'
+        });
+      } else {
+        res.status(200).send({
+          status: 200,
+          data: record
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  viewOneIntervention: function viewOneIntervention(req, res) {
+    var userId = req.userData.id;
+    var intervId = req.params.id;
+    var type = 'intervention';
+    query.viewOneRecordQuery(type, userId, intervId).then(function (record) {
+      // Returns an array with one object
+      if (record.length === 0) {
+        res.status(404).send({
+          status: 404,
+          error: 'Intervention does not exist'
+        });
+      } else {
+        res.status(200).send({
+          status: 200,
+          data: record
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  editRedflagComment: function editRedflagComment(req, res) {
+    var comment = req.body.comment;
+
+    var userId = req.userData.id;
+    var redflagId = req.params.id;
+    var type = 'redflag';
+
+    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          error: 'Record does not exist'
+        });
+      } else {
+        query.updateRecordComment(comment, redflagId);
+        if (type === 'redflag') {
+          res.status(200).send({
+            status: 200,
+            data: [{
+              id: record[0].id,
+              message: "Updated Redflag's comment"
+            }]
+          });
+        }
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  editRedflagLocation: function editRedflagLocation(req, res) {
+    var location = req.body.location;
+
+    var userId = req.userData.id;
+    var redflagId = req.params.id;
+    var type = 'redflag';
+
+    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          error: 'Record does not exist'
+        });
+      } else {
+        query.updateRecordLocation(location, redflagId);
+        if (type === 'redflag') {
+          res.status(200).send({
+            status: 200,
+            data: [{
+              id: record[0].id,
+              message: "Updated Redflag's location"
+            }]
+          });
+        }
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  editIntervComment: function editIntervComment(req, res) {
+    var comment = req.body.comment;
+
+    var userId = req.userData.id;
+    var intervId = req.params.id;
+    var type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, intervId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          error: 'Record does not exist'
+        });
+      } else {
+        query.updateRecordComment(comment, intervId);
+        if (type === 'intervention') {
+          res.status(200).send({
+            status: 200,
+            data: [{
+              id: record[0].id,
+              message: "Updated Intervention's comment"
+            }]
+          });
+        }
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  editIntervLocation: function editIntervLocation(req, res) {
+    var location = req.body.location;
+
+    var userId = req.userData.id;
+    var intervId = req.params.id;
+    var type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, intervId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          error: 'Record does not exist'
+        });
+      } else {
+        query.updateRecordLocation(location, intervId);
+        if (type === 'intervention') {
+          res.status(200).send({
+            status: 200,
+            data: [{
+              id: record[0].id,
+              message: "Updated Intervention's location"
+            }]
+          });
+        }
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  deleteRedflag: function deleteRedflag(req, res) {
+    var redflagId = req.params.id;
+    var userId = req.userData.id;
+    var type = 'redflag';
+
+    query.viewOneRecordQuery(type, userId, redflagId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          error: 'Redflag does not exist'
+        });
+      } else {
+        query.deleteRecord(type, userId, redflagId);
+        res.status(200).send({
+          status: 200,
+          data: [{
+            id: record[0].id,
+            message: "Redflag record has been deleted"
+          }]
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  deleteIntervention: function deleteIntervention(req, res) {
+    var intervId = req.params.id;
+    var userId = req.userData.id;
+    var type = 'intervention';
+
+    query.viewOneRecordQuery(type, userId, intervId).then(function (record) {
+      if (record.length < 1) {
+        res.status(404).send({
+          status: 404,
+          error: 'Intervention does not exist'
+        });
+      } else {
+        query.deleteRecord(type, userId, intervId);
+        res.status(200).send({
+          status: 200,
+          data: [{
+            id: record[0].id,
+            message: "Intervention record has been deleted"
+          }]
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        error: error.message
+      });
+    });
+  },
+  adminViewAll: function adminViewAll(req, res) {
+    var userId = req.userData.id;
+
+    query.isUserAdmin(userId).then(function (user) {
+      var adminObject = {
+        id: user[0].id,
+        email: user[0].email,
+        isAdmin: user[0].isadmin
+      };
+
+      if (adminObject.isAdmin === true) {
+        query.adminViewAllQuery().then(function (records) {
+          if (records.length < 1) {
+            res.status(404).send({
+              status: 404,
+              error: "No records found"
+            });
+          } else {
+            res.status(200).send({
+              status: 200,
+              data: records
+            });
+          }
+        });
+      } else if (adminObject.isAdmin === false) {
+        res.status(403).send({
+          status: 403,
+          error: "Unauthorized access"
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        status: 500,
+        error: error.message
+      });
+    });
+  },
+  adminEditStatus: function adminEditStatus(req, res) {
+    var status = req.body.status;
+
+    var userId = req.userData.id;
+    var recordId = req.params.id;
+
+    query.isUserAdmin(userId).then(function (user) {
+      var adminObject = {
+        id: user[0].id,
+        email: user[0].email,
+        isAdmin: user[0].isadmin
+      };
+      if (adminObject.isAdmin === true) {
+        query.adminViewOneRecord(recordId).then(function (record) {
+          if (record.length < 1) {
+            res.status(404).send({
+              status: 404,
+              error: "Record unavailable"
+            });
+          } else {
+            query.editStatusQuery(status, recordId);
+            res.status(200).send({
+              id: record[0].id,
+              data: [{
+                status: 200,
+                message: "Status updated"
+              }]
+            });
+          }
+        });
+      } else if (adminObject.isAdmin === false) {
+        res.status(403).send({
+          status: 403,
+          error: "Action unauthorized"
+        });
+      }
+    }).catch(function (error) {
+      res.status(500).send({
+        status: 500,
         error: error.message
       });
     });

@@ -37,9 +37,42 @@ class Queries {
     return db.any("SELECT * FROM users WHERE email = $1 OR password = $2", [email.trim(), password]);
   }
 
-  viewAllRedflagsQuery(type, id) {
+  viewAllRecordsQuery(type, id) {
     return db.any("SELECT * FROM records WHERE type = $1 AND createdBy = $2", [type, id])
   }
+
+  viewOneRecordQuery(type, userId, recordId) {
+    return db.any("SELECT * FROM records WHERE id = $1 AND type = $2 AND createdBy = $3", [recordId, type, userId]);
+  }
+
+  updateRecordComment(editField, recordId) {
+    return db.any("UPDATE records SET comment = $1 WHERE id = $2", [editField, recordId])
+  }
+
+  updateRecordLocation(editField, recordId) {
+    return db.any("UPDATE records SET location = $1 WHERE id = $2", [editField, recordId])
+  }
+
+  deleteRecord(type, userId, recordId) {
+    return db.any("DELETE FROM records WHERE type = $1 AND id = $2 AND createdBy = $3", [type, recordId, userId])
+  }
+
+  isUserAdmin(id) {
+    return db.any("SELECT * FROM users WHERE id = $1", [id])
+  }
+
+  adminViewAllQuery() {
+    return db.any("SELECT * FROM records")
+  }
+
+  editStatusQuery(status, recordId) {
+    return db.any("UPDATE records SET status = $1 WHERE id = $2", [status, recordId])
+  }
+
+  adminViewOneRecord(recordId) {
+    return db.any("SELECT * FROM records WHERE id = $1", [recordId])
+  }
+
 }
 
 export default Queries; 
