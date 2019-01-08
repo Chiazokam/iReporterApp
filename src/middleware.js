@@ -29,7 +29,7 @@ const middleware = {
   },
 
   doesUserExist(req, res, next) {
-    const { email, username } = req.body;
+    const { email, username } = req.body; 
     query.userExistence(email, username)
       .then((data) => {
         if (data.length > 0) {

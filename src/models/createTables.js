@@ -16,9 +16,9 @@ const createTables = async () => {
       phone VARCHAR(128) NOT NULL,
       isAdmin BOOLEAN DEFAULT false,
       createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
+    ); 
 
-    CREATE TABLE IF NOT EXISTS records(
+    CREATE TABLE IF NOT EXISTS records( 
         id SERIAL PRIMARY KEY,
         title VARCHAR(128) NOT NULL,
         createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

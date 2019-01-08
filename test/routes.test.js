@@ -8,8 +8,8 @@ let token;
 const redflag = {
   title: 'Money hidden in soak away',
   location: '4.34454, 7.88838',
-  comment: 'Hidden by some poliyician nearby',
-  images: 'girl',
+  comment: 'Hidden by some politician nearby',
+  images: 'girl', 
   videos: 'google.com',
 };
 
