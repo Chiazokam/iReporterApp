@@ -10,26 +10,26 @@
   <body>
     <section class="half-page left-content">
       <div class="container">
-        <form id="create-redflag-form" action="" method="post">
-          <div class="form-field">
-            <input type="text" name="title" value="" placeholder="Title">
+        <form id="create-redflag-form">
+          <div class="form-field required">
+            <label></label>
+            <input type="text" name="title" id="title" placeholder="Title" required>
+          </div>
+          <div class="form-field required">
+            <label></label>
+            <input type="text" name="location" id="location" placeholder="Latitude, Longitude" required>
+          </div>
+          <div class="form-field-textarea required">
+            <label></label>
+            <textarea name="comment" id="comment" rows="8" placeholder="Describe Incidence" required></textarea>
           </div>
           <div class="form-field">
-            <input type="date" name="createdOn" value="" placeholder="Date Captured">
+            <input type="file" name="image" id="image">
           </div>
           <div class="form-field">
-            <input type="text" name="location" value="" placeholder="Latitude, Longitude">
+            <input type="text" name="video" id="video" placeholder="Video Url">
           </div>
-          <div class="form-field">
-            <textarea name="comment" rows="8" placeholder="Describe Incidence"></textarea>
-          </div>
-          <div class="form-field">
-            <input type="text" name="image_url" value="" placeholder="Image Url">
-          </div>
-          <div class="form-field">
-            <input type="text" name="video_url" value="" placeholder="Video Url">
-          </div>
-          <button type="button" class="btn-colored"><a href="">Submit</a></button>
+          <input type="submit" class="btn btn-colored btn-dark" id="Submit">
         </form>
       </div>
     </section>
@@ -38,10 +38,11 @@
         <h2>- <span class="span-bold-letter">C</span>reate A Red-Flag -</h2>
         <div class="content">
           <p>Join in stopping corruption!</p>
-            <button type="button" class="btn-colored"><a href="create_interv.html">Create Intervention</a></button>
-            <button type="button" class="btn-trans"><a href="profile.html">Back To Profile</a></button>
+            <button type="button" class="btn btn-colored"><a href="create_interv.html">Create Intervention</a></button>
+            <button type="button" class="btn btn-trans"><a href="profile.html">Back To Profile</a></button>
         </div>
       </div>
     </section>
+    <script src="scripts/records.js"></script>
   </body>
 </html>

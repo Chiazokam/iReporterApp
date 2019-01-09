@@ -25,6 +25,7 @@ function signIn(e) {
             console.log(error);   
         }
         const { token, user } = data[0];
+        //document.cookie = 'token=token; Secure; HttpOnly'
         localStorage.setItem("token", token);
         if (user.isAdmin === true) {
             window.location = './admin.html';
@@ -32,7 +33,6 @@ function signIn(e) {
         else if (user.isAdmin === false ){
             window.location = './profile.html';
         }
-        
     })
     .catch((error) => console.log(error))
 }
