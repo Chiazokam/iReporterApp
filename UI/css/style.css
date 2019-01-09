@@ -24,7 +24,7 @@ body{
 }
 
 .span-bold-letter{
-  color: #006266;
+  color: #008C9E;
   font-size: 90px;
   font-family: 'Great Vibes', cursive;
 }
@@ -82,6 +82,11 @@ hr{
 .btn-colored:hover{
   color: #f5f6fa;
   background-color: #343838;
+}
+
+.btn-dark:hover{
+  color: #343838;
+  background-color: #f5f6fa
 }
 
 /*Global*/
@@ -177,8 +182,21 @@ hr{
   display: block;
   margin: 25px 0 25px 0;
 }
+
+.required label{
+  display: block;
+  text-align: left;
+  margin-left: 40px;
+}
+
+.required label:after{
+  content: " *";
+  display:inline;
+  color: red;
+}
+
 /*Global*/
-.form-field input, .form-field select, .form-field textarea{
+.form-field input, .form-field select{
   min-width: 84%;
   height: 35px;
   border-radius: 5px;
@@ -188,6 +206,19 @@ hr{
   color: #95a5a6;
 }
 
+.form-field-textarea{
+  display: block;
+  margin: 25px 0 25px 0;
+}
+
+.form-field-textarea textarea{
+  width: 84%;
+  border-radius: 5px;
+  font-size: 19px;
+  padding-left: 10px;
+  font-family: 'Lato', sans-serif;
+  color: #95a5a6;
+}
 
 /*Global*/
 .right-content h2{
