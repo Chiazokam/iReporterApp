@@ -9,48 +9,54 @@ fetch('https://ireporter-heroku.herokuapp.com/api/v1/interventions', {
 .then((res) => res.json())
 .then((response) => {
     const { data } = response;
-
-    let output = '<h2>- <span class="span-bold-letter">V</span>iew Interventions -</h2>';
-    data.forEach((record) => {
-        let newLocation = record.location.split(',');
-        let lat = Number(newLocation[0]);
-        let long = Number(newLocation[1]);
-        output +=  `
-        <div class="view-record-box">
-        <table>
-          <tbody>
-            <tr>
-              <td class="table-icon"></td>
-              <td class="table-icon"><i class="far fa-edit"></i><i class="fas fa-trash-alt"></i></td>
-            </tr>
-            <tr>
-              <td class="head-table">Title</td>
-              <td class="body-table">${record.title}</td>
-            </tr>
-            <tr>
-              <td class="head-table">Date</td>
-              <td class="body-table">${record.createdon}</td>
-            </tr>
-            <tr>
-              <td class="head-table">Description</td>
-              <td class="body-table">${record.comment}</td>
-            </tr>
-            <tr>
-              <td class="head-table">Status</td>
-              <td class="body-table">${record.status}</td>
-            </tr>
-            <tr>
-              <td class="head-table">Location</td>
-              <td>
-                <div class="map">
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>`
-    })
-    document.getElementById('output').innerHTML = output;
+    console.log(data);
+    if (data === undefined) {
+        console.log(response.error);
+        let output = '<h2>- <span class="span-bold-letter">N</span>o Interventions Recorded -</h2>';
+        document.getElementById('output').innerHTML = output;
+    } else {
+        let output = '<h2>- <span class="span-bold-letter">V</span>iew Interventions -</h2>';
+        data.forEach((record) => {
+            let newLocation = record.location.split(',');
+            let lat = Number(newLocation[0]);
+            let long = Number(newLocation[1]);
+            output +=  `
+            <div class="view-record-box">
+            <table>
+            <tbody>
+                <tr>
+                <td class="table-icon"></td>
+                <td class="table-icon"><i class="far fa-edit"></i><i class="fas fa-trash-alt"></i></td>
+                </tr>
+                <tr>
+                <td class="head-table">Title</td>
+                <td class="body-table">${record.title}</td>
+                </tr>
+                <tr>
+                <td class="head-table">Date</td>
+                <td class="body-table">${record.createdon}</td>
+                </tr>
+                <tr>
+                <td class="head-table">Description</td>
+                <td class="body-table">${record.comment}</td>
+                </tr>
+                <tr>
+                <td class="head-table">Status</td>
+                <td class="body-table">${record.status}</td>
+                </tr>
+                <tr>
+                <td class="head-table">Location</td>
+                <td>
+                    <div class="map">
+                    </div>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>`
+        })
+        document.getElementById('output').innerHTML = output;
+    }
 });
 
 
