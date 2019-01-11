@@ -11,10 +11,10 @@ const { postValidation, validateEmail, validateLocation, doesUserExist, validate
  router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to iReporter' }));
 
 /* Create Redflag Endpoint */
-router.post('/api/v1/redflags', verifyToken, validateLocation, postValidation, recordController.createRedflag);
+router.post('/api/v1/redflags', verifyToken, postValidation, recordController.createRedflag);
 
 /* Create Intervention Endpoint */
-router.post('/api/v1/interventions', verifyToken, validateLocation, postValidation, recordController.createIntervention)
+router.post('/api/v1/interventions', verifyToken, postValidation, recordController.createIntervention)
 
 /* Create User Endpoint */
 router.post('/api/v1/auth/signup', validateEmail, validatePhonenumber, doesUserExist, recordController.createUser);
