@@ -35,7 +35,7 @@ body{
 }
 
 #showcase{
-    margin-top: 13%;
+    margin-top: 10%;
     text-align: center;
 }
 
@@ -272,7 +272,6 @@ form p span a{
     text-align: center;
     background-color: #343838;
     background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));
-    padding-top: 25px;
   }
 
 .sidebar-text{
