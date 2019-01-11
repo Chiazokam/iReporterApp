@@ -25,7 +25,6 @@ function signIn(e) {
             console.log(error);   
         }
         const { token, user } = data[0];
-        //document.cookie = 'token=token; Secure; HttpOnly'
         localStorage.setItem("token", token);
         if (user.isAdmin === true) {
             window.location = './admin.html';

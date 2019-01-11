@@ -10,8 +10,12 @@ fetch('https://ireporter-heroku.herokuapp.com/api/v1/redflags', {
 .then((response) => {
     const { data } = response;
 
-    let output = '<h2>- <span class="span-bold-letter">V</span>iew Red-Flags -</h2>';
-    data.forEach((record) => {
+    if (data === undefined) {
+      let output = '<h2>- <span class="span-bold-letter">N</span>o Redflags Recorded -</h2>';
+      document.getElementById('output').innerHTML = output;
+    } else {
+      let output = '<h2>- <span class="span-bold-letter">V</span>iew Red-Flags -</h2>';
+      data.forEach((record) => {
         let newLocation = record.location.split(',');
         let lat = Number(newLocation[0]);
         let long = Number(newLocation[1]);
@@ -51,6 +55,7 @@ fetch('https://ireporter-heroku.herokuapp.com/api/v1/redflags', {
       </div>`
     })
     document.getElementById('output').innerHTML = output;
+    }
 });
 
 

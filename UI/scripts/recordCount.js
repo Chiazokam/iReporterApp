@@ -21,11 +21,19 @@ fetch('https://ireporter-heroku.herokuapp.com/api/v1/redflags', {
 .then((response) => {
     const { data } = response;
 
-    redflagTotal.textContent = data.filter(record => record.type === 'redflag').length;
-    redflagDraft.textContent = data.filter(record => record.status === 'draft' && record.type === 'redflag').length;
-    redflagResolved.textContent = data.filter(record => record.status === 'resolved' && record.type === 'redflag').length;
-    redflagRejected.textContent = data.filter(record => record.status === 'rejected' && record.type === 'redflag').length;
-    redflagInvestigation.textContent = data.filter(record => record.status === 'under-investigation' && record.type === 'redflag').length; 
+    if(data === undefined) {
+        redflagTotal.textContent = 0
+        redflagDraft.textContent = 0
+        redflagResolved.textContent = 0
+        redflagRejected.textContent = 0
+        redflagInvestigation.textContent = 0
+    } else {
+        redflagTotal.textContent = data.filter(record => record.type === 'redflag').length;
+        redflagDraft.textContent = data.filter(record => record.status === 'draft' && record.type === 'redflag').length;
+        redflagResolved.textContent = data.filter(record => record.status === 'resolved' && record.type === 'redflag').length;
+        redflagRejected.textContent = data.filter(record => record.status === 'rejected' && record.type === 'redflag').length;
+        redflagInvestigation.textContent = data.filter(record => record.status === 'under-investigation' && record.type === 'redflag').length;
+    } 
 });
 
 
@@ -38,10 +46,17 @@ fetch('https://ireporter-heroku.herokuapp.com/api/v1/interventions', {
 .then((response) => {
     const { data } = response;
 
-    intervTotal.textContent = data.filter(record => record.type === 'intervention').length;
-    intervDraft.textContent = data.filter(record => record.status === 'draft' && record.type === 'intervention').length;
-    intervResolved.textContent = data.filter(record => record.status === 'resolved' && record.type === 'intervention').length;
-    intervRejected.textContent = data.filter(record => record.status === 'rejected' && record.type === 'intervention').length;
-    intervInvestigation.textContent = data.filter(record => record.status === 'under-investigation' && record.type === 'intervention').length; 
-
+    if (data === undefined) {
+        intervTotal.textContent = 0
+        intervDraft.textContent = 0
+        intervResolved.textContent = 0
+        intervRejected.textContent = 0
+        intervInvestigation.textContent = 0
+    } else {
+        intervTotal.textContent = data.filter(record => record.type === 'intervention').length;
+        intervDraft.textContent = data.filter(record => record.status === 'draft' && record.type === 'intervention').length;
+        intervResolved.textContent = data.filter(record => record.status === 'resolved' && record.type === 'intervention').length;
+        intervRejected.textContent = data.filter(record => record.status === 'rejected' && record.type === 'intervention').length;
+        intervInvestigation.textContent = data.filter(record => record.status === 'under-investigation' && record.type === 'intervention').length;
+    }   
 });
