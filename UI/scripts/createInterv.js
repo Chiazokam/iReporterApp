@@ -1,8 +1,8 @@
-document.getElementById('create-redflag-form').addEventListener('submit', createRedflag);
+document.getElementById('create-interv-form').addEventListener('submit', createIntervention);
 
 const token = localStorage.getItem('token');
 
-function createRedflag(e) {
+function createIntervention(e) {
     e.preventDefault();
     const title = document.getElementById('title').value;
     const longitude = document.getElementById('longitude').value;
@@ -14,10 +14,10 @@ function createRedflag(e) {
         
     
     if(!token) {
-        //window.location = './create_redflag.html';
+        window.location = './create_interv.html';
         console.log('Permission denied');
     } else {
-        fetch('https://ireporter-heroku.herokuapp.com/api/v1/redflags', {
+        fetch('https://ireporter-heroku.herokuapp.com/api/v1/interventions', {
         method: 'POST',
         mode: "cors",
         headers: {
@@ -38,7 +38,7 @@ function createRedflag(e) {
         if(error) {
             console.log(error);
         } else {
-            //window.location = './create_redflag.html';
+            window.location = './create_interv.html';
             console.log(data[0].message); 
         }
     })
