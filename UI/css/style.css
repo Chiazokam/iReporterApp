@@ -282,6 +282,7 @@ form p span a{
 .sidebar ul{
   list-style: none;
   padding-left: 12%;
+  padding-top: 25px;
 }
 
 .sidebar ul table{
