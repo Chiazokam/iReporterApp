@@ -11,146 +11,91 @@
     <section class="sidebar sidebar-text">
       <ul>
         <li class="head-li"><i class="fab fa-font-awesome-flag"></i> Red-Flag :</li>
-            <table>
-              <tbody>
-                  <tr>
-                    <td><p>Total</p></td>
-                    <td><span class="digit">8</span></td>
-                  </tr>
-                  <tr>
-                    <td><p>In Draft</p></td>
-                    <td><span class="digit">1</span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Resolved</p></td>
-                    <td><span class="digit">3</span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Rejected</p></td>
-                    <td><span class="digit">1</span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Under Investigation</p></td>
-                    <td><span class="digit">3</span></td>
-                  </tr>
-              </tbody>
-            </table>
-          <li class="head-li"><i class="fas fa-info"></i> Intervention :</li>
-          <table>
-            <tbody>
-              <tr>
-                <td><p>Total</p></td>
-                <td><span class="digit">15</span></td>
-              </tr>
-              <tr>
-                <td><p>In Draft</p></td>
-                <td><span class="digit">8</span></td>
-              </tr>
-              <tr>
-                <td><p>Resolved</p></td>
-                <td><span class="digit">3</span></td>
-              </tr>
-              <tr>
-                <td><p>Rejected</p></td>
-                <td><span class="digit">0</span></td>
-              </tr>
-              <tr>
-                <td><p>Under Investigation</p></td>
-                <td><span class="digit">4</span></td>
-              </tr>
-            </tbody>
-          </table>
+        <table>
+          <tbody>
+            <tr>
+              <td><p>Total</p></td>
+              <td><span class="digit redflag-total"></span></td>
+            </tr>
+            <tr>
+              <td><p>In Draft</p></td>
+              <td><span class="digit redflag-draft"></span></td>
+            </tr>
+            <tr>
+              <td><p>Resolved</p></td>
+              <td><span class="digit redflag-resolved"></span></td>
+            </tr>
+            <tr>
+              <td><p>Rejected</p></td>
+              <td><span class="digit redflag-rejected"></span></td>
+            </tr>
+            <tr>
+              <td><p>Under Investigation</p></td>
+              <td><span class="digit redflag-investigation"></span></td>
+            </tr>
+        </tbody>
+      </table>
+    <li class="head-li"><i class="fas fa-info"></i> Intervention :</li>
+    <table>
+      <tbody>
+        <tr>
+          <td><p>Total</p></td>
+          <td><span class="digit interv-total"></span></td>
+        </tr>
+        <tr>
+          <td><p>In Draft</p></td>
+          <td><span class="digit interv-draft"></span></td>
+        </tr>
+        <tr>
+          <td><p>Resolved</p></td>
+          <td><span class="digit interv-resolved"></span></td>
+        </tr>
+        <tr>
+          <td><p>Rejected</p></td>
+          <td><span class="digit interv-rejected"></span></td>
+        </tr>
+        <tr>
+          <td><p>Under Investigation</p></td>
+          <td><span  class="digit interv-investigation"></span></td>
+        </tr>
+      </tbody>
+      </table>
       </ul>
-      <button type="button" class="btn-colored btn-record-list">List All Records</button>
+      <input type="submit" id="logout" class="btn btn-colored btn-dark" value="Log out">
     </section>
     <section class="right-diff-content fixed">
-      <h2>- <span class="span-bold-letter">M</span>anage Your Records -</h2>
+      <h2>- <span class="span-bold-letter">M</span>anage Your Records -</h2> 
       <table>
         <tbody>
           <tr>
             <td>
               <div class="records-image create-redflag">
-                <button type="button" class="btn-trans btn-record"><a href="create_record.html">Create Record</a></button>
+                <button type="button" class="btn btn-trans btn-record"><a href="create_redflag.html">Create Red-Flag</a></button>
               </div>
             </td>
             <td>
               <div class="records-image view-redflag">
-                <button type="button" class="btn-trans btn-record"><a href="view_redflags.html">View Red-Flags</a></button>
+                <button type="button" class="btn btn-trans btn-record"><a href="view_redflags.html">View Red-Flags</a></button>
               </div>
             </td>
           </tr>
           <tr>
             <td>
-              <div class="records-image view-intervention">
-                <button type="button" class="btn-trans btn-record"><a href="view_intervs.html">View Interventions</a></button>
+              <div class="records-image create-intervention">
+                <button type="button" class="btn btn-trans btn-record"><a href="create_interv.html">Create Intervention</a></button>
               </div>
             </td>
             <td>
+              <div class="records-image view-intervention">
+                <button type="button" class="btn btn-trans btn-record"><a href="view_intervs.html">View Interventions</a></button>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
     </section>
     </div>
-    <!--/Modal-->
-    <!--Modal to list out all Records-->
-    <div class="modal-list-record">
-      <section class="modal-list-content">
-        <span class="modal-close">&times;</span>  <!--For the close button-->
-        <h2>- <span class="span-bold-letter">S</span>ummary of Records -</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><p>Money Hidden Away</p></td>
-              <td><p>I discovered money hidden away in a soak away</p></td>
-              <td><p>Red Flag</p></td>
-            </tr>
-            <tr>
-              <td><p>Broken Bridge</p></td>
-              <td><p>A part of Eko Bridge is broken and needs maintenance</p></td>
-              <td><p>Intervention</p></td>
-            </tr>
-            <tr>
-              <td><p>Money Hidden Away</p></td>
-              <td><p>I discovered money hidden away in a soak away</p></td>
-              <td><p>Red Flag</p></td>
-            </tr>
-            <tr>
-              <td><p>Money Hidden Away</p></td>
-              <td><p>I discovered money hidden away in a soak away</p></td>
-              <td><p>Red Flag</p></td>
-            </tr>
-            <tr>
-              <td><p>Money Hidden Away</p></td>
-              <td><p>I discovered money hidden away in a soak away</p></td>
-              <td><p>Red Flag</p></td>
-            </tr>
-            <tr>
-              <td><p>Broken Bridge</p></td>
-              <td><p>A part of Eko Bridge is broken and needs maintenance</p></td>
-              <td><p>Intervention</p></td>
-            </tr>
-            <tr>
-              <td><p>Broken Bridge</p></td>
-              <td><p>A part of Eko Bridge is broken and needs maintenance</p></td>
-              <td><p>Intervention</p></td>
-            </tr>
-            <tr>
-              <td><p>Money Hidden Away</p></td>
-              <td><p>I discovered money hidden away in a soak away</p></td>
-              <td><p>Red Flag</p></td>
-            </tr>
-
-          </tbody>
-        </table>
-      </section>
-  <script type="text/javascript" src="ireporter.js"></script>
+      <script type="text/javascript" src="scripts/recordCount.js"></script>
+      <script type="text/javascript" src="scripts/profile.js"></script>
   </body>
 </html>

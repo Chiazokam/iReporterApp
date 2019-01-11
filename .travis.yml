@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- node
+env:
+  global:
+  - NODE_ENV=test
+cache:
+  directories:
+  - node_modules
+before_script:
+  - psql -f ./src/db.sql -U postgres
+after_success:
+- npm run coveralls
+deploy:
+  provider: heroku
+  app: ireporter-heroku
+  api_key:
+    secure: oKNzlqhVJMKujC4M2FpK2TQWo7ziFwqP8QcuSSEXj0Fj3WbjvqCnbZ7UCpVLJ2CuE+XcvyBGpK0/uNJkgcZtn5fOJqXeNYRx/VunEP/DQ38LkkUNFzn8c1O6vZPQ48AWXClExJFfAMhv2Fn/x0YPNp9wIk1EUMin0cjs7iYteq7e6349WKiEviDAvI29wOLpuXhNExLyFHR9Crd5/e0Osadxy4khJYymIC5eG+eeZv44VOYJl/hd/Y+jxCAy5gfAiTct5t671o8XPwEega3ScxRBMrmIMgO15Idc6UfHcGDczixcq7lZrd6dCZnc6ndi0Q0FEN18b4eBllIIw7NJgupVA0QxIH1mCcGxr+LEuYF1UJ3tC0nbzx1dmG+3A8N147zqo7xv30nKKdadVCHyah8o6IPkzPjRc+4dhCEfIvMYdaMGL/phoj3XMNJxBdGHeWu8jEarSU/2sEAgvnzdpUq0hDo6sC/DwNs5f4yWI7kprLL3eTGHPYm0ypHxCEHvbG840nkhbumFAmcNxcoo51sXOpT7drJ4Du+aierQBKe3Mho+pVh2RKH/cXMJCObW4EdWh8QFw4ItOQvILY4rffe3f0zfNAXy9xqkoxZdg2wdqRRixsJiyfynddMw3cFy10fcX8CniwhTrmyhRlp8kCagTpvpLpeDxxjrq/JWvxs=
+  on: develop

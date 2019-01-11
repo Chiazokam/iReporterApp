@@ -24,7 +24,7 @@ body{
 }
 
 .span-bold-letter{
-  color: #006266;
+  color: #008C9E;
   font-size: 90px;
   font-family: 'Great Vibes', cursive;
 }
@@ -35,7 +35,7 @@ body{
 }
 
 #showcase{
-    margin-top: 13%;
+    margin-top: 10%;
     text-align: center;
 }
 
@@ -53,19 +53,11 @@ body{
 }
 
 #showcase h3 span{
-  /* background-color: #008C9E; */
+  background-color: #008C9E;
   color: #f5f6fa;
   border-radius: 5px;
   padding: 0 10px 2px 10px;
-  font-weight: 800;
-  text-decoration: underline;
-  text-decoration-color: #008C9E;
-  font-size: 50px;
-}
-
-#showcase h3 span:hover{
-  color: #008C9E;
-  text-decoration-color: #f5f6fa;
+  font-weight: 200;
 }
 
 hr{
@@ -74,7 +66,7 @@ hr{
 }
 
 /*Global*/
-button{
+.btn{
   height: 45px;
   background-color: #008C9E;
   border: none;
@@ -83,29 +75,36 @@ button{
   font-weight: 100;
   padding: 0 13px 0 13px;
   font-size: 20px;
-  color: #f5f6fa;
+  color: #343838;
   margin-left: 10px;
-  outline: none;
 }
 /*Global*/
 .btn-colored:hover{
   color: #f5f6fa;
-  background-color: #006266;
-  outline:none;
+  background-color: #343838;
+}
+
+.btn-dark:hover{
+  color: #343838;
+  background-color: #f5f6fa
 }
 
 /*Global*/
 .btn-trans{
   background-color: transparent;
   border: 1px solid #f5f6fa;
-  focus {outline:0;}
 }
 /*Global*/
 .btn-trans a, .btn-colored a{
   text-decoration: none;
   color: #f5f6fa;
-  font-weight: 600;
 }
+
+.btn-trans, .btn-colored{
+  text-decoration: none;
+  color: #f5f6fa;
+}
+
 /*Global*/
 .btn-colored a:hover{
   color: #f5f6fa;
@@ -162,7 +161,6 @@ button{
 
 .about-button{
   margin-right: 20px;
-  outline:none;
 }
 
 /*Sign Up Page*/
@@ -179,6 +177,11 @@ button{
   padding: 20px 0 20px 0;
   box-shadow: 0px 0px 5px #f5f6fa;
 }
+/*Global*/
+.form-field{
+  display: block;
+  margin: 25px 0 25px 0;
+}
 
 .required label{
   display: block;
@@ -191,10 +194,16 @@ button{
   display:inline;
   color: red;
 }
+
 /*Global*/
-.form-field{
-  display: block;
-  margin: 25px 0 25px 0;
+.form-field input, .form-field select{
+  min-width: 84%;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 19px;
+  padding-left: 10px;
+  font-family: 'Lato', sans-serif;
+  color: #95a5a6;
 }
 
 .form-field-textarea{
@@ -212,24 +221,6 @@ button{
 }
 
 /*Global*/
-.form-field input, .form-field select{
-  min-width: 84%;
-  height: 35px;
-  border-radius: 5px;
-  font-size: 19px;
-  padding-left: 10px;
-  font-family: 'Lato', sans-serif;
-  color: #95a5a6;
-}
-
-.form-field select{
-  width: 87%;
-}
-.btn-signup-button:hover{
-  background-color: #006266;
-  color: #2f3640;
-}
-/*Global*/
 .right-content h2{
   color: #f5f6fa;
   font-size: 30px;
@@ -242,16 +233,15 @@ form p{
   color: #f5f6fa;
 }
 /*Global*/
-/* form p span{
+form p span{
   background-color: #005F6B;
   border-radius: 5px;
   padding: 5px;
-} */
-
+}
 /*Global*/
 form p span a{
   color: #f5f6fa;
-  /* text-decoration: none; */
+  text-decoration: none;
 }
 
 /*Sign In Page*/
@@ -282,7 +272,6 @@ form p span a{
     text-align: center;
     background-color: #343838;
     background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));
-    padding-top: 25px;
   }
 
 .sidebar-text{
@@ -368,7 +357,11 @@ form p span a{
 }
 
 .create-redflag{
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1517817748493-49ec54a32465?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.pexels.com/photos/1266022/pexels-photo-1266022.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+}
+
+.create-intervention{
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.pexels.com/photos/1239162/pexels-photo-1239162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
 }
 
 .view-redflag{
