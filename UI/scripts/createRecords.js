@@ -5,10 +5,13 @@ const token = localStorage.getItem('token');
 function createRedflag(e) {
     e.preventDefault();
     const title = document.getElementById('title').value;
-    const location = document.getElementById('location').value;
+    const longitude = document.getElementById('longitude').value;
+    const latitude = document.getElementById('latitude').value;
     const comment = document.getElementById('comment').value;
     const images = document.getElementById('image').value;
     const videos = document.getElementById('video').value;
+    const location = `${latitude}, ${longitude}`;
+        
     
     if(!token) {
         //window.location = './create_redflag.html';

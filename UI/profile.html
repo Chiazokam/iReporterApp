@@ -11,55 +11,55 @@
     <section class="sidebar sidebar-text">
       <ul>
         <li class="head-li"><i class="fab fa-font-awesome-flag"></i> Red-Flag :</li>
-            <table>
-              <tbody>
-                  <tr>
-                    <td><p>Total</p></td>
-                    <td><span class="digit">8</span></td>
-                  </tr>
-                  <tr>
-                    <td><p>In Draft</p></td>
-                    <td><span class="digit">1</span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Resolved</p></td>
-                    <td><span class="digit">3</span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Rejected</p></td>
-                    <td><span class="digit">1</span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Under Investigation</p></td>
-                    <td><span class="digit">3</span></td>
-                  </tr>
-              </tbody>
-            </table>
-          <li class="head-li"><i class="fas fa-info"></i> Intervention :</li>
-          <table>
-            <tbody>
+        <table>
+          <tbody>
               <tr>
                 <td><p>Total</p></td>
-                <td><span class="digit">15</span></td>
+                <td><span id="redflag-total" class="digit"></span></td>
               </tr>
               <tr>
                 <td><p>In Draft</p></td>
-                <td><span class="digit">8</span></td>
+                <td><span id="redflag-draft" class="digit"></span></td>
               </tr>
               <tr>
                 <td><p>Resolved</p></td>
-                <td><span class="digit">3</span></td>
+                <td><span id="redflag-resolved" class="digit"></span></td>
               </tr>
               <tr>
                 <td><p>Rejected</p></td>
-                <td><span class="digit">0</span></td>
+                <td><span id="redflag-rejected" class="digit"></span></td>
               </tr>
               <tr>
                 <td><p>Under Investigation</p></td>
-                <td><span class="digit">4</span></td>
+                <td><span id="redflag-investigation" class="digit"></span></td>
               </tr>
-            </tbody>
-          </table>
+          </tbody>
+        </table>
+      <li class="head-li"><i class="fas fa-info"></i> Intervention :</li>
+      <table>
+        <tbody>
+          <tr>
+            <td><p>Total</p></td>
+            <td><span id="interv-total" class="digit"></span></td>
+          </tr>
+          <tr>
+            <td><p>In Draft</p></td>
+            <td><span id="interv-draft" class="digit"></span></td>
+          </tr>
+          <tr>
+            <td><p>Resolved</p></td>
+            <td><span id="interv-resolved" class="digit"></span></td>
+          </tr>
+          <tr>
+            <td><p>Rejected</p></td>
+            <td><span id="interv-rejected" class="digit"></span></td>
+          </tr>
+          <tr>
+            <td><p>Under Investigation</p></td>
+            <td><span id="interv-investigation" class="digit"></span></td>
+          </tr>
+        </tbody>
+      </table>
       </ul>
       <button type="button" class="btn btn-colored btn-record-list">List All Records</button>
     </section>
@@ -154,6 +154,7 @@
           </tbody>
         </table>
       </section>
-  <script type="text/javascript" src="ireporter.js"></script>
+      <script type="text/javascript" src="scripts/recordCount.js"></script>
+      <script type="text/javascript" src="scripts/ireporter.js"></script>
   </body>
 </html>
