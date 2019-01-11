@@ -1,14 +1,14 @@
-const redflagTotal = document.getElementById('redflag-total');
-const redflagDraft = document.getElementById('redflag-draft');
-const redflagResolved = document.getElementById('redflag-resolved');
-const redflagRejected = document.getElementById('redflag-rejected');
-const redflagInvestigation = document.getElementById('redflag-investigation');
+const redflagTotal = document.querySelector('.redflag-total');
+const redflagDraft = document.querySelector('.redflag-draft');
+const redflagResolved = document.querySelector('.redflag-resolved');
+const redflagRejected = document.querySelector('.redflag-rejected');
+const redflagInvestigation = document.querySelector('.redflag-investigation');
 
-const intervTotal = document.getElementById('interv-total');
-const intervDraft = document.getElementById('interv-draft');
-const intervResolved = document.getElementById('interv-resolved');
-const intervRejected = document.getElementById('interv-rejected');
-const intervInvestigation = document.getElementById('interv-investigation');
+const intervTotal = document.querySelector('.interv-total');
+const intervDraft = document.querySelector('.interv-draft');
+const intervResolved = document.querySelector('.interv-resolved');
+const intervRejected = document.querySelector('.interv-rejected');
+const intervInvestigation = document.querySelector('.interv-investigation');
 
 token = localStorage.getItem('token');    // Declared already in viewRecords script
 

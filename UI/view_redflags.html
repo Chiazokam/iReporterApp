@@ -13,52 +13,52 @@
         <li class="head-li"><i class="fab fa-font-awesome-flag"></i> Red-Flag :</li>
             <table>
               <tbody>
-                  <tr>
-                    <td><p>Total</p></td>
-                    <td><span id="redflag-total" class="digit"></span></td>
-                  </tr>
-                  <tr>
-                    <td><p>In Draft</p></td>
-                    <td><span id="redflag-draft" class="digit"></span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Resolved</p></td>
-                    <td><span id="redflag-resolved" class="digit"></span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Rejected</p></td>
-                    <td><span id="redflag-rejected" class="digit"></span></td>
-                  </tr>
-                  <tr>
-                    <td><p>Under Investigation</p></td>
-                    <td><span id="redflag-investigation" class="digit"></span></td>
-                  </tr>
-              </tbody>
-            </table>
-          <li class="head-li"><i class="fas fa-info"></i> Intervention :</li>
-          <table>
-            <tbody>
-              <tr>
-                <td><p>Total</p></td>
-                <td><span id="interv-total" class="digit"></span></td>
-              </tr>
-              <tr>
-                <td><p>In Draft</p></td>
-                <td><span id="interv-draft" class="digit"></span></td>
-              </tr>
-              <tr>
-                <td><p>Resolved</p></td>
-                <td><span id="interv-resolved" class="digit"></span></td>
-              </tr>
-              <tr>
-                <td><p>Rejected</p></td>
-                <td><span id="interv-rejected" class="digit"></span></td>
-              </tr>
-              <tr>
-                <td><p>Under Investigation</p></td>
-                <td><span id="interv-investigation" class="digit"></span></td>
-              </tr>
+                <tr>
+                  <td><p>Total</p></td>
+                  <td><span class="digit redflag-total">0</span></td>
+                </tr>
+                <tr>
+                  <td><p>In Draft</p></td>
+                  <td><span class="digit redflag-draft">0</span></td>
+                </tr>
+                <tr>
+                  <td><p>Resolved</p></td>
+                  <td><span class="digit redflag-resolved">0</span></td>
+                </tr>
+                <tr>
+                  <td><p>Rejected</p></td>
+                  <td><span class="digit redflag-rejected">0</span></td>
+                </tr>
+                <tr>
+                  <td><p>Under Investigation</p></td>
+                  <td><span class="digit redflag-investigation">0</span></td>
+                </tr>
             </tbody>
+          </table>
+        <li class="head-li"><i class="fas fa-info"></i> Intervention :</li>
+        <table>
+          <tbody>
+            <tr>
+              <td><p>Total</p></td>
+              <td><span class="digit interv-total">0</span></td>
+            </tr>
+            <tr>
+              <td><p>In Draft</p></td>
+              <td><span class="digit interv-draft">0</span></td>
+            </tr>
+            <tr>
+              <td><p>Resolved</p></td>
+              <td><span class="digit interv-resolved">0</span></td>
+            </tr>
+            <tr>
+              <td><p>Rejected</p></td>
+              <td><span class="digit interv-rejected">0</span></td>
+            </tr>
+            <tr>
+              <td><p>Under Investigation</p></td>
+              <td><span  class="digit interv-investigation">0</span></td>
+            </tr>
+          </tbody>
           </table>
       </ul>
       <button type="button" class="btn btn-colored btn-record-list"><a href="profile.html">Back To Profile</a></button>
@@ -70,7 +70,7 @@
         <!-- Display user's records -->
       </div>
     </section>
-    <script type="text/javascript" src="scripts/viewRecords.js"></script>
+    <script type="text/javascript" src="scripts/viewRedflags.js"></script>
     <script type="text/javascript" src="scripts/recordCount.js"></script>
     <script type="text/javascript" src="scripts/location.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1Us-XFdyoA2kbyb1IvDBJOus9P6_unwM&callback=initMap"
