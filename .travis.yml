@@ -10,7 +10,7 @@ cache:
 before_script:
   - psql -f ./src/db.sql -U postgres
 after_success:
-- npm run coveralls
+- npm run coverage
 deploy:
   provider: heroku
   app: ireporter-heroku

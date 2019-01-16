@@ -8,16 +8,14 @@ var _pgPromise = require('pg-promise');
 
 var _pgPromise2 = _interopRequireDefault(_pgPromise);
 
-var _pg = require('pg');
-
 var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_dotenv2.default.config(); // DB connection aide: https://www.codementor.io/olawalealadeusi896/building-a-simple-api-with-nodejs-expressjs-and-postgresql-db-masuu56t7
-
+// DB connection aide: https://www.codementor.io/olawalealadeusi896/building-a-simple-api-with-nodejs-expressjs-and-postgresql-db-masuu56t7
+_dotenv2.default.config();
 
 var config = {
   host: process.env.HOST,

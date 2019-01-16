@@ -1,0 +1,698 @@
+{
+    "openapi" : "3.0.1",
+    "info" : {
+      "title" : "iReporter",
+      "description" : "defaultDescription",
+      "version" : "1.0-oas3"
+    },
+    "servers" : [ {
+      "url" : "https://ireporter-heroku.herokuapp.com/"
+    } ],
+    "paths" : {
+      "/" : {
+        "get" : {
+          "description" : "Get root page",
+          "responses" : {
+            "200" : {
+              "description" : "Success",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/signup" : {
+        "post" : {
+          "description" : "Signup a user",
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : " {\r\n\"firstname\": \"Jane\", \r\n \"lastname\": \"Doe\",\r\n            \"othername\": \"Sally\",\r\n \"email\": \"janedoe@doe.com\",\r\n            \"password\": \"Sally\",\r\n \"phone\": \"09455746459\",\r\n \"username\": \"sally\"\r\n}"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "201" : {
+              "description" : "User successfully created",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/login" : {
+        "post" : {
+          "description" : "Login User",
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body_1"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : " {\r\n\"email\": \"janedoe@doe.com\",\r\n \"password\": \"Sally\"\r\n          }"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "200" : {
+              "description" : "User successfully logged in",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/redflags" : {
+        "get" : {
+          "description" : "Get all user redflags",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Redflags retrieved",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        },
+        "post" : {
+          "description" : "Create redflag",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body_2"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\r\n\t \"title\": \"Buried notes\",\r\n      \"comment\": \"Money was found buried in a pit\",\r\n \"location\":\"2.433, 4.45544\",\r\n  \"images\": \"money.gif\",\r\n        \"videos\": \"discovery.mp4\"\r\n}"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "201" : {
+              "description" : "Created redflag successfully",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/interventions" : {
+        "get" : {
+          "description" : "Get all user interventions",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Interventions retrieved",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        },
+        "post" : {
+          "description" : "Create Intervention",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body_3"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\r\n\t \"title\": \"Broken Bridge\",\r\n      \"comment\": \"The Siallo bridge has some cracks under\",\r\n      \"location\":\"2.433, 4.45544\",\r\n       \"images\": \"bridge.png\",\r\n        \"videos\": \"bridge.png\"\r\n}"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "201" : {
+              "description" : "Created intervention successfully",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/redflags/:id" : {
+        "get" : {
+          "description" : "Get one redflag",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Redflag found",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        },
+        "delete" : {
+          "description" : "Delete a redflag",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Redflag successfully deleted",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/interventions/:id" : {
+        "get" : {
+          "description" : "Get one intervention",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Intervention found",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        },
+        "delete" : {
+          "description" : "Delete an intervention",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Intervention successfully deleted",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/redflags/:id/comment" : {
+        "patch" : {
+          "description" : "Edit redflag comment",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body_4"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\r\n \"comment\": \"The Siallo bridge gave way yesterday\"}"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Redflag comment successfully updated",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/interventions/:id/comment" : {
+        "patch" : {
+          "description" : "Edit intervention comment",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body_5"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\r\n  \"comment\": \"Money discovered seems to belong to a politician\"}"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Intervention comment successfully updated",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/redflags/:id/location" : {
+        "patch" : {
+          "description" : "Edit redflag location",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body_6"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\r\n \"location\":\"2.2933, 4.905544\"}"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Redflag location successfully updated",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/interventions/:id/location" : {
+        "patch" : {
+          "description" : "Edit Intervention location",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body_7"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\r\n \"location\":\"2.2933, 4.905544\"}"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "200" : {
+              "description" : "Intervention location successfully updated",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/records" : {
+        "get" : {
+          "description" : "Admin can get all redflags and interventions",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "403" : {
+              "description" : "User unauthenticated. isAdmin must be true",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/records/:id/status" : {
+        "patch" : {
+          "description" : "Admin can change status of redflag or intervention",
+          "parameters" : [ {
+            "name" : "token",
+            "in" : "header",
+            "required" : false,
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/body_8"
+                },
+                "examples" : {
+                  "0" : {
+                    "value" : "{\r\n\t \"status\": \"resolved\"\r\n}"
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "403" : {
+              "description" : "User unauthenticated. isAdmin must be true",
+              "content" : {
+                "application/json; charset=utf-8" : {
+                  "schema" : {
+                    "type" : "string"
+                  },
+                  "examples" : { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components" : {
+      "schemas" : {
+        "body" : {
+          "type" : "object",
+          "properties" : {
+            "firstname" : {
+              "type" : "string"
+            },
+            "password" : {
+              "type" : "string"
+            },
+            "othername" : {
+              "type" : "string"
+            },
+            "phone" : {
+              "type" : "string"
+            },
+            "email" : {
+              "type" : "string"
+            },
+            "lastname" : {
+              "type" : "string"
+            },
+            "username" : {
+              "type" : "string"
+            }
+          }
+        },
+        "body_1" : {
+          "type" : "object",
+          "properties" : {
+            "password" : {
+              "type" : "string"
+            },
+            "email" : {
+              "type" : "string"
+            }
+          }
+        },
+        "body_2" : {
+          "type" : "object",
+          "properties" : {
+            "images" : {
+              "type" : "string"
+            },
+            "comment" : {
+              "type" : "string"
+            },
+            "location" : {
+              "type" : "string"
+            },
+            "videos" : {
+              "type" : "string"
+            },
+            "title" : {
+              "type" : "string"
+            }
+          }
+        },
+        "body_3" : {
+          "type" : "object",
+          "properties" : {
+            "images" : {
+              "type" : "string"
+            },
+            "comment" : {
+              "type" : "string"
+            },
+            "location" : {
+              "type" : "string"
+            },
+            "videos" : {
+              "type" : "string"
+            },
+            "title" : {
+              "type" : "string"
+            }
+          }
+        },
+        "body_4" : {
+          "type" : "object",
+          "properties" : {
+            "comment" : {
+              "type" : "string"
+            }
+          }
+        },
+        "body_5" : {
+          "type" : "object",
+          "properties" : {
+            "comment" : {
+              "type" : "string"
+            }
+          }
+        },
+        "body_6" : {
+          "type" : "object",
+          "properties" : {
+            "location" : {
+              "type" : "string"
+            }
+          }
+        },
+        "body_7" : {
+          "type" : "object",
+          "properties" : {
+            "location" : {
+              "type" : "string"
+            }
+          }
+        },
+        "body_8" : {
+          "type" : "object",
+          "properties" : {
+            "status" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  }

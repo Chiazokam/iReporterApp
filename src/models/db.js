@@ -11,7 +11,7 @@ const config = {
   password: process.env.PASSWORD,
   database: process.env.DATABASE
 }
-
+ 
 const connectionString = process.env.DATABASE_URL;
 const pgProm = pg();
 

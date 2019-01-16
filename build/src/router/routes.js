@@ -35,10 +35,10 @@ router.get('/', function (req, res) {
 });
 
 /* Create Redflag Endpoint */
-router.post('/api/v1/redflags', _helpers.verifyToken, validateLocation, postValidation, _controller2.default.createRedflag);
+router.post('/api/v1/redflags', _helpers.verifyToken, postValidation, _controller2.default.createRedflag);
 
 /* Create Intervention Endpoint */
-router.post('/api/v1/interventions', _helpers.verifyToken, validateLocation, postValidation, _controller2.default.createIntervention);
+router.post('/api/v1/interventions', _helpers.verifyToken, postValidation, _controller2.default.createIntervention);
 
 /* Create User Endpoint */
 router.post('/api/v1/auth/signup', validateEmail, validatePhonenumber, doesUserExist, _controller2.default.createUser);

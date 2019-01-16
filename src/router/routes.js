@@ -3,7 +3,7 @@ import recordController from '../controllers/controller';
 import middleware from '../middleware';
 import { verifyToken } from '../helpers' 
 
-const router = express.Router();
+const router = express.Router(); 
 
 const { postValidation, validateEmail, validateLocation, doesUserExist, validatePhonenumber } = middleware;
 

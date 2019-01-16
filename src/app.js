@@ -1,7 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import router from './router/routes';
-import cors from "cors";;
+import cors from "cors";
+import swaggerUI from 'swagger-ui-express';
+import docs from '../docs.json';
 
 
 const app = express();
@@ -21,6 +23,8 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
     next();
   });
+
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
 
 module.exports = app;
 
